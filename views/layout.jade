@@ -1,11 +1,14 @@
 doctype html
 html
-	head
-		title= title
-		link(rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Bowlby+One")
-		link(rel='stylesheet', href='/stylesheets/style.css')
-		if(styles)
-			link(rel='stylesheet', href=styles)
-		script(src='http://code.jquery.com/jquery-latest.min.js')
-	body
-		block content
+    head
+        title= title
+        link(rel="stylesheet", href="/plugins/font-awesome-4.2.0/css/font-awesome.css")
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        if(styles)
+        link(rel='stylesheet', href=styles)
+        script(src='http://code.jquery.com/jquery-latest.min.js')
+        script(src='./plugins/packery.pkgd.min.js')
+        script(src='./plugins/draggabilly.pkgd.js')
+        block header
+    body
+        block content

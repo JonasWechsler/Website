@@ -28,6 +28,7 @@ app.get('/zbuff', routes.zbuff);
 app.get('/flower', routes.flower);
 app.get('/gravity', routes.gravity);
 app.get('/bullseye', routes.seuss);
+app.get('/resume', routes.resume);
 app.get("/quote", function (Req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&source=joel_on_software+paul_graham+prog_stylemyfortune', function (error, response, content) {
         if (!error && response.statusCode == 200) {

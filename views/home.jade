@@ -2,18 +2,26 @@ doctype html
 html
   head
     title= "OOOOOO"
+    link(rel="stylesheet", href="/plugins/font-awesome-4.2.0/css/font-awesome.css")
     link(rel='stylesheet', href='/stylesheets/home.css')
-    link(rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Bowlby+One")
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
     script(src='./plugins/packery.pkgd.min.js')
     script(src='./plugins/draggabilly.pkgd.js')
     script(src='./js/home.js')
   body
-    div.container
-        h1.title.stamp="Title"
-        each val in candy
-            div.block.item(class = val.class)
-                img.thumbnail(src = val.img,alt=val.title)
-                .adjacent
-                    h1=val.title
-                    h2=val.desc
+    .content
+        h1
+            |J O N A S
+        h1
+            |W E C H S L E R
+        br  
+        .container.w3
+            .tile.w1.h1.a
+                .fa.fa-github
+            .tile.w1.h1.b
+                h1
+                    |Projects
+            .tile.w1.h1.c
+            .tile.w1.h1.d
+            .tile.w1.h1.e
+            .tile.w1.h1.f

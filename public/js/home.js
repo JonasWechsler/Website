@@ -1,10 +1,20 @@
 $(document).ready(function(){
+    var $container = $('.container');
+    // init
+    $container.packery({
+      columnWidth: 150,
+      rowHeight: 150,
+      itemSelector: '.tile',
+      gutter: 15
+    });
+        /*
 	var container = $('.container').packery({
-	  columnWidth: 250,
-	  rowHeight: 250,
+	  columnWidth: 150,
+	  rowHeight: 150,
 	  gutter:10,
-	  'stamp':'.stamp'
+	  "itemSelector": ".tile"
 	});
+
 	var gold = 0.618033988749895;
 	var h = Math.random();
 	container.find('.item').each( function( i, itemElem ) {
@@ -18,8 +28,6 @@ $(document).ready(function(){
 	  // bind Draggabilly events to Packery
 	  container.packery( 'bindDraggabillyEvents', draggie );
 	});
-
-
 	container.on( 'click', '.item', function( event ) {
 	  // change size of item via class
 	  $( event.target ).closest('.item').toggleClass('big');
@@ -27,7 +35,7 @@ $(document).ready(function(){
 	  console.log( $( event.target ).closest('.item').html());
 	  container.packery();
 	});
-
+*/
 });
 function hsv(h, s, v) {
     var r, g, b, i, f, p, q, t;

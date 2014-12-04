@@ -106,3 +106,8 @@ exports.rainbow = function (req, res) {
         }
     });
 }
+
+
+exports.resume = function(req, res){
+    res.render('resume');
+}
