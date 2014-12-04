@@ -10,6 +10,7 @@ html
     script(src='./js/home.js')
   body
     div.container
+        h1.title.stamp="Title"
         each val in candy
             div.block.item(class = val.class)
                 img.thumbnail(src = val.img,alt=val.title)

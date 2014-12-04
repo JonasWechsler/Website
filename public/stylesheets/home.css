@@ -2,7 +2,7 @@ body {
     padding: 0;
     margin: 0;
     font: 14px"Lucida Grande", Helvetica, Arial, sans-serif;
-    background-color: #202020;
+    background-color: white;
 }
 * {
     margin: 0;
@@ -13,6 +13,10 @@ body {
 }
 a {
     color: #00B7FF;
+}
+.title{
+    vertical-align: middle;
+    width:1000px;
 }
 .container{
     position:absolute;
@@ -32,6 +36,9 @@ a {
 .item{
 
 }
+.thumbnail{
+    background-color:white;
+}
 .block {
   width: 250px;
   height: 250px;
@@ -43,17 +50,17 @@ a {
     height: 250px;
 }
 .big{
-    width: 500px;
+    width: 510px;
 }
 .item .adjacent{
     display:none;
 }
 .big .adjacent{
+    border-left:10px solid white;
     padding:10px;
     vertical-align: top;
     height:100%;
     display:inline-block;
-    background-color:blue;
 }
 .theatre {
     position: relative;
@@ -72,4 +79,32 @@ a {
     border-bottom-color: #88b7d5;
     border-width: 30px;
     margin-left: -30px;
+}
+
+.g{
+  background-color:#0c0404;
+}
+.a{
+  background-color:#223067;
+  /*227.83, 66.99, 40.39*/
+}
+.b{
+  background-color:#1b5245;
+  /*165.82, 67.07, 32.16*/
+}
+.c{
+  background-color:#482a18;
+  /*22.5, 66.67, 28.24*/
+}
+.d{
+  background-color:#441724;
+  /*434.67, 55.18, 26.67*/
+}
+.e{
+  background-color:#1a4f1b;
+  /*121.13, 67.09, 30.98*/
+}
+.f{
+  background-color:#3c1a4d;
+  /*280, 66.23, 30.2*/
 }
