@@ -97,6 +97,12 @@ h1{
 body{
    background-color:#110c06;
 }
+.whalf{
+  width:65px;
+}
+.hhalf{
+  height:65px;
+}
 .w1{
   width:150px;
 }
@@ -127,6 +133,9 @@ body{
 }
 .tile .fa{
   font-size: 100px;
+}
+.hhalf > .fa{
+  font-size: 50px;
 }
 .g{
   background-color:#0c0404;

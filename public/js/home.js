@@ -2,8 +2,6 @@ $(document).ready(function(){
     var $container = $('.container');
     // init
     $container.packery({
-      columnWidth: 150,
-      rowHeight: 150,
       itemSelector: '.tile',
       gutter: 15
     });
