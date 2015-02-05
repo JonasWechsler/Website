@@ -29,6 +29,9 @@ app.get('/flower', routes.flower);
 app.get('/gravity', routes.gravity);
 app.get('/bullseye', routes.seuss);
 app.get('/resume', routes.resume);
+app.get('/rainbow', routes.rainbow);
+app.get('/calculator', routes.calculator);
+
 app.get("/quote", function (Req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&source=joel_on_software+paul_graham+prog_stylemyfortune', function (error, response, content) {
         if (!error && response.statusCode == 200) {
@@ -39,9 +42,6 @@ app.get("/quote", function (Req, res) {
         }
     });
 });
-app.get('/rainbow', routes.rainbow);
-app.get('/calculator', routes.calculator);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
