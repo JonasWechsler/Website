@@ -25,6 +25,8 @@ $(document).keyup(function (e) {
 var oldx, oldy;
 document.onmousedown = function (e) {
     c.onmousemove = function (e) {
+        if (!e.x) e.x = e.clientX;
+        if (!e.y) e.y = e.clientY;
         if (!oldx) oldx = e.x;
         if (!oldy) oldy = e.y;
         var dx = e.x - oldx;
@@ -34,7 +36,7 @@ document.onmousedown = function (e) {
             y: 0,
             z: 0
         }, dx, dy);
-
+        console.log(oldx, oldy);
         oldx = e.x;
         oldy = e.y;
         timeSinceClick = 0;
@@ -223,9 +225,7 @@ function Part(x, y, z, color) {
 
 var date = new Date();
 for (var x = 0; x < 100; x += 10) {
-
     for (var y = 0; y < 100; y += 10) {
-
         for (var z = 0; z < 100; z += 10) {
             var rand1 = Math.random() * 2 - 1;
             var rand2 = Math.random() * 2 - 1;
@@ -246,8 +246,7 @@ function drawItAll(ctx) {
     }
     zbuffer.sort(function (a, b) {
         if (a.zdist > b.zdist) return -1;
-        if (a.zdist < b.zdist) return 1;
-        return 0
+        if (a.zdist < b.zdist) return 1;return 0
     });
     ctx.fillStyle = "black";
     for (var z = 0; z < zbuffer.length; z++) {
