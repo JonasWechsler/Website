@@ -1,10 +1,33 @@
-extends layout
-
-block content
-    canvas#draw(width=width,height=height)
-    script(src='#{src}')
-    if(title=='Rainbow')
-        div.title
-            - for (var index = 0; index < 16*8; ++i)
-                if(!index>quote.length)
-                    div.letter(class = index)=quote[index]
+doctype html
+html
+  head
+    title= "OOOOOO"
+    link(rel="stylesheet", href="/plugins/font-awesome-4.2.0/css/font-awesome.css")
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='./plugins/packery.pkgd.min.js')
+    script(src='./plugins/draggabilly.pkgd.js')
+    script(src='./js/home.js')
+  body
+    .content
+        h1
+            |J O N A S
+        h1
+            |W E C H S L E R
+        br
+        .container.w3
+            .tile.w1.h1.a
+                .fa.fa-user
+            .tile.w1.h1.b
+                .fa.fa-folder
+            .tile.w1.h1.c
+                .fa.fa-github
+            .tile.w1.h1.d
+                .fa.fa-envelope
+            .tile.w1.h1.e
+                .fa.fa-file
+            .tile.w1.h1.f
+            .tile.whalf.hhalf.e
+                .fa.fa-envelope-o
+            .tile.whalf.hhalf.f
+                .fa.fa-gamepad

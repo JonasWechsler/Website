@@ -2,8 +2,12 @@
  * GET home page.
  */
 var request = require('request');
+
 exports.home = function (req, res) {
-    res.render('home', {
+    res.render('home');
+}
+exports.index = function (req, res) {
+    res.render('index', {
         candy: [{
             'title': 'Star',
             'img': './images/zbuff.png',
@@ -37,14 +41,6 @@ exports.home = function (req, res) {
         }]
     });
 }
-exports.index = function (req, res) {
-    res.render('index', {
-        title: 'Express',
-        src: '',
-        width: 0,
-        height: 0
-    });
-};
 exports.flower = function (req, res) {
     res.render('index', {
         title: 'Flower',

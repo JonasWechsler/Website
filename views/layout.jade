@@ -3,7 +3,7 @@ html
     head
         title= title
         link(rel="stylesheet", href="/plugins/font-awesome-4.2.0/css/font-awesome.css")
-        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/layout.css')
         if(styles)
         link(rel='stylesheet', href=styles)
         script(src='http://code.jquery.com/jquery-latest.min.js')
@@ -11,4 +11,13 @@ html
         script(src='./plugins/draggabilly.pkgd.js')
         block header
     body
+      .navcontainer
+        nav
+          a.selected
+            |HOME
+          a
+            |PROJECTS
+          a
+            |ABOUT
+      .content
         block content

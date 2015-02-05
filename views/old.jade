@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    canvas#draw(width=width,height=height)
+    script(src='#{src}')
+    if(title=='Rainbow')
+        div.title
+            - for (var index = 0; index < 16*8; ++i)
+                if(!index>quote.length)
+                    div.letter(class = index)=quote[index]
