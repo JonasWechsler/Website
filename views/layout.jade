@@ -11,13 +11,26 @@ html
         script(src='./plugins/draggabilly.pkgd.js')
         block header
     body
+      block beforecontent
       .navcontainer
         nav
-          a.selected
-            |HOME
-          a
-            |PROJECTS
-          a
-            |ABOUT
+          if highlight == 0
+            a.selected(href="/")
+              |HOME
+          else
+            a(href="/")
+              |HOME
+          if highlight == 1
+            a.selected(href="/projects")
+              |PROJECTS
+          else
+            a(href="/projects")
+              |PROJECTS
+          if highlight == 2
+            a.selected(href="/about")
+              |ABOUT
+          else
+            a(href="/about")
+              |ABOUT
       .content
         block content

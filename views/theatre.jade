@@ -1,0 +1,9 @@
+extends layout
+
+block header
+  title= title
+  link(rel='stylesheet', href='/stylesheets/theatre.css')
+block content
+  .blog
+    canvas#draw.center(width="#{width}", height="#{height}")
+  script(src="#{src}")

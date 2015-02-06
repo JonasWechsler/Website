@@ -1,19 +1,16 @@
-doctype html
-html
-  head
-    title= "OOOOOO"
-    link(rel='stylesheet', href='/stylesheets/calculator.css')
-    link(rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Bowlby+One")
-    link(href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400',rel='stylesheet',type='text/css')
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-  body
-    .calculator
-      .textarea.h1(onKeyUp="check()")
-        input
-        input
-        input
-      canvas#graph.h1(width=292 height=292)
-      .err
-      .log
-    script(src='./js/calculator.js')
+extends layout
+block header
+  link(rel='stylesheet', href='/stylesheets/calculator.css')
+  link(href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400',rel='stylesheet',type='text/css')
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+block content
+  .calculator
+    .textarea.h1(onKeyUp="check()")
+      input
+      input
+      input
+    canvas#graph.h1(width=292 height=292)
+    .err
+    .log.hide
+  script(src='./js/calculator.js')
 

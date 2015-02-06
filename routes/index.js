@@ -3,11 +3,21 @@
  */
 var request = require('request');
 
+var render = function(res,file,params){
+  console.log(params);
+  if('undefined' === typeof params)
+    params = {};
+  if('undefined' === typeof params['highlight'])
+    params['highlight']=1;
+  console.log(params);
+  res.render(file,params);
+}
+
 exports.home = function (req, res) {
-    res.render('home');
+    render(res,'home',{highlight:0});
 }
 exports.index = function (req, res) {
-    res.render('index', {
+    render(res,'theatre'/*, {
         candy: [{
             'title': 'Star',
             'img': './images/zbuff.png',
@@ -39,10 +49,10 @@ exports.index = function (req, res) {
             'desc': 'A function based graphing calculator',
             'link': '/calculator'
         }]
-    });
+    }*/);
 }
 exports.flower = function (req, res) {
-    res.render('index', {
+    render(res,'theatre', {
         title: 'Flower',
         src: './js/flower.js',
         width: 500,
@@ -50,7 +60,7 @@ exports.flower = function (req, res) {
     });
 }
 exports.gravity = function (req, res) {
-    res.render('index', {
+    render(res,'theatre', {
         title: 'Gravity',
         src: './js/grav.js',
         width: 1000,
@@ -58,7 +68,7 @@ exports.gravity = function (req, res) {
     });
 }
 exports.seuss = function (req, res) {
-    res.render('index', {
+    render(res,'theatre', {
         title: 'Bullseye',
         src: './js/seuss.js',
         width: 1000,
@@ -66,7 +76,7 @@ exports.seuss = function (req, res) {
     });
 }
 exports.zbuff = function (req, res) {
-    res.render('index', {
+    render(res,'theatre', {
         title: 'Star',
         src: './js/zbuff.js',
         width: 500,
@@ -74,7 +84,7 @@ exports.zbuff = function (req, res) {
     });
 }
 exports.calculator = function (req, res) {
-    res.render('calculator');
+    render(res,'calculator');
 }
 exports.rainbow = function (req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&max_characters=288&source=joel_on_software+paul_graham+prog_style', function (error, response, content) {
@@ -82,7 +92,7 @@ exports.rainbow = function (req, res) {
             var json = JSON.parse(content);
             var quote = json.quote;
             console.log(quote);
-            res.render('index', {
+            render(res,'theatre', {
                 title: 'Rainbow',
                 src: './js/rainbow.js',
                 styles: './stylesheets/rainbow.css',
@@ -91,7 +101,7 @@ exports.rainbow = function (req, res) {
                 height: 0
             });
         } else {
-            res.render('index', {
+            render(res,'theatre', {
                 title: 'Rainbow',
                 src: './js/rainbow.js',
                 styles: './stylesheets/rainbow.css',
@@ -105,5 +115,5 @@ exports.rainbow = function (req, res) {
 
 
 exports.resume = function(req, res){
-    res.render('resume');
+    render(res,'resume');
 }

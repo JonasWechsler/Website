@@ -4,16 +4,28 @@ body{
   font-family:Helvetica;
   background-color:#E0E0E0;
 }
+a{
+  text-decoration: none;
+}
+.header{
+font-family: 'Monoton', cursive;
+  text-align:center;
+  background-color:#212121;
+  padding:100px 100px 0px 100px;
+  color:white;
+  font-size:100px;
+}
 .navcontainer{
   display:block;
   background-color:#212121;
+  border-bottom:70px solid #212121;
 }
 nav{
+  text-align: center;
+  display:block;
   font-size:11px;
   letter-spacing:2px;
   padding:2px 100px 0 100px;
-  margin: 0 auto;
-  width:700px;
   color:white;
 }
 nav a{
@@ -25,6 +37,7 @@ nav a{
 nav a.selected{
   margin:8px 10px 0 10px;
   border-bottom:3px solid #E0E0E0;
+  border-top:3px solid #E0E0E0;
   color: #E0E0E0;
 }
 .content{

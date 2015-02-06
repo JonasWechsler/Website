@@ -1,8 +1,15 @@
+html {
+   height: 100%;
+}
 body{
   padding:0;
   margin:0;
+  min-height:100%;
   font-family:Helvetica;
   background-color:#E0E0E0;
+}
+a{
+  text-decoration: none;
 }
 .header{
 font-family: 'Monoton', cursive;
@@ -36,13 +43,18 @@ nav a.selected{
   color: #E0E0E0;
 }
 .content{
-  margin: 0 auto;
-  text-align:center;
-  width:900px;
-}
-.content > *{
-  background-color:#FAFAFA;
-  display:block;
   width:100%;
-  margin-bottom:5px;
+}
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.blog{
+  margin: 5px auto 0 auto;
+  padding:5px;
+  text-align:left;
+  width:900px;
+  background-color:#FAFAFA;
 }

@@ -26,7 +26,7 @@ function bindLast(){
   });
   $('input').on("change keyup paste focus click focusout",function(){
     functions = [];
-    $('.textarea > input').each(function(idx){ 
+    $('.textarea > input').each(function(idx){
         if($(this).is(":focus")||$(this).val().isEmpty()){
         $(this).css('background-image', 'linear-gradient(to right, white 50%,' + colors[idx%colors.length] +' 50%)');
         $(this).css('background-position','0% 0%');
@@ -67,7 +67,7 @@ document.onmousedown = function (e) {
         var dy = e.y - oldy;
         dx /= 20;
         dy /= 20;
-        x_offset += dx;
+        x_offset -= dx;
         y_offset += dy;
         oldx = e.x;
         oldy = e.y;
@@ -87,7 +87,7 @@ function parseLine(line) {
       if(funct.length>1)throw funct + "(" + input + ") : Function name should be one character.";
       if(input.length>1)throw funct + "(" + input + ") : Please have one single character input.";
       if(equation.indexOf(funct+"(x)")!=-1)throw funct + "(x): Please do not have recursive functions";
-      
+
       while(equation.indexOf('\'')!=-1){
         clear();
         var eqfix = equation;
@@ -97,33 +97,34 @@ function parseLine(line) {
         for(var i=idx,p=0;eqfix.charAt(i)=='\'';i++)
           p++;
         var closeidx = 0;
-        for(var i=idx,c=1;c>1&&i<eqfix.length;i++){
-          //Find the closing brace
-          if(eqfix.charAt(i)==='(')
+        var one = false;
+        for(var i=idx,c=0;;i++){//Find the closing brace
+          if(eqfix.charAt(i)==='('){
             c++;
+            one = true;
+          }
           if(eqfix.charAt(i)===')')
             c--;
           closeidx=i;
-          console.log(c,i,eqfix.charAt(i));if(i>100)
+          if(i>=eqfix.length)
+            break;
+          if(c=== 0 && one)
+            break;
+          if(i>100)
             break;
         }
-        console.log("raw :",eqfix);
-        console.log("point :",idx,p,closeidx);
-        console.log("alt :",eqfix.substring(0,idx-1),",",fname,",",eqfix.substring(idx+p+1,closeidx),",",p,",",eqfix.substring(closeidx+1));
         equation = eqfix.substring(0,idx-1) + "slope(" + fname + "," + eqfix.substring(idx+p+1,closeidx) + "," + p + ")" + eqfix.substring(closeidx+1);
       }
       var lined = "function " + funct + "(x){return" + equation + "};";
-      console.log(lined);
       equations.push(lined);
       fnames.push(funct);
       return {response:true,format:lined,message:""};
 }
 
 var eps = 2.2*Math.pow(10,-16);
-var rooteps = Math.sqrt(eps);
 function slope(F,x,p){
   if(!p)p=1;
-  var h = rooteps*x;
+  var h = Math.pow(eps,1/(p*p+1))*x;
   var xph = x + h;
   var dx = xph - x;
   if(p > 1)
@@ -149,10 +150,10 @@ function graph() {
     var max = Number.MIN_VALUE;
     min = -10;
     max = 10;
-    var xmin = -10 + x_offset;
-    var xmax = 10 + x_offset;
+    var xmin = -10 - x_offset;
+    var xmax = 10 - x_offset;
     try {
-        for (var x = xmin; x < xmax; x += .01) {
+        for (var x = xmin; x < xmax; x += (xmax-xmin)/WIDTH) {
             var y = grapher(x);
             if (reset && false) {
                 for (var yi = 0; yi < y.length; yi++) {
@@ -165,11 +166,20 @@ function graph() {
                 y: y
             });
         }
+
         reset = false;
         min += y_offset;
         max += y_offset;
         ctx.clearRect(0, 0, WIDTH, HEIGHT);
         ctx.fillStyle = "black";
+        if(0 < max && min < 0){
+          ctx.beginPath();
+          var zero = HEIGHT - HEIGHT * (0 - min) / (max - min);
+          ctx.moveTo(0,zero);
+          ctx.lineTo(WIDTH,zero);
+          ctx.strokeStyle = "grey";
+          ctx.stroke();
+        }
         for (var i = 0; i < cache[0].y.length; i++) {
             ctx.beginPath();
             ctx.moveTo(WIDTH - cache[0].x, HEIGHT - cache[0].y[i]);
@@ -188,7 +198,8 @@ function graph() {
             ctx.stroke();
         }
     } catch (e) {
-        console.log(e);
+        clear();
+        log(e);
     }
 }
 
@@ -205,11 +216,14 @@ function check() {
     try{
       reset = true;
       parseLines();
-    graph();
-      $('.err').text("");
+      graph();
+      error("");
     }catch(err){
-      $('.err').text(err);
+      error(err);
     }
+}
+function error(line){
+  $('.err').text(line);
 }
 function clear(){
   $('.log').text('');
