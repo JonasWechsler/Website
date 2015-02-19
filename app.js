@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.home);
-app.get('/index', routes.index);
+app.get('/projects', routes.projects);
 app.get('/zbuff', routes.zbuff);
 app.get('/flower', routes.flower);
 app.get('/gravity', routes.gravity);

@@ -13,24 +13,12 @@ html
       |J
     .navcontainer
       nav
-        if highlight == 0
-          a.selected(href="/")
-            |HOME
-        else
-          a(href="/")
-            |HOME
-        if highlight == 1
-          a.selected(href="/projects")
-            |PROJECTS
-        else
-          a(href="/projects")
-            |PROJECTS
-        if highlight == 2
-          a.selected(href="/about")
-            |ABOUT
-        else
-          a(href="/about")
-            |ABOUT
+        a(href="/")
+          |HOME
+        a(href="/projects")
+          |PROJECTS
+        a(href="/about")
+          |ABOUT
     .content
       .title
 

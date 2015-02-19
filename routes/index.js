@@ -16,18 +16,13 @@ var render = function(res,file,params){
 exports.home = function (req, res) {
     render(res,'home',{highlight:0});
 }
-exports.index = function (req, res) {
-    render(res,'theatre'/*, {
-        candy: [{
+exports.projects = function (req, res) {
+    render(res,'projects', {
+        projects: [{
             'title': 'Star',
             'img': './images/zbuff.png',
             'desc': 'Probability distro',
             'link': '/zbuff'
-        }, {
-            'title': 'Flower',
-            'img': './images/Flower.png',
-            'desc': 'somein',
-            'link': '/flower'
         }, {
             'title': 'Gravity',
             'img': './images/gravity.png',
@@ -39,17 +34,12 @@ exports.index = function (req, res) {
             'desc': 'somein',
             'link': '/bullseye'
         }, {
-            'title': 'Z buffer',
-            'img': './images/Flower.png',
-            'desc': 'somein',
-            'link': '/flower'
-        }, {
             'title': 'Calculator',
             'img': './images/calculator.png',
             'desc': 'A function based graphing calculator',
             'link': '/calculator'
         }]
-    }*/);
+    });
 }
 exports.flower = function (req, res) {
     render(res,'theatre', {

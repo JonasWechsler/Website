@@ -8,7 +8,7 @@ a{
   text-decoration: none;
 }
 .header{
-font-family: 'Monoton', cursive;
+font-family: 'Monoton', Helvetica, sans-serif;
   text-align:center;
   background-color:#212121;
   padding:100px 100px 0px 100px;
