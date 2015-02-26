@@ -63,8 +63,8 @@ document.onmousedown = function (e) {
     canvas.onmousemove = function (e) {
         if (!oldx) oldx = e.x;
         if (!oldy) oldy = e.y;
-        var dx = e.x - oldx;
-        var dy = e.y - oldy;
+        var dx = (e.x - oldx)*zoom;
+        var dy = (e.y - oldy)*zoom;
         dx /= 20;
         dy /= 20;
         x_offset -= dx;
@@ -79,6 +79,25 @@ document.onmouseup = function (e) {
     oldy = null;
     canvas.onmousemove = null;
 }
+document.onkeypress = function(e){
+	console.log(e);
+	if(e.charCode == 43){
+		zoom/=2;
+		graph();
+	}
+	if(e.charCode == 45){
+		zoom*=2;
+		graph()
+	}
+	/*console.log(e.shiftKey, e.charCode >= 48, e.charCode <= 57);
+	if(e.charCode >= 48 && e.charCode <= 57){
+		console.log($('.textarea > input:nth-child('+(e.charCode-48)+")"));
+		$('.textarea > input:nth-child('+(e.charCode-48)+")").focus();
+	}*/
+}
+
+console.log($('.textarea > input:nth-child(0)').val("f(x)=x*x"));
+
 
 function parseLine(line) {
       var equation = line.substring(line.indexOf('=')+1);
@@ -148,10 +167,10 @@ function graph() {
     var cache = [];
     var min = Number.MAX_VALUE;
     var max = Number.MIN_VALUE;
-    min = -10;
-    max = 10;
-    var xmin = -10 - x_offset;
-    var xmax = 10 - x_offset;
+    min = -10 * zoom;
+    max = 10 * zoom;
+    var xmin = -10 * zoom - x_offset;
+    var xmax = 10 * zoom - x_offset;
     try {
         for (var x = xmin; x < xmax; x += (xmax-xmin)/WIDTH) {
             var y = grapher(x);
@@ -172,6 +191,7 @@ function graph() {
         max += y_offset;
         ctx.clearRect(0, 0, WIDTH, HEIGHT);
         ctx.fillStyle = "black";
+		/*Draw the horizontal axis*/
         if(0 < max && min < 0){
           ctx.beginPath();
           var zero = HEIGHT - HEIGHT * (0 - min) / (max - min);
@@ -180,6 +200,7 @@ function graph() {
           ctx.strokeStyle = "grey";
           ctx.stroke();
         }
+		/*Finally draw the function*/
         for (var i = 0; i < cache[0].y.length; i++) {
             ctx.beginPath();
             ctx.moveTo(WIDTH - cache[0].x, HEIGHT - cache[0].y[i]);
