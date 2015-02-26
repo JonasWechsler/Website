@@ -86,6 +86,9 @@ exports.zbuff = function (req, res) {
 exports.calculator = function (req, res) {
     render(res,'calculator');
 }
+exports.tetris = function (req, res){
+	render(res,'tetris');
+}
 exports.rainbow = function (req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&max_characters=288&source=joel_on_software+paul_graham+prog_style', function (error, response, content) {
         if (!error && response.statusCode == 200) {
