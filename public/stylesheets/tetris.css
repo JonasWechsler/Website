@@ -1,18 +1,26 @@
-body {
+/*body {
       background-color: #FAFAFA;
-      /*background-image: url("http://i.imgur.com/zeQpekQ.png");*/
-}
-.content{
+      background-image: url("http://i.imgur.com/zeQpekQ.png");
+}*/
+
+/*.tetra{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+}*/
 canvas{
   background-color:black;
   border:1px inset gray;
 }
-#tetris{
+body{
+	overflow:hidden;
+}
+.blog{
+  position:relative;
+  height:100%;
+}
+/*#tetris{
   box-shadow:inset 3px 3px 6px rgba(0,0,0,0.16);
   width:200px;
   overflow:hidden;
@@ -36,9 +44,9 @@ canvas{
 #tetris .B{
     opacity: 0;
     filter: alpha(opacity=0); /* For IE8 and earlier */
-}
+/*}
 #1{
   width:100%;
   height:20px;
   color:black;
-}
+}*/

@@ -47,7 +47,16 @@ nav a.selected{
   position:absolute;
   top:38px;
   height:100%;
+  /* Firefox */
+  height: -moz-calc(100% - 38px);
+  /* WebKit */
+  height: -webkit-calc(100% - 38px);
+  /* Opera */
+  height: -o-calc(100% - 38px);
+  /* Standard */
+  height: calc(100% - 38px);
   width:100%;
+
 }
 .center{
   position: absolute;
