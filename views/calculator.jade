@@ -4,13 +4,14 @@ block header
   link(href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400',rel='stylesheet',type='text/css')
   //script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
 block content
-  .calculator
-    .textarea.h1(onKeyUp="check()")
-      input
-      input
-      input
-    canvas#graph.h1(width=292 height=292)
-    .err
-    .log.hide
+  .blog
+    .calculator.center
+      .textarea.h1(onKeyUp="check()")
+        input
+        input
+        input
+      canvas#graph.h1(width=292 height=292)
+      .err
+      .log.hide
   script(src='./js/calculator.js')
 

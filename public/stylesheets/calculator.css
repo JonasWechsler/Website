@@ -37,6 +37,10 @@ canvas {
    border: 4px grey double;
 }
 */
+.blog{
+	position:relative;
+	height:90%;
+}
 .content *{
   color:rgba(0,0,0,1);
   font-family:"Roboto",sans-serif;

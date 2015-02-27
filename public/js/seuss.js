@@ -1,8 +1,11 @@
     /*One way sphere*/
-    var Edges = new Array();
+    var c = document.getElementById("draw");
+    var context = c.getContext("2d");
+    
+	var Edges = new Array();
     var Faces = new Array();
-    var WIDTH = 1000;
-    var HEIGHT = 500;
+    var WIDTH = c.width;
+    var HEIGHT = c.height;
     var DEBUG = true;
     var camera = {
         x: 50,
@@ -349,8 +352,6 @@
         }
     }
     makeSphere(0, 0, 0, 25);
-    var c = document.getElementById("draw");
-    var context = c.getContext("2d");
     setInterval(function () {
         drawItAll(context);
         panCameraAround({
