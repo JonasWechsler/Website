@@ -1,9 +1,11 @@
-extends layout
+extends ../layout
 block header
   link(rel='stylesheet', href='/stylesheets/projects.css')
 block content
-  .blog
+  .blog#container
     each val in projects
-      .project
+      .project(class="w#{val.w} h#{val.h}")
         a(href=val.link)
           img(src=val.img)
+block footer
+  script(src="./js/projects.js")

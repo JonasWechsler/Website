@@ -14,35 +14,43 @@ var render = function(res,file,params){
 }
 
 exports.home = function (req, res) {
-    render(res,'home',{highlight:0});
+    render(res,'home');
 }
 exports.projects = function (req, res) {
-    render(res,'projects', {
+    render(res,'projects/projects', {
         projects: [{
             'title': 'Star',
             'img': './images/zbuff.png',
             'desc': 'Probability distro',
-            'link': '/zbuff'
+            'link': '/zbuff',
+            'w':1,
+            'h':1
         }, {
             'title': 'Gravity',
             'img': './images/gravity.png',
             'desc': 'Brevity',
-            'link': '/gravity'
+            'link': '/gravity',
+            'w':1,
+            'h':1
         }, {
             'title': 'Bullseye',
             'img': './images/seuss.png',
             'desc': 'somein',
-            'link': '/bullseye'
+            'link': '/bullseye',
+            'w':1,
+            'h':1
         }, {
             'title': 'Calculator',
             'img': './images/calculator.png',
             'desc': 'A function based graphing calculator',
-            'link': '/calculator'
+            'link': '/calculator',
+            'w':1,
+            'h':1
         }]
     });
 }
 exports.flower = function (req, res) {
-    render(res,'theatre', {
+    render(res,'projects/theatre', {
         title: 'Flower',
         src: './js/flower.js',
         width: 500,
@@ -50,7 +58,7 @@ exports.flower = function (req, res) {
     });
 }
 exports.gravity = function (req, res) {
-    render(res,'theatre', {
+    render(res,'projects/theatre', {
         title: 'Gravity',
         src: './js/grav.js',
         width: 1000,
@@ -58,7 +66,7 @@ exports.gravity = function (req, res) {
     });
 }
 exports.seuss = function (req, res) {
-    render(res,'theatre', {
+    render(res,'projects/theatre', {
         title: 'Bullseye',
         src: './js/seuss.js',
         width: 1000,
@@ -66,7 +74,7 @@ exports.seuss = function (req, res) {
     });
 }
 exports.zbuff = function (req, res) {
-    render(res,'theatre', {
+    render(res,'projects/theatre', {
         title: 'Star',
         src: './js/zbuff.js',
         width: 500,
@@ -74,10 +82,10 @@ exports.zbuff = function (req, res) {
     });
 }
 exports.calculator = function (req, res) {
-    render(res,'calculator');
+    render(res,'projects/calculator');
 }
 exports.tetris = function (req, res){
-	render(res,'tetris');
+	render(res,'projects/tetris');
 }
 exports.rainbow = function (req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&max_characters=288&source=joel_on_software+paul_graham+prog_style', function (error, response, content) {
@@ -85,7 +93,7 @@ exports.rainbow = function (req, res) {
             var json = JSON.parse(content);
             var quote = json.quote;
             console.log(quote);
-            render(res,'theatre', {
+            render(res,'projects/theatre', {
                 title: 'Rainbow',
                 src: './js/rainbow.js',
                 styles: './stylesheets/rainbow.css',
@@ -94,7 +102,7 @@ exports.rainbow = function (req, res) {
                 height: 0
             });
         } else {
-            render(res,'theatre', {
+            render(res,'projects/theatre', {
                 title: 'Rainbow',
                 src: './js/rainbow.js',
                 styles: './stylesheets/rainbow.css',
