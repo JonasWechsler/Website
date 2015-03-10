@@ -61,7 +61,7 @@ exports.gravity = function (req, res) {
     render(res,'projects/theatre', {
         title: 'Gravity',
         src: './js/grav.js',
-        width: 1000,
+        width: 500,
         height: 500
     });
 }
@@ -69,7 +69,7 @@ exports.seuss = function (req, res) {
     render(res,'projects/theatre', {
         title: 'Bullseye',
         src: './js/seuss.js',
-        width: 1000,
+        width: 500,
         height: 500
     });
 }
