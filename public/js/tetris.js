@@ -2,72 +2,13 @@
  * -Options menu
  * -Fix sliding after contact
  * -Point scoring
- * -
+ * -Holding down buttons
  * - 
  */
 
-var BACKSPACE = 8;
-var TAB = 9;
-var ENTER = 13;
-var SHIFT = 16;
-var CTRL = 17;
-var ALT = 18;
-var PAUSE = 19;
-var BREAK = PAUSE;
-var CAPSLOCK = 20;
-var ESCAPE = 27;
-var SPACE = 32;
-var PAGEUP = 33;
-var PAGEDOWN = 34;
-var END = 35;
-var HOME = 36;
-var LARROW = 37;
-var UARROW = 38;
-var RARROW = 39;
-var DARROW = 40;
-var INSERT = 45;
-var DELETE = 46;
-var ZERO = 48;
-var ONE = 49;
-var TWO = 50;
-var THREE = 51;
-var FOUR = 52;
-var FIVE = 53;
-var SIX = 54;
-var SEVEN = 55;
-var EIGHT = 56;
-var NINE = 57;
-var A = 65;
-var B = 66;
-var C = 67;
-var D = 68;
-var E = 69;
-var F = 70;
-var G = 71;
-var H = 72;
-var I = 73;
-var J = 74;
-var K = 75;
-var L = 76;
-var M = 77;
-var N = 78;
-var O = 79;
-var P = 80;
-var Q = 81;
-var R = 82;
-var S = 83;
-var T = 84;
-var U = 85;
-var V = 86;
-var W = 87;
-var X = 88;
-var Y = 89;
-var Z = 90;
-var LWINDOW = 91;
-var RWINDOW = 92;
-var SELECT = 93;
-
 function TetrisMain(x,y,w,h,selector){
+	var debug = true;
+
 	var draw_x = x;
 	var draw_y = y;
 	var width = w;
@@ -421,7 +362,7 @@ rfor:for(var r=rows-1;r>=0;r--){
 	 */
 	this.drop = function(){
 		for(var i=0;i<height && this.shift('down');i++);
-		touch_time=1;
+		this.new_turn();
 	}
 	/******Player Interaction Methods*********/
 	/**
@@ -643,6 +584,19 @@ rfor:for(var r=rows-1;r>=0;r--){
 			}
 		}
 		new_frame = false;
+		if(debug){
+			var i = 10;
+			var write = function(s){
+				ctx.fillText(s,0,i);
+				i+=10;
+			}
+			ctx.fillStyle="black";
+			write("draw_x: " + draw_x + ", draw_y: " + draw_y);
+			write(", width: " + width + ", height: " + height + "\n");
+			write("container: " + container + ", canvas: " + canvas + "\n");
+			write("rows: " + rows + ", cols: " + cols + ", hidden: " + hidden_rows + "\n");
+			write("frame: " + frame + ", new_frame: " + new_frame + ", touch_time: " + touch_time + "\n");
+		}
 	}
 	this.to_string = function(){
 		var print = "";
