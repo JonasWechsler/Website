@@ -1,4 +1,3 @@
-
 var BACKSPACE = 8;
 var TAB = 9;
 var ENTER = 13;
