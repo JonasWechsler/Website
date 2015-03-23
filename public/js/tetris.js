@@ -2,11 +2,13 @@
  * -Options menu
  * -Fix sliding after contact
  * -Point scoring
- * -
+ * -Holding down buttons
  * - 
  */
 
 function TetrisMain(x,y,w,h,selector){
+	var debug = true;
+
 	var draw_x = x;
 	var draw_y = y;
 	var width = w;
@@ -360,7 +362,7 @@ rfor:for(var r=rows-1;r>=0;r--){
 	 */
 	this.drop = function(){
 		for(var i=0;i<height && this.shift('down');i++);
-		touch_time=1;
+		this.new_turn();
 	}
 	/******Player Interaction Methods*********/
 	/**
@@ -582,6 +584,19 @@ rfor:for(var r=rows-1;r>=0;r--){
 			}
 		}
 		new_frame = false;
+		if(debug){
+			var i = 10;
+			var write = function(s){
+				ctx.fillText(s,0,i);
+				i+=10;
+			}
+			ctx.fillStyle="black";
+			write("draw_x: " + draw_x + ", draw_y: " + draw_y);
+			write(", width: " + width + ", height: " + height + "\n");
+			write("container: " + container + ", canvas: " + canvas + "\n");
+			write("rows: " + rows + ", cols: " + cols + ", hidden: " + hidden_rows + "\n");
+			write("frame: " + frame + ", new_frame: " + new_frame + ", touch_time: " + touch_time + "\n");
+		}
 	}
 	this.to_string = function(){
 		var print = "";
