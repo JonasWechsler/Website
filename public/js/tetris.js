@@ -1,12 +1,9 @@
 /*TODO
  * -Options menu
- * -Fix sliding after contact
  * -Point scoring
- * -Holding down buttons
- * - 
  */
 
-function TetrisMain(x,y,w,h,selector){
+function TetrisMain(x,y,w,h,selector,cols,rows){
 	var debug = true;
 
 	var draw_x = x;
@@ -16,9 +13,10 @@ function TetrisMain(x,y,w,h,selector){
 	var container = selector;
 	var canvas = (selector)?false:true;
 
-	const rows = 24;
-	const cols = 10;
-	const hidden_rows = 4;
+	var rows = rows?rows:20;
+	var cols = cols?cols:10;
+	var hidden_rows = 4;
+	rows+=hidden_rows;
 
 	var frame = 0;
 	var new_frame = true;
@@ -215,6 +213,11 @@ rfor:for(var r=rows-1;r>=0;r--){
 	 */
 	this.resolve_contact = function(){
 		var contact = frame%drop_speed_mod==0 && !this.shift('down');
+		//
+		//if(active[0].r>10){
+		//	this.shift("up");
+		//}
+		//
 		if(contact && !touch_time){
 			touch_time = frame;
 		}
@@ -271,14 +274,42 @@ rfor:for(var r=rows-1;r>=0;r--){
 			var c = (active[i].r-center_r);
 			switch(dir){
 				case "cw":c*=-1;break;
-				case "ccw":c*=-1;break;
+				case "ccw":r*=-1;break;
 			}
 			r+=center_r;
 			c+=center_c;
 			new_active[i] = new Point(r,c);
 		}
+		var dr = 0;
+		var dc = 0;
+		for(var i=0;i<new_active.length;i++){
+			while(new_active[i].r+dr>=rows){
+				dr--;
+			}
+			while(new_active[i].c+dc>=cols){
+				dc--;
+			}
+			while(new_active[i].r+dr<0){
+				dr++;
+			}
+			while(new_active[i].c+dc<0){
+				dc++;
+			}
+				
+		}
+		for(var i=0;i<new_active.length;i++){
+			new_active[i].r += dr;
+			new_active[i].c += dc;
+		}
 		active = new_active;
-		if(!this.shift("none")&&!this.shift("left")&&!this.shift("right")&&!this.shift("right")&&!this.shift("up")){
+
+		if(!this.shift("none")&&
+			!this.shift("left")&&
+			!this.shift("right")&&
+			!this.shift("down")&&
+			!this.shift("down",2)&&
+			!this.shift("down",3)&&
+			!this.shift("up")){
 			active=old_active;
 			return;
 		}
@@ -302,29 +333,30 @@ rfor:for(var r=rows-1;r>=0;r--){
 	/**
 	 *
 	 */
-	this.shift = function(dir){
+	this.shift = function(dir,num){
+		if(!num)num=1;
 		var dx = 0;
 		var dy = 0;
 		switch(dir.toLowerCase()){
 			case 'up':
 			case 'north':
 			case 0:
-				dy--;
+				dy-=num;
 				break;
 			case 'right':
 			case 'east':
 			case 1:
-				dx++;
+				dx+=num;
 				break;
 			case 'down':
 			case 'south':
 			case 2:
-				dy++;
+				dy+=num;
 				break;
 			case 'left':
 			case 'west':
 			case 3:
-				dx--;
+				dx-=num;
 				break;
 			case 'none':
 			case 4:
@@ -336,8 +368,7 @@ rfor:for(var r=rows-1;r>=0;r--){
 		for(var i=0;i<active.length;i++){
 			var t = active[i];
 			if(board[t.r+dy][t.c+dx] || t.r + dy >= rows)return false;
-			if(t.c+dx < 0 || t.c+dx >=cols)
-				return false;
+			if(t.c+dx < 0 || t.c+dx >=cols) return false;
 		}
 		for(var i=0;i<active.length;i++){
 			active[i].r+=dy;
@@ -387,7 +418,10 @@ rfor:for(var r=rows-1;r>=0;r--){
 				this.on_down(event.key);
 			else if(keys[event.key]&&!event.down)
 				this.on_up(event.key);
-			keys[event.key]=event.down;
+			if(event.down&&!keys[event.key])
+				keys[event.key]=event.down;
+			if(!event.down)
+				keys[event.key]=event.down;
 		}
 	}
 	/**
@@ -395,7 +429,8 @@ rfor:for(var r=rows-1;r>=0;r--){
 	 */
 	this.on_down = function(key){
 		var name = key_bindings[key];
-		switch(name){case "cw":
+		switch(name){
+			case "cw":
 			case "ccw":
 				this.rotate(name);
 				break;
@@ -408,7 +443,6 @@ rfor:for(var r=rows-1;r>=0;r--){
 	 *
 	 */
 	this.on_up = function(key){
-
 	}
 
 	/**
@@ -507,6 +541,7 @@ rfor:for(var r=rows-1;r>=0;r--){
 		new_frame = this.resolve_contact()||new_frame;
 		this.check_rows();
 		frame++;
+		
 	}
 	/**
 	 *
@@ -547,12 +582,11 @@ rfor:for(var r=rows-1;r>=0;r--){
 	this.draw = function(ctx){
 		if(!new_frame)
 			return;
-		var block_height = height/(rows-hidden_rows);
-		var block_width = width/cols;
+		var block_width = Math.min(height/(rows-hidden_rows),width/cols);
 		for(var r=hidden_rows;r<rows;r++){
 			for(var c=0;c<cols;c++){
 				var x = draw_x + block_width*c;
-				var y = draw_y + block_height*(r-hidden_rows);
+				var y = draw_y + block_width*(r-hidden_rows);
 				var ID = board[r][c];
 				var color = "white";
 				var highlight = "white";
@@ -573,10 +607,10 @@ rfor:for(var r=rows-1;r>=0;r--){
 						color="gray";
 				if(canvas){
 					ctx.fillStyle=color;
-					ctx.fillRect(x,y,block_width,block_height);
+					ctx.fillRect(x,y,block_width,block_width);
 					if(ID!=0){
 						ctx.fillStyle="rgba(255,255,255,.1)";
-						ctx.fillRect(x+block_width/8,y+block_height/8,block_width*.75,block_height*.75);
+						ctx.fillRect(x+block_width/8,y+block_width/8,block_width*.75,block_width*.75);
 					}
 				}else{
 					$(selector + " #r" + (r-hidden_rows) + " #c" + c).removeClass().addClass(this.num_to_letter(ID)).css("background-color",color);
@@ -595,7 +629,15 @@ rfor:for(var r=rows-1;r>=0;r--){
 			write(", width: " + width + ", height: " + height + "\n");
 			write("container: " + container + ", canvas: " + canvas + "\n");
 			write("rows: " + rows + ", cols: " + cols + ", hidden: " + hidden_rows + "\n");
-			write("frame: " + frame + ", new_frame: " + new_frame + ", touch_time: " + touch_time + "\n");
+			write("frame: " + frame + ", touch_time: " + touch_time + "\n");
+			write("activeID: " + activeID + ", holdID: " + holdID + ", rotation: " + rotation + " dropping: " + dropping + "\n");
+			write("slide_speed_mod: " + slide_speed_mod + ", drop_speed_mod: " + drop_speed_mod + "\n");
+			write("frames_after_touch: " + frames_after_touch + "\n");
+			write("swapped_this_turn: " + swapped_this_turn + ", turn_swap_limit: " + turn_swap_limit + "\n");
+			for(var j=0;j<active.length;j++){
+				write("r: " + active[j].r + ", c: " + active[j].c + "\n");
+			}
+			write((keys+"").split(",").join() + "\n");
 		}
 	}
 	this.to_string = function(){
@@ -624,6 +666,8 @@ var ctx = canvas.getContext("2d");
 var t = new TetrisMain(0,0,250,500/*,"#tetris"*/);t.bind(LARROW,"left");t.bind(RARROW,"right");
 t.bind(38,"cw");
 t.bind(40,"soft");
+t.bind(Z,"cw");
+t.bind(X,"ccw");
 t.bind(SHIFT,"swap");
 t.bind(SPACE,"fast");
 t.game_over(t.init);
