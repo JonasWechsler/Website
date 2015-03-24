@@ -663,7 +663,7 @@ cfor:for(var c=0;c<cols;c++){
 }
 var canvas = document.getElementById("draw");
 var ctx = canvas.getContext("2d");
-var t = new TetrisMain(0,0,250,500/*,"#tetris"*/);t.bind(LARROW,"left");t.bind(RARROW,"right");
+var t = new TetrisMain(0,0,250,500,"#tetris");t.bind(LARROW,"left");t.bind(RARROW,"right");
 t.bind(38,"cw");
 t.bind(40,"soft");
 t.bind(Z,"cw");

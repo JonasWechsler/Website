@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,EAAG;EACD,aAAa,EAAE,aAAa",
+"sources": ["../../sass/error.scss"],
+"names": [],
+"file": "error.scss"
+}

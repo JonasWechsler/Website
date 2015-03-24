@@ -4,12 +4,10 @@
 var request = require('request');
 
 var render = function(res,file,params){
-  console.log(params);
   if('undefined' === typeof params)
     params = {};
   if('undefined' === typeof params['highlight'])
     params['highlight']=1;
-  console.log(params);
   res.render(file,params);
 }
 

@@ -80,87 +80,88 @@ a {
     border-width: 30px;
     margin-left: -30px;
 }*/
-*{
-  margin:0;
-  color:white;
-  font-family:Arial, Helvetica, sans-serif;
-}
-h1{
-  text-align: center;
-}
-.content{
+* {
+  margin: 0;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif; }
+
+h1 {
+  text-align: center; }
+
+.content {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-}
-body{
-   background-color:#110c06;
-}
-.whalf{
-  width:67px;
-}
-.hhalf{
-  height:67px;
-}
-.w1{
-  width:150px;
-}
-.h1{
-  height:150px;
-}
-.w2{
-  width:310px;
-}
-.h2{
-  height:310px;
-}
-.w3{
-  width:480px
-}
-.h3{
-  height:480px;
-}
-.tile *{
-  color:#110c06;
+  transform: translate(-50%, -50%); }
+
+body {
+  background-color: #110c06; }
+
+.whalf {
+  width: 67px; }
+
+.hhalf {
+  height: 67px; }
+
+.w1 {
+  width: 150px; }
+
+.h1 {
+  height: 150px; }
+
+.w2 {
+  width: 310px; }
+
+.h2 {
+  height: 310px; }
+
+.w3 {
+  width: 480px; }
+
+.h3 {
+  height: 480px; }
+
+.tile * {
+  color: #110c06;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-}
-.tile >{
-  margin: 10px;
-}
-.tile .fa{
-  font-size: 100px;
-}
-.hhalf > .fa{
-  font-size: 50px;
-}
-.g{
-  background-color:#0c0404;
-}
-.a{
-  background-color:#223067;
-  /*227.83, 66.99, 40.39*/
-}
-.b{
-  background-color:#1b5245;
-  /*165.82, 67.07, 32.16*/
-}
-.c{
-  background-color:#482a18;
-  /*22.5, 66.67, 28.24*/
-}
-.d{
-  background-color:#441724;
-  /*434.67, 55.18, 26.67*/
-}
-.e{
-  background-color:#1a4f1b;
-  /*121.13, 67.09, 30.98*/
-}
-.f{
-  background-color:#3c1a4d;
-  /*280, 66.23, 30.2*/
-}
+  transform: translate(-50%, -50%); }
+
+.tile > {
+  margin: 10px; }
+
+.tile .fa {
+  font-size: 100px; }
+
+.hhalf > .fa {
+  font-size: 50px; }
+
+.g {
+  background-color: #0c0404; }
+
+.a {
+  background-color: #223067;
+  /*227.83, 66.99, 40.39*/ }
+
+.b {
+  background-color: #1b5245;
+  /*165.82, 67.07, 32.16*/ }
+
+.c {
+  background-color: #482a18;
+  /*22.5, 66.67, 28.24*/ }
+
+.d {
+  background-color: #441724;
+  /*434.67, 55.18, 26.67*/ }
+
+.e {
+  background-color: #1a4f1b;
+  /*121.13, 67.09, 30.98*/ }
+
+.f {
+  background-color: #3c1a4d;
+  /*280, 66.23, 30.2*/ }
+
+/*# sourceMappingURL=index.scss.map */
