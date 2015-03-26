@@ -1,47 +1,53 @@
+@import 'constants';
+
+$blockwidth: 200px;
+$blockheight: 200px;
+$blockswide: floor($blogwidth/$blockwidth);
+$blockmargin: ($blogwidth - $blockswide * $blockwidth)/(2*$blockswide);
+
 .blog {
   padding: 50px;
 }
 
 .project {
+  margin:$blockmargin;
  /*width:200px;
  height:200px;
  padding:3px;
  display:inline-block;
 margin:8.5px;
  border:double 1px gray;*/
+  a {
+    width: inherit;
+    height: inherit;
+  }
+  img {
+    background-color: white;
+    width: inherit;
+    height: inherit;
+  }
 }
 
 .w1 {
-  width: 200px;
+  width: $blockwidth;
 }
 
 .w2 {
-  width: 400px;
+  width: 2 * $blockwidth + 2 * $blockmargin;
 }
 
 .w3 {
-  width: 600px;
+  width: 3 * $blockwidth + 4 * $blockmargin;
 }
 
 .h1 {
-  height: 200px;
+  height: $blockheight;
 }
 
 .h2 {
-  height: 400px;
+  height: 2 * $blockheight + 2 * $blockmargin;
 }
 
 .h3 {
-  height: 600px;
-}
-
-.project a {
-  width: inherit;
-  height: inherit;
-}
-
-.project img {
-  background-color: white;
-  width: inherit;
-  height: inherit;
+  height: 3 * $blockheight + 4 * $blockmargin;
 }

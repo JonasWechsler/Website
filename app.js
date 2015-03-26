@@ -35,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.home);
+app.get('/about', routes.about);
 app.get('/projects', routes.projects);
 app.get('/zbuff', routes.zbuff);
 app.get('/flower', routes.flower);

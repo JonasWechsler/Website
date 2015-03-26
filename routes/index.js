@@ -14,6 +14,9 @@ var render = function(res,file,params){
 exports.home = function (req, res) {
     render(res,'home');
 }
+exports.about = function(req, res){
+    render(res,'about',{'hightlight':3});
+}
 exports.projects = function (req, res) {
     render(res,'projects/projects', {
         projects: [{
