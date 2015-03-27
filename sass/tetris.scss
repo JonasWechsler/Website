@@ -10,6 +10,7 @@
   transform: translate(-50%, -50%);
 }*/
 canvas {
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.16);
   display: none;
   background-color: black;
   border: 1px inset gray;
@@ -29,7 +30,6 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.16);
   width: 200px;
   overflow: hidden;
   background-color: #F5F5F5;

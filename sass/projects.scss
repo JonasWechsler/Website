@@ -3,12 +3,16 @@
 }
 
 .project {
- /*width:200px;
- height:200px;
- padding:3px;
- display:inline-block;
-margin:8.5px;
- border:double 1px gray;*/
+  a {
+    width: inherit;
+    height: inherit;
+  }
+
+  img {
+    background-color: white;
+    width: inherit;
+    height: inherit;
+  }
 }
 
 .w1 {
@@ -33,15 +37,4 @@ margin:8.5px;
 
 .h3 {
   height: 600px;
-}
-
-.project a {
-  width: inherit;
-  height: inherit;
-}
-
-.project img {
-  background-color: white;
-  width: inherit;
-  height: inherit;
 }

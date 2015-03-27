@@ -36,19 +36,17 @@ nav {
   margin: 0 auto;
   width: 700px;
   color: white;
-}
-
-nav a {
+  a {
   display: inline-block;
   margin: 8px 10px 3px 10px;
   padding: 5px 5px 8px 5px;
   color: #D7CCC8;
-}
-
-nav a.selected {
+  }
+  a.selected {
   margin: 8px 10px 0 10px;
   border-bottom: 3px solid #E0E0E0;
   color: #E0E0E0;
+  }
 }
 
 .content {
