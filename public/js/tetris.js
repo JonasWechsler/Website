@@ -282,6 +282,7 @@ rfor:for(var r=rows-1;r>=0;r--){
 		}
 		var dr = 0;
 		var dc = 0;
+
 		for(var i=0;i<new_active.length;i++){
 			while(new_active[i].r+dr>=rows){
 				dr--;
@@ -302,14 +303,17 @@ rfor:for(var r=rows-1;r>=0;r--){
 			new_active[i].c += dc;
 		}
 		active = new_active;
-
 		if(!this.shift("none")&&
 			!this.shift("left")&&
 			!this.shift("right")&&
 			!this.shift("down")&&
 			!this.shift("down",2)&&
 			!this.shift("down",3)&&
-			!this.shift("up")){
+			!this.shift("up")&&
+			!this.shift("southeast")&&
+			!this.shift("southwest")&&
+			!this.shift("northeast")&&
+			!this.shift("northwest")){
 			active=old_active;
 			return;
 		}
@@ -360,6 +364,22 @@ rfor:for(var r=rows-1;r>=0;r--){
 				break;
 			case 'none':
 			case 4:
+				break;
+			case 'northeast':
+				dy-=num;
+				dx+=num;
+				break;
+			case 'northwest':
+				dy-=num;
+				dx-=num;
+				break;
+			case 'southeast':
+				dy+=num;
+				dx+=num;
+				break;
+			case 'southwest':
+				dy+=num;
+				dx-=num;
 				break;
 		}
 		/**0**

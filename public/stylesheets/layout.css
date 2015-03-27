@@ -23,25 +23,22 @@ a {
   height: 38px;
   display: block;
   background-color: #212121; }
-
-nav {
-  font-size: 11px;
-  letter-spacing: 2px;
-  padding: 2px 100px 0 100px;
-  margin: 0 auto;
-  width: 700px;
-  color: white; }
-
-nav a {
-  display: inline-block;
-  margin: 8px 10px 3px 10px;
-  padding: 5px 5px 8px 5px;
-  color: #D7CCC8; }
-
-nav a.selected {
-  margin: 8px 10px 0 10px;
-  border-bottom: 3px solid #E0E0E0;
-  color: #E0E0E0; }
+  .navcontainer nav {
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 2px 100px 0 100px;
+    margin: 0 auto;
+    width: 700px;
+    color: white; }
+    .navcontainer nav a {
+      display: inline-block;
+      margin: 8px 10px 3px 10px;
+      padding: 5px 5px 8px 5px;
+      color: #D7CCC8; }
+    .navcontainer nav a.selected {
+      margin: 8px 10px 0 10px;
+      border-bottom: 3px solid #E0E0E0;
+      color: #E0E0E0; }
 
 .content {
   position: absolute;
@@ -66,6 +63,7 @@ nav a.selected {
 .blog {
   margin: 0 auto 5px auto;
   padding: 5px;
+  padding: 50px;
   text-align: left;
   width: 900px;
   background-color: #FAFAFA; }

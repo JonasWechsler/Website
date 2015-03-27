@@ -2,38 +2,37 @@
   padding: 50px; }
 
 .project {
+  margin: 12.5px;
  /*width:200px;
  height:200px;
  padding:3px;
  display:inline-block;
 margin:8.5px;
  border:double 1px gray;*/ }
+  .project a {
+    width: inherit;
+    height: inherit; }
+  .project img {
+    background-color: white;
+    width: inherit;
+    height: inherit; }
 
 .w1 {
   width: 200px; }
 
 .w2 {
-  width: 400px; }
+  width: 425px; }
 
 .w3 {
-  width: 600px; }
+  width: 650px; }
 
 .h1 {
   height: 200px; }
 
 .h2 {
-  height: 400px; }
+  height: 425px; }
 
 .h3 {
-  height: 600px; }
-
-.project a {
-  width: inherit;
-  height: inherit; }
-
-.project img {
-  background-color: white;
-  width: inherit;
-  height: inherit; }
+  height: 650px; }
 
 /*# sourceMappingURL=projects.scss.map */
