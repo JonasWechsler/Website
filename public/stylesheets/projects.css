@@ -3,12 +3,11 @@
 
 .project {
   margin: 12.5px;
- /*width:200px;
- height:200px;
- padding:3px;
- display:inline-block;
-margin:8.5px;
- border:double 1px gray;*/ }
+  /*width:200px;
+  height:200px;
+  padding:3px;
+  display:inline-block;
+  border:double 1px gray;*/ }
   .project a {
     width: inherit;
     height: inherit; }

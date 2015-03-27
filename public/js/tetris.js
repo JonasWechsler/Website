@@ -681,26 +681,176 @@ cfor:for(var c=0;c<cols;c++){
 	}
 	this.init(x,y,w,h,selector);
 }
+
+function piece_viewer(x0,y0,w0,h0,p,s){
+	var x = 0,
+		y = 0,
+		w = 0,
+		h = 0,
+		piece = 0,
+		selector = 0,
+		active = [],
+		padding = 1;
+	this.init = function(x0,y0,w0,h0,p,s){
+		x=x0;
+		y=y0;
+		w=w0;
+		h=h0;
+		this.set_piece(p);
+		selector = s;
+	}
+	/**
+	 *
+	 */
+	this.get_colors = function(ID){
+		var color = "white";
+		switch(ID){
+			case 1:
+				color="cyan";
+				break;
+			case 2:
+				color="green";
+				break;
+			case 3:
+				color="red";
+				break;
+			case 4:
+				color="yellow";
+				break;
+			case 5:
+				color="blue";
+				break;
+			case 6:
+				color="orange";
+				break;
+			case 7:
+				color="purple";
+				break;
+			case 8:
+				color="gray";
+				break;
+		}
+		return color;
+	}
+	this.set_piece = function(p){
+		piece = p;
+		switch(p){
+			case 0://Blank
+				active=[[0]];
+				break;
+			case 1://I
+				active=[
+					[0,1,0],
+					[0,1,0],
+					[0,1,0],
+					[0,1,0]
+				];
+				break;
+			case 2://s
+				active=[
+					[0,2,2],
+					[2,2,0]
+				];
+				break;
+			case 3://z
+				active=[
+					[3,3,0],
+					[0,3,3]
+				];
+				break;
+			case 4://O
+				active=[
+					[4,4],
+					[4,4]
+				];
+				break;
+			case 5://J
+				active=[
+					[0,5],
+					[0,5],
+					[5,5]
+				];
+				break;
+			case 6://L
+				active=[
+					[6,0],
+					[6,0],
+					[6,6]
+				];
+				break;
+			case 7://T
+				active=[
+					[7,7,7],
+					[0,7,0]
+				];
+				break;
+		}
+		
+	}
+	this.draw = function(ctx){
+		var side = w0/5;
+		var tet_w = active[0].length;
+		var tet_h = active.length;
+		var left = (w-tet_w*side)/2;
+		var top = (h-tet_h*side)/2;	
+		if(ctx){
+			ctx.clearRect(0,0,w,h);
+		}else if(selector){
+			$(selector).empty();
+		}else{
+			throw new Exception("You gotta have a website!");
+		}
+		for(var r=0;r<active.length;r++){
+			for(var c=0;c<active[0].length;c++){
+				if(ctx){
+					ctx.fillRect(left+c*side,top+r*side,side,side);
+				}else if(selector){
+					var new_div = $("<div></div>");
+					new_div.css("position","absolute");
+					new_div.css("left",left+c*side+"px");
+					new_div.css("top",top+r*side+"px");
+					new_div.css("background-color",this.get_colors(active[r][c]))
+					$(selector).append(new_div);
+				}
+			}
+		}
+	}
+	this.init(x0,y0,w0,h0,p,s);
+}
 var canvas = document.getElementById("draw");
 var ctx = canvas.getContext("2d");
-var t = new TetrisMain(0,0,250,500,"#tetris");t.bind(LARROW,"left");t.bind(RARROW,"right");
-t.bind(38,"cw");
-t.bind(40,"soft");
-t.bind(X,"cw");
-t.bind(Z,"ccw");
-t.bind(SHIFT,"swap");
-t.bind(SPACE,"fast");
-t.game_over(t.init);
+var main = new TetrisMain(0,0,250,500,"#tetris");
+var next_piece = new piece_viewer(0,0,100,100,0,"#next");
+var hold_piece = new piece_viewer(0,0,100,100,0,"#hold");
+
+main.bind(LARROW,"left");
+main.bind(RARROW,"right");
+main.bind(38,"cw");
+main.bind(40,"soft");
+main.bind(X,"cw");
+main.bind(Z,"ccw");
+main.bind(SHIFT,"swap");
+main.bind(SPACE,"fast");
+main.game_over(main.init);
+main.hold(function(p){
+	hold_piece.set_piece(p)
+});
+main.next(function(p){
+	next_piece.set_piece(p)
+});
+
 document.onkeydown= function (e) {
 	e = e || window.event;
-	t.queue_key_event(e.which,true);
+	main.queue_key_event(e.which,true);
 };
 document.onkeyup= function (e) {
 	e = e || window.event;
-	t.queue_key_event(e.which,false);
+	main.queue_key_event(e.which,false);
 };
 
 setInterval(function(){
-		t.step();
-		t.draw(ctx);
-		},20);
+	main.step();
+	main.draw(ctx);
+	hold_piece.draw();
+	next_piece.draw();
+},20);
