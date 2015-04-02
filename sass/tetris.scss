@@ -31,8 +31,7 @@ body {
     display:inline-block;
     left:50%;
     top:50%;
-          transform: translate(-50%, -50%);
-    border: 1px solid black;
+    transform: translate(-50%, -50%);
     .tetromino{
       position:relative;
       width:100px;
@@ -64,11 +63,11 @@ body {
         margin: 0;
         padding: 0;
         height: 20px;
-      }
-      .B {
-        opacity: 0;
-        filter: alpha(opacity = 0);
-        /* For IE8 and earlier */
+        .B {
+          opacity: 0;
+          filter: alpha(opacity = 0);
+          /* For IE8 and earlier */
+        }
       }
     }
   }

@@ -107,7 +107,41 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 			case 5:return "J";
 			case 6:return "L";
 			case 7:return "T";
+			case 8:return "A";
 		}
+	}
+	/**
+	 *
+	 */
+	this.get_colors = function(ID){
+		var color = "white";
+		switch(ID){
+			case 1:
+				color="cyan";
+				break;
+			case 2:
+				color="green";
+				break;
+			case 3:
+				color="red";
+				break;
+			case 4:
+				color="yellow";
+				break;
+			case 5:
+				color="blue";
+				break;
+			case 6:
+				color="orange";
+				break;
+			case 7:
+				color="purple";
+				break;
+			case 8:
+				color="gray";
+				break;
+		}
+		return color;
 	}
 	/*******Block Management Methods********/
 
@@ -172,6 +206,7 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 	this.generate_block_random = function(){
 		var block = seven_bag.shift();
 		this.generate_block(block);
+		next_piece_callback(seven_bag[0]);
 	}
 	/**
 	 *
@@ -309,11 +344,11 @@ rfor:for(var r=rows-1;r>=0;r--){
 			!this.shift("down")&&
 			!this.shift("down",2)&&
 			!this.shift("down",3)&&
-			!this.shift("up")&&
 			!this.shift("southeast")&&
 			!this.shift("southwest")&&
 			!this.shift("northeast")&&
-			!this.shift("northwest")){
+			!this.shift("northwest")&&
+			!this.shift("up")){
 			active=old_active;
 			return;
 		}
@@ -566,39 +601,6 @@ rfor:for(var r=rows-1;r>=0;r--){
 	/**
 	 *
 	 */
-	this.get_colors = function(ID){
-		var color = "white";
-		switch(ID){
-			case 1:
-				color="cyan";
-				break;
-			case 2:
-				color="green";
-				break;
-			case 3:
-				color="red";
-				break;
-			case 4:
-				color="yellow";
-				break;
-			case 5:
-				color="blue";
-				break;
-			case 6:
-				color="orange";
-				break;
-			case 7:
-				color="purple";
-				break;
-			case 8:
-				color="gray";
-				break;
-		}
-		return color;
-	}
-	/**
-	 *
-	 */
 	this.draw = function(ctx){
 		if(!new_frame)
 			return;
@@ -633,7 +635,7 @@ rfor:for(var r=rows-1;r>=0;r--){
 						ctx.fillRect(x+block_width/8,y+block_width/8,block_width*.75,block_width*.75);
 					}
 				}else{
-					$(selector + " #r" + (r-hidden_rows) + " #c" + c).removeClass().addClass(this.num_to_letter(ID)).css("background-color",color);
+					$(selector + " #r" + (r-hidden_rows) + " #c" + c).removeClass().addClass(this.num_to_letter(ID));
 				}
 			}
 		}
@@ -681,176 +683,3 @@ cfor:for(var c=0;c<cols;c++){
 	}
 	this.init(x,y,w,h,selector);
 }
-
-function piece_viewer(x0,y0,w0,h0,p,s){
-	var x = 0,
-		y = 0,
-		w = 0,
-		h = 0,
-		piece = 0,
-		selector = 0,
-		active = [],
-		padding = 1;
-	this.init = function(x0,y0,w0,h0,p,s){
-		x=x0;
-		y=y0;
-		w=w0;
-		h=h0;
-		this.set_piece(p);
-		selector = s;
-	}
-	/**
-	 *
-	 */
-	this.get_colors = function(ID){
-		var color = "white";
-		switch(ID){
-			case 1:
-				color="cyan";
-				break;
-			case 2:
-				color="green";
-				break;
-			case 3:
-				color="red";
-				break;
-			case 4:
-				color="yellow";
-				break;
-			case 5:
-				color="blue";
-				break;
-			case 6:
-				color="orange";
-				break;
-			case 7:
-				color="purple";
-				break;
-			case 8:
-				color="gray";
-				break;
-		}
-		return color;
-	}
-	this.set_piece = function(p){
-		piece = p;
-		switch(p){
-			case 0://Blank
-				active=[[0]];
-				break;
-			case 1://I
-				active=[
-					[0,1,0],
-					[0,1,0],
-					[0,1,0],
-					[0,1,0]
-				];
-				break;
-			case 2://s
-				active=[
-					[0,2,2],
-					[2,2,0]
-				];
-				break;
-			case 3://z
-				active=[
-					[3,3,0],
-					[0,3,3]
-				];
-				break;
-			case 4://O
-				active=[
-					[4,4],
-					[4,4]
-				];
-				break;
-			case 5://J
-				active=[
-					[0,5],
-					[0,5],
-					[5,5]
-				];
-				break;
-			case 6://L
-				active=[
-					[6,0],
-					[6,0],
-					[6,6]
-				];
-				break;
-			case 7://T
-				active=[
-					[7,7,7],
-					[0,7,0]
-				];
-				break;
-		}
-		
-	}
-	this.draw = function(ctx){
-		var side = w0/5;
-		var tet_w = active[0].length;
-		var tet_h = active.length;
-		var left = (w-tet_w*side)/2;
-		var top = (h-tet_h*side)/2;	
-		if(ctx){
-			ctx.clearRect(0,0,w,h);
-		}else if(selector){
-			$(selector).empty();
-		}else{
-			throw new Exception("You gotta have a website!");
-		}
-		for(var r=0;r<active.length;r++){
-			for(var c=0;c<active[0].length;c++){
-				if(ctx){
-					ctx.fillRect(left+c*side,top+r*side,side,side);
-				}else if(selector){
-					var new_div = $("<div></div>");
-					new_div.css("position","absolute");
-					new_div.css("left",left+c*side+"px");
-					new_div.css("top",top+r*side+"px");
-					new_div.css("background-color",this.get_colors(active[r][c]))
-					$(selector).append(new_div);
-				}
-			}
-		}
-	}
-	this.init(x0,y0,w0,h0,p,s);
-}
-var canvas = document.getElementById("draw");
-var ctx = canvas.getContext("2d");
-var main = new TetrisMain(0,0,250,500,"#tetris");
-var next_piece = new piece_viewer(0,0,100,100,0,"#next");
-var hold_piece = new piece_viewer(0,0,100,100,0,"#hold");
-
-main.bind(LARROW,"left");
-main.bind(RARROW,"right");
-main.bind(38,"cw");
-main.bind(40,"soft");
-main.bind(X,"cw");
-main.bind(Z,"ccw");
-main.bind(SHIFT,"swap");
-main.bind(SPACE,"fast");
-main.game_over(main.init);
-main.hold(function(p){
-	hold_piece.set_piece(p)
-});
-main.next(function(p){
-	next_piece.set_piece(p)
-});
-
-document.onkeydown= function (e) {
-	e = e || window.event;
-	main.queue_key_event(e.which,true);
-};
-document.onkeyup= function (e) {
-	e = e || window.event;
-	main.queue_key_event(e.which,false);
-};
-
-setInterval(function(){
-	main.step();
-	main.draw(ctx);
-	hold_piece.draw();
-	next_piece.draw();
-},20);
