@@ -45,9 +45,10 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 	var turn_swap_limit = 1;
 
 	var game_over_callback = function(){console.log("Game Over")};
-	var held_piece_callback = function(p){console.log(p)};
-	var next_piece_callback = function(p){console.log(p)};
-
+	var held_piece_callback = function(held){console.log(held)};
+	var next_piece_callback = function(next){console.log(next)};
+	var line_clear_callback = function(line){console.log(line)};
+	var score_callback = function(p){console.log(p)};
 	var match_history = [];
 
 	/*Rules*/
@@ -213,17 +214,23 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 	 */
 	this.check_rows = function(){
 		var clears=0;
-rfor:for(var r=rows-1;r>=0;r--){
-		 for(var c=0;c<cols;c++)
-			 if(!board[r][c])
-				 continue rfor;
-		 clears++;
-		 for(var r0=r;r0>0;r0--)
-			 for(var c=0;c<cols;c++)
-				 board[r0][c]=board[r0-1][c];
-
-	 }
-	 return clears;
+		var cleared_squares = [];
+		rfor:for(var r=rows-1;r>=0;r--){
+			var line_squares = []
+		 	for(var c=0;c<cols;c++){
+		 		line_squares.push("#r" + r + " > #c" + c);
+			 	if(!board[r][c])
+				 	continue rfor;
+			}
+			cleared_squares.concat(line_squares);
+			clears++;
+			for(var r0=r;r0>0;r0--)
+				 for(var c=0;c<cols;c++)
+					 board[r0][c]=board[r0-1][c];
+	 	}
+	 	if(cleared_squares.length>0)
+	 		line_clear_callback(cleared_squares);
+		return clears;
 	}
 	/**
 	 *
@@ -546,6 +553,12 @@ rfor:for(var r=rows-1;r>=0;r--){
 	 */
 	this.next = function(callback){
 		next_piece_callback = callback;
+	}
+	/**
+	*Returns a list of selectors
+	*/
+	this.line_clear_callback = function(callback){
+		line_clear_callback = callback;
 	}
 	/**
 	 *
