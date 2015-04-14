@@ -20,6 +20,13 @@ exports.about = function(req, res){
 exports.projects = function (req, res) {
     render(res,'projects/projects', {
         projects: [{
+            'title': 'Tetris',
+            'img': './images/tetris_2.png',
+            'desc': 'Tetrisu',
+            'link': '/tetris',
+            'w': 1,
+            'h': 2
+        }, {
             'title': 'Star',
             'img': './images/zbuff.png',
             'desc': 'Probability distro',

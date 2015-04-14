@@ -73,7 +73,7 @@ function StyleCreator(){
 				color="purple";
 				break;
 			case 8:
-				color="gray";
+				color="olive";
 				break;
 		}
 		return color;
