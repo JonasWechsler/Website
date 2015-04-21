@@ -66,12 +66,7 @@ exports.flower = function (req, res) {
     });
 }
 exports.gravity = function (req, res) {
-    render(res,'projects/theatre', {
-        title: 'Gravity',
-        src: './js/grav.js',
-        width: 500,
-        height: 500
-    });
+    render(res,'projects/gravity');
 }
 exports.seuss = function (req, res) {
     render(res,'projects/theatre', {

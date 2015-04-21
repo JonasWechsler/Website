@@ -1,0 +1,13 @@
+extends ../layout
+
+block header
+  title= "Gravity"
+  link(rel='stylesheet', href='/stylesheets/theatre.css')
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+block content
+  .blog
+    canvas#draw.center(width="500", height="500")
+  script(src="./js/Grav2/keys.js")
+  script(src="./js/Grav2/world.js")
+  script(src="./js/Grav2/run.js")
+
