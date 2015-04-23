@@ -45,10 +45,22 @@ function StyleCreator(){
 			case 8:return "A";
 		}
 	}
+
+
+	this.get_colors = function(ID){
+		if(!ID)return "white";
+		var rgb;
+		if(ID==8)
+			rgb = HSVtoRGB(0,0,.2);
+		else
+			rgb = HSVtoRGB(1-ID/9,.5,.95);
+		
+		return "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")";
+	}
 	/**
 	 *
 	 */
-	this.get_colors = function(ID){
+	this.get_boring_colors = function(ID){
 		var color = "white";
 		switch(ID){
 			case 1:
@@ -77,6 +89,39 @@ function StyleCreator(){
 				break;
 		}
 		return color;
+	}
+	/**
+	*
+	*/
+
+	/* accepts parameters
+	 * h  Object = {h:x, s:y, v:z}
+	 * OR 
+	 * h, s, v
+	*/
+	function HSVtoRGB(h, s, v) {
+	    var r, g, b, i, f, p, q, t;
+	    if (h && s === undefined && v === undefined) {
+	        s = h.s, v = h.v, h = h.h;
+	    }
+	    i = Math.floor(h * 6);
+	    f = h * 6 - i;
+	    p = v * (1 - s);
+	    q = v * (1 - f * s);
+	    t = v * (1 - (1 - f) * s);
+	    switch (i % 6) {
+	        case 0: r = v, g = t, b = p; break;
+	        case 1: r = q, g = v, b = p; break;
+	        case 2: r = p, g = v, b = t; break;
+	        case 3: r = p, g = q, b = v; break;
+	        case 4: r = t, g = p, b = v; break;
+	        case 5: r = v, g = p, b = q; break;
+	    }
+	    return {
+	        r: Math.floor(r * 255),
+	        g: Math.floor(g * 255),
+	        b: Math.floor(b * 255)
+	    };
 	}
 	this.init();
 }

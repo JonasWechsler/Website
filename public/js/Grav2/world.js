@@ -3,7 +3,7 @@ function World(WIDTH,HEIGHT){
 
     var particles = new Array();
     var BIG_G = 6.67384 * update_rate;
-    var num = 20;
+    var num = 40;
   
     var camera, bigBounds, player;
 
@@ -43,7 +43,7 @@ function World(WIDTH,HEIGHT){
           var tx = this.x - particles[0].x;
           var ty = this.y - particles[0].y;
           
-					this.d2x = (tx) + CENTER_X;
+          this.d2x = (tx) + CENTER_X;
           this.d2y = (ty) + CENTER_Y;
           
           ctx.beginPath();
@@ -184,8 +184,9 @@ function World(WIDTH,HEIGHT){
                 if (h === 0 || !h) {
                     continue;
                 }
-							
-						  if (h < web_length){
+							 
+                var has_been_rendered = p1.d2x && p1.d2y && p2.d2x && p2.d2y;
+						    if (h < web_length && has_been_rendered){
                   ctx.beginPath();
                   ctx.globalAlpha = 5/h;
                   ctx.lineWidth = 3;
