@@ -26,7 +26,7 @@ a {
 }
 
 .navcontainer {
-  height: 38px;
+  height: $headerheight;
   display: block;
   background-color: #212121;
   nav {
@@ -52,7 +52,7 @@ a {
 
 .content {
   position: absolute;
-  top: 38px;
+  top: $headerheight;
   height: 100%;
   /* Firefox */
   height: -moz-calc(100% - 38px);

@@ -1,3 +1,4 @@
+/*DO NOT EDIT .css FILES*/
 /*body {
       background-color: #FAFAFA;
       background-image: url("http://i.imgur.com/zeQpekQ.png");
@@ -55,10 +56,10 @@ body {
         margin: 0;
         padding: 0;
         height: 20px; }
-      .blog .tetriscontainer #tetris .B {
-        opacity: 0;
-        filter: alpha(opacity=0);
-        /* For IE8 and earlier */ }
+        .blog .tetriscontainer #tetris div .B {
+          opacity: 0;
+          filter: alpha(opacity=0);
+          /* For IE8 and earlier */ }
 
  /*
 #1{

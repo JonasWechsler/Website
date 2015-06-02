@@ -4,5 +4,6 @@ for file in *.scss; do
     destfile="$DEST/$file"
     sass "$file" "$destfile"
     mv "$destfile" "${destfile%.scss}.css"
+    sed -i "1i/*DO NOT EDIT .css FILES*/" "${destfile%.scss}.css"
     echo "$file > $destfile > ${destfile%.scss}.css"
 done
