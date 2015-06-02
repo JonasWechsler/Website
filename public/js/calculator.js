@@ -1,51 +1,12 @@
 /**/
 var colors = ['#F44336','#E91E63','#9C27B0','#3F51B5','#2196F3'];
 
-var functions = [];
-
-function bindLast(){
-  $('.textarea > input').focus(function(){
-    $('.textarea').addClass('h2');
-  }).focusout(function(){
-    $('.textarea').removeClass('h2');
-  }).keydown(function(e) {
-    if (e.keyCode==40 || e.keyCode==13) {
-        $(this).next('input, select').focus();
-    }else if (e.keyCode==38) {
-        $(this).prev('input, select').focus();
-    }else if (e.keyCode==8 && $(this).val().isEmpty()){
-      e.preventDefault();
-      $(this).prev('input, select').focus();
-      $(this).remove();
-    }
-  });
-  $('.textarea > input:last-child').focus(function(){
-    $('input').unbind();
-    $('.textarea').append('<input>');
-    bindLast();
-  });
-  $('input').on("change keyup paste focus click focusout",function(){
-    functions = [];
-    $('.textarea > input').each(function(idx){
-        if($(this).is(":focus")||$(this).val().isEmpty()){
-        $(this).css('background-image', 'linear-gradient(to right, white 50%,' + colors[idx%colors.length] +' 50%)');
-        $(this).css('background-position','0% 0%');
-        $(this).css('color','black');
-      }else{
-        $(this).css('background-image', 'linear-gradient(to right, white 50%,' + colors[idx%colors.length] +' 50%)');
-        $(this).css('background-position','-100% 0%');
-        $(this).css('color','white');
-        functions.push($(this).val());
-      }
-    });
-    check();
-  });
-}
-bindLast();
-
 String.prototype.isEmpty = function() {
     return (this.length === 0 || !this.trim());
 };
+
+
+var functions = [];
 
 /**/
 var canvas = document.getElementById('graph');var ctx = canvas.getContext('2d');
@@ -80,25 +41,55 @@ document.onmouseup = function (e) {
     canvas.onmousemove = null;
 }
 document.onkeypress = function(e){
-	console.log(e);
 	if(e.charCode == 43){
 		zoom/=2;
 		graph();
 	}
 	if(e.charCode == 45){
 		zoom*=2;
-		graph()
+		graph();
 	}
-	/*console.log(e.shiftKey, e.charCode >= 48, e.charCode <= 57);
-	if(e.charCode >= 48 && e.charCode <= 57){
-		console.log($('.textarea > input:nth-child('+(e.charCode-48)+")"));
-		$('.textarea > input:nth-child('+(e.charCode-48)+")").focus();
-	}*/
 }
 
-console.log($('.textarea > input:nth-child(0)').val("f(x)=x*x"));
+function bindLast(){
+  $('.textarea > input').focus(function(){
+    $('.textarea').addClass('h2');
+  }).focusout(function(){
+    $('.textarea').removeClass('h2');
+  }).keydown(function(e) {
+    if (e.keyCode==40 || e.keyCode==13) {
+        $(this).next('input, select').focus();
+    }else if (e.keyCode==38) {
+        $(this).prev('input, select').focus();
+    }else if (e.keyCode==8 && $(this).val().isEmpty()){
+      e.preventDefault();
+      $(this).prev('input, select').focus();
+      $(this).remove();
+    }
+  });
 
-
+  $('.textarea > input:last-child').focus(function(){
+    $('input').unbind();
+    $('.textarea').append('<input>');
+    bindLast();
+  });
+  $('input').on("change keyup paste focus click focusout",function(){
+    functions = [];
+    $('.textarea > input').each(function(idx){
+        if($(this).is(":focus")||$(this).val().isEmpty()){
+        $(this).css('background-image', 'linear-gradient(to right, white 50%,' + colors[idx%colors.length] +' 50%)');
+        $(this).css('background-position','0% 0%');
+        $(this).css('color','black');
+      }else{
+        $(this).css('background-image', 'linear-gradient(to right, white 50%,' + colors[idx%colors.length] +' 50%)');
+        $(this).css('background-position','-100% 0%');
+        $(this).css('color','white');
+        functions.push($(this).val());
+      }
+    });
+    check();
+  });
+}
 function parseLine(line) {
       var equation = line.substring(line.indexOf('=')+1);
       var funct = line.substring(0, line.indexOf('('));
@@ -252,4 +243,18 @@ function clear(){
 function log(a){
     $('.log').append("<p>" + a + "</p>");
 }
+check();
+var startgraph;
+if(!document.cookie)
+  startgraph=["f(x)=x"];
+else
+  startgraph = document.cookie;
+
+bindLast();
+
+for(var i=0;i<startgraph.length;i++){
+  $($(".textarea").children()[i]).val(startgraph[i]);
+}
+graph();
+
 check();
