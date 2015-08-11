@@ -15,7 +15,7 @@ exports.home = function (req, res) {
     render(res,'home');
 }
 exports.about = function(req, res){
-    render(res,'about',{'hightlight':3});
+    render(res,'about',{'highlight':2});
 }
 exports.projects = function (req, res) {
     render(res,'projects/projects', {
@@ -67,6 +67,9 @@ exports.flower = function (req, res) {
 }
 exports.gravity = function (req, res) {
     render(res,'projects/gravity');
+}
+exports.golf = function(req, res){
+    render(res,'projects/golf');
 }
 exports.seuss = function (req, res) {
     render(res,'projects/theatre', {

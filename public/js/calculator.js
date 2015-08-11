@@ -10,9 +10,11 @@ var functions = [];
 
 /**/
 var canvas = document.getElementById('graph');
+canvas.width = 300;
+canvas.height = 300;
 var ctx = canvas.getContext('2d');
-var WIDTH = 300;
-var HEIGHT = 300;
+var WIDTH = canvas.width;
+var HEIGHT = canvas.height;
 var equations = [];
 var fnames = [];
 

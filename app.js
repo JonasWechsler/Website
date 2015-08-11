@@ -45,6 +45,7 @@ app.get('/resume', routes.resume);
 app.get('/rainbow', routes.rainbow);
 app.get('/calculator', routes.calculator);
 app.get('/tetris', routes.tetris);
+app.get('/golf', routes.golf);
 
 app.get("/quote", function (Req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&source=joel_on_software+paul_graham+prog_stylemyfortune', function (error, response, content) {
