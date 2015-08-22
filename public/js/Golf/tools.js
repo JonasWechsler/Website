@@ -24,7 +24,6 @@ function Vector(x, y) {
       x += v;
       y += v;
     } else {
-      console.log(v);
       throw "<" + v + "> + <" + this.x + ", " + this.y + ">";
     }
     return new Vector(x, y);
@@ -76,14 +75,9 @@ function VectorMath(){}
 
 VectorMath.intersectSegBall = function(seg, ball) {
   //http://stackoverflow.com/questions/1073336/circle-line-segment-collision-detection-algorithm
-  try{
     var d = seg.v1.minus(seg.v0),
-      f = seg.v0.minus(ball.position);
-
-        }catch(e){
-    console.log(e,v);
-  }
-    var a = d.dot(d),
+      f = seg.v0.minus(ball.position),
+      a = d.dot(d),
       b = 2 * f.dot(d),
       c = f.dot(f) - ball.r * ball.r;
 
