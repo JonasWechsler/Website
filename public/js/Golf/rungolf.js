@@ -43,5 +43,9 @@ document.addEventListener('keyup', function(e) {
 
 setInterval(function() {
   stepPhysics();
+}, 10);
+
+setInterval(function() {
   drawPhysics(ctx);
 }, 10);
+
