@@ -5,6 +5,12 @@ var next_piece = new piece_viewer(0,0,100,100,0,"#next");
 var hold_piece = new piece_viewer(0,0,100,100,0,"#hold");
 var style_creator = new StyleCreator();
 
+var score_keeper = new ScoreKeeper();
+score_keeper.levelSelector = "#level";
+score_keeper.comboSelector = "#combo";
+score_keeper.lineSelector = "#line";
+score_keeper.scoreSelector = "#score";
+
 main.bind(LARROW,"left");
 main.bind(RARROW,"right");
 main.bind(38,"cw");
@@ -13,13 +19,24 @@ main.bind(X,"cw");
 main.bind(Z,"ccw");
 main.bind(SHIFT,"swap");
 main.bind(SPACE,"fast");
-main.game_over(main.init);
+main.game_over(function(){
+	main.init();
+	score_keeper.reset();
+});
+
 main.hold(function(p){
 	hold_piece.set_piece(p)
 });
+
 main.next(function(p){
 	next_piece.set_piece(p)
 });
+
+main.line_clear_callback(function(a){
+	score_keeper.clear(a);
+});
+
+
 
 document.onkeydown= function (e) {
 	e = e || window.event;

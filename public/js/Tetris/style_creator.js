@@ -26,7 +26,6 @@ function StyleCreator(){
 		new_style += "{\n";
 		new_style += style;
 		new_style += "\n}\n";
-		console.log($(selector).length);
 		$(selector).append(new_style);
 	}
 	/**

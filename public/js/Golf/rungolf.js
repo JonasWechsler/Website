@@ -28,8 +28,11 @@ document.addEventListener('keydown', function(e) {
   }
 }, false);
 
+function draw(){
+	stepPhysics();
+	drawPhysics(ctx);
+	window.requestAnimationFrame(draw);
+}
 
-setInterval(function() {
-  stepPhysics();
-  drawPhysics(ctx);
-}, 10);
+//setInterval(function() {
+//}, 10);
