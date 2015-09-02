@@ -431,10 +431,8 @@ var build1 = function(){
 	strokeTo(88,678.5);
 	strokeTo(86,673.5);
 	strokeTo(84,668.5);
-	setMaterial(bouncey);
 	strokeTo(84,659.5);
 	strokeTo(84,607.5);
-	setMaterial(wood);
 	strokeTo(88,601.5);
 	strokeTo(93,599.5);
 	strokeTo(98,600.5);

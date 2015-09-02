@@ -20,16 +20,38 @@ document.addEventListener('keydown', function(e) {
   var char = String.fromCharCode(e.keyCode);
   switch (char) {
     case 'Q':
-      fixeds[0].up = !fixeds[0].up;
+      fixeds[0].up = true;
       break;
     case 'E':
-      fixeds[1].up = !fixeds[1].up;
+      fixeds[1].up = true;
       break;
   }
 }, false);
 
+function draw(){
+	stepPhysics();
+	drawPhysics(ctx);
+	window.requestAnimationFrame(draw);
+}
+
+document.addEventListener('keyup', function(e) {
+  var char = String.fromCharCode(e.keyCode);
+  switch (char) {
+    case 'Q':
+      fixeds[0].up = false;
+      break;
+    case 'E':
+      fixeds[1].up = false;
+      break;
+  }
+}, false);
 
 setInterval(function() {
   stepPhysics();
+}, 10);
+
+setInterval(function() {
   drawPhysics(ctx);
 }, 10);
+
+

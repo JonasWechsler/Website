@@ -8,13 +8,21 @@ block header
 block content
 	.blog
 		.tetriscontainer
-			#tetris
 			#next.tetromino
 			#hold.tetromino
+			#tetris
+			#stats
+				#line
+					|0
+				#score
+					|0pts
+				#combo
 			canvas#draw.center(width=250, height=500)
+			
 block footer
 	script(src='./js/Tetris/tetris_main.js')
 	script(src='./js/Tetris/piece_viewer.js')
 	script(src='./js/Tetris/style_creator.js')
+	script(src='./js/Tetris/score_keeper.js')
 	script(src='./js/Tetris/run.js')
 

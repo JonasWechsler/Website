@@ -213,7 +213,7 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 	 *
 	 */
 	this.check_rows = function(){
-		var clears=0;
+		var clears=0,total=0;
 		var cleared_squares = [];
 		rfor:for(var r=rows-1;r>=0;r--){
 			var line_squares = []
@@ -222,18 +222,19 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 			 	if(!board[r][c])
 				 	continue rfor;
 			}
+			//You have cleared a line!
 			cleared_squares.concat(line_squares);
 			clears++;
 			for(var r0=r;r0>0;r0--)
 				 for(var c=0;c<cols;c++)
 					 board[r0][c]=board[r0-1][c];
 	 	}
-	 	if(cleared_squares.length>0)
-	 		line_clear_callback(cleared_squares);
-		return clears;
+	 	if(clears>0)
+			total=clears+this.check_rows();
+		return total;
 	}
 	/**
-	 *
+	 *Spawns a new piece.
 	 */
 	this.new_turn = function(){
 		swapped_this_turn = 0;
@@ -249,20 +250,19 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 			game_over_callback();
 		}
 		touch_time = 0;
+
+		line_clear_callback(this.check_rows());
 	}
 	/**
 	 *
 	 */
 	this.resolve_contact = function(){
 		var contact = frame%drop_speed_mod==0 && !this.shift('down');
-		//
-		//if(active[0].r>10){
-		//	this.shift("up");
-		//}
-		//
+
 		if(contact && !touch_time){
 			touch_time = frame;
 		}
+
 		if(frame - touch_time > frames_after_touch && touch_time && contact){
 			this.new_turn();
 		}
@@ -607,7 +607,7 @@ function TetrisMain(x,y,w,h,selector,cols,rows){
 		new_frame = frame%drop_speed_mod==0||new_frame;
 		new_frame = this.while_pressed()||new_frame;//TODO implement new_frame
 		new_frame = this.resolve_contact()||new_frame;
-		this.check_rows();
+		//this.check_rows();
 		frame++;
 		
 	}
