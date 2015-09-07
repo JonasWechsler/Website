@@ -41,7 +41,7 @@ app.get('/zbuff', routes.zbuff);
 app.get('/flower', routes.flower);
 app.get('/gravity', routes.gravity);
 app.get('/bullseye', routes.seuss);
-app.get('/resume', routes.resume);
+//app.get('/resume', routes.resume);
 //app.get('/rainbow', routes.rainbow);
 app.get('/calculator', routes.calculator);
 app.get('/tetris', routes.tetris);

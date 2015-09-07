@@ -50,8 +50,10 @@ setInterval(function() {
   stepPhysics();
 }, 10);
 
-setInterval(function() {
+function draw() {
   drawPhysics(ctx);
-}, 10);
+  window.requestAnimationFrame(draw);
+}
+window.requestAnimationFrame(draw);
 
 

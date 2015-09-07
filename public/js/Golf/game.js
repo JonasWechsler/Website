@@ -7,6 +7,15 @@ var triggers = [];
 var timestamp = 0;
 var currentMaterial = new Material(1,"red",function(){});
 
+var clearAll = function(){
+  dynamics = [];
+  statics = [];
+  fixeds = [];
+  triggers = [];
+  timestamp = [];
+  currentMaterial = new Material(1,"red",function(){});
+}
+
 var acceleration = function(x,y){
   return new Vector(0,.05);
 };
@@ -200,6 +209,12 @@ var addFixed = function(fixed){
   }
   fixed.material = currentMaterial;
   fixeds.push(fixed);
+}
+
+var addTrigger = function(trigger){
+  if(!trigger.effect)
+    throw "Triggers must have effects";
+  triggers.push(trigger);
 }
 
 var setAcceleration = function(fn){

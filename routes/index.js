@@ -12,7 +12,44 @@ var render = function(res,file,params){
 }
 
 exports.home = function (req, res) {
-    render(res,'home');
+     render(res,'home', {
+        projects: [{
+            'title': 'Tetris',
+            'img': './images/tetris_2.png',
+            'desc': 'Tetrisu',
+            'link': '/tetris',
+            'w': 1,
+            'h': 2
+        }, {
+            'title': 'Star',
+            'img': './images/zbuff.png',
+            'desc': 'Probability distro',
+            'link': '/zbuff',
+            'w':1,
+            'h':1
+        }, {
+            'title': 'Gravity',
+            'img': './images/gravity.png',
+            'desc': 'Brevity',
+            'link': '/gravity',
+            'w':1,
+            'h':1
+        }, {
+            'title': 'Bullseye',
+            'img': './images/seuss.png',
+            'desc': 'somein',
+            'link': '/bullseye',
+            'w':1,
+            'h':1
+        }, {
+            'title': 'Calculator',
+            'img': './images/calculator.png',
+            'desc': 'A function based graphing calculator',
+            'link': '/calculator',
+            'w':1,
+            'h':1
+        }]
+    });
 }
 exports.about = function(req, res){
     render(res,'about',{'highlight':2});

@@ -15,6 +15,7 @@ var playSound = function(sound,vol){
 }
 
 var build1 = function(){
+	clearAll();
 	var stat = function(x0,y0,x1,y1){
 		addStatic(new LineSegment(new Vector(x0,y0), new Vector(x1,y1)));
 	}
@@ -418,26 +419,37 @@ var build1 = function(){
 	strokeTo(266.20000076293945,296.40000915527344);
 	strokeTo(270.20000076293945,292.40000915527344);
 	strokeTo(272.20000076293945,292.40000915527344);
-	moveTo(102,603.5);//bouncey
+	var off = -5;
+	moveTo(146,689 + off);
+	strokeTo(147,692 + off);
+	strokeTo(148,696 + off);
+	strokeTo(149,698 + off);
+	strokeTo(149,702 + off);
+	strokeTo(148,704 + off);
+	strokeTo(147,706 + off);
+	strokeTo(145,707 + off);
+	strokeTo(143,708 + off);
+	strokeTo(139,709 + off);
+	strokeTo(134,708 + off);
+	strokeTo(130,705 + off);
+	strokeTo(93,682 + off);
+	strokeTo(89,679 + off);
+	strokeTo(88,676 + off);
+	strokeTo(85,673 + off);
+	strokeTo(85,670 + off);
+	strokeTo(85,608 + off);
+	strokeTo(85,605 + off);
+	strokeTo(87,604 + off);
+	strokeTo(88,603 + off);
+	strokeTo(91,600 + off);
+	strokeTo(93,600 + off);
+	strokeTo(96,600 + off);
+	strokeTo(98,601 + off);
+	strokeTo(101,603 + off);
+	strokeTo(105,607 + off);
 	setMaterial(bouncey);
-	strokeTo(147,692.5);
-	strokeTo(149,699.5);
+	strokeTo(146,689 + off);
 	setMaterial(wood);
-	strokeTo(146,705.5);
-	strokeTo(142,707.5);
-	strokeTo(134,707.5);
-	strokeTo(129,704.5);
-	strokeTo(93,681.5);
-	strokeTo(88,678.5);
-	strokeTo(86,673.5);
-	strokeTo(84,668.5);
-	strokeTo(84,659.5);
-	strokeTo(84,607.5);
-	strokeTo(88,601.5);
-	strokeTo(93,599.5);
-	strokeTo(98,600.5);
-	strokeTo(100,601.5);
-	strokeTo(102,603.5);
 	moveTo(273.25,707.5);//bouncey
 	strokeTo(314.25,683.5);
 	strokeTo(320.25,679.5);
@@ -449,7 +461,9 @@ var build1 = function(){
 	strokeTo(309.25,601.5);
 	strokeTo(305.25,603.5);
 	strokeTo(302.25,608.5);
+	setMaterial(bouncey);
 	strokeTo(263.25,692.5);
+	setMaterial(wood);
 	strokeTo(261.25,699.5);
 	strokeTo(262.25,702.5);
 	strokeTo(265.25,706.5);
@@ -473,11 +487,54 @@ var build1 = function(){
 	strokeTo(390.25,603.5);
 	strokeTo(396.25,602.5);
 	strokeTo(397.25,358.5);
+	setMaterial(bouncey);
+	for(var t=0;t<=1.05;t+=.05){
+		var angle = Math.PI*2*t;
+		var x = Math.cos(angle)*30 + 153;
+		var y = Math.sin(angle)*30 + 246;
+		if(t==0)
+			moveTo(x,y);
+		else
+			strokeTo(x,y);
+	}
+	for(var t=0;t<=1.05;t+=.05){
+		var angle = Math.PI*2*t;
+		var x = Math.cos(angle)*30 + 252;
+		var y = Math.sin(angle)*30 + 270;
+		if(t==0)
+			moveTo(x,y);
+		else
+			strokeTo(x,y);
+	}
+	for(var t=0;t<=1.05;t+=.05){
+		var angle = Math.PI*2*t;
+		var x = Math.cos(angle)*30 + 153;
+		var y = Math.sin(angle)*30 + 146;
+		if(t==0)
+			moveTo(x,y);
+		else
+			strokeTo(x,y);
+	}
+	for(var t=0;t<=1.05;t+=.05){
+		var angle = Math.PI*2*t;
+		var x = Math.cos(angle)*30 + 252;
+		var y = Math.sin(angle)*30 + 170;
+		if(t==0)
+			moveTo(x,y);
+		else
+			strokeTo(x,y);
+	}
+	setMaterial(wood);
+	//150,250,30,30
 
 	addDynamic(new DynamicBall(new Vector(413,370), 10, new Vector(0,-100)));
 
 	addFixed(new Flapper(new Vector(125,745),-.03,-.27,-.01));
 	addFixed(new Flapper(new Vector(280,745),.03,.94,.68));
+
+	addTrigger(new TriggerLineSegment(new Vector(150,830),new Vector(250,830),function(){
+		build1();
+	}));
 }
 
 build1();
