@@ -1,0 +1,54 @@
+/*DO NOT EDIT .css FILES*/
+svg {
+  height: 0;
+  width: 0; }
+
+.border {
+  overflow: hidden;
+  margin: calc(50vh - 12.5em) auto;
+  margin: 10vh auto;
+  width: 420px;
+  height: 420px; }
+  .border .cubes {
+    position: relative;
+    width: 32em;
+    height: 32em;
+    left: -40px;
+    top: -25px; }
+    .border .cubes .spacer {
+      display: inline-block;
+      height: 50px;
+      width: 42px; }
+    .border .cubes .cube {
+      display: inline-block;
+      position: relative;
+      width: 84px;
+      height: 72.17021px; }
+      .border .cubes .cube .side {
+        position: absolute;
+        background-attachment: fixed; }
+      .border .cubes .cube .top {
+        -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        clip-path: url("#top");
+        width: 80px;
+        height: 50px;
+        background-image: url("../images/desert.jpg"); }
+      .border .cubes .cube .left {
+        top: 25px;
+        width: 40px;
+        height: 72.17021px;
+        -webkit-clip-path: polygon(0 0, 100% 34.64033%, 100% 100%, 0 65.35967%);
+        clip-path: url("#left");
+        background-image: url("../images/pines.jpg"); }
+      .border .cubes .cube .right {
+        top: 25px;
+        left: 40px;
+        width: 40px;
+        height: 72.17021px;
+        -webkit-clip-path: polygon(100% 0, 0% 34.64033%, 0% 100%, 100% 65.35967%);
+        clip-path: url(#right);
+        background-image: url("../images/water.jpg"); }
+
+/* Center the demo */
+
+/*# sourceMappingURL=cubes.scss.map */

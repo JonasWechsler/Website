@@ -1,6 +1,9 @@
 var canvas = document.getElementById("draw");
 var ctx = canvas.getContext("2d");
 
+canvas.width = 500;
+canvas.height = 500;
+
 var WIDTH = canvas.width;
 var HEIGHT = canvas.height;
 var COLOR = "#D7D988";

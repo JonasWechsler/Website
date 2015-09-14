@@ -1,0 +1,107 @@
+$loops : 0;
+@function approximateSq($num, $approx) {
+  $root : (( $num / $approx ) + $approx) / 2;
+  @return $root;
+}
+
+@function sqrt($num) {
+  $root:0;
+  $testRoot : 0;
+  $upperBounds : round($num / 2) + 1; //never need over half the main number. Add one just to be sure!
+  $loops : $upperBounds;
+  @for $test from 2 through $upperBounds {
+    $sq : $test * $test;
+    @if $sq <= $num {
+      $testRoot : $test;
+    }
+  }  
+  
+  $root : (approximateSq($num, $testRoot));
+  
+  @return $root;
+}
+
+svg{
+  height:0;
+  width:0;
+}
+
+.border{
+  overflow:hidden;
+  margin: calc(50vh - 12.5em) auto;
+  margin: 10vh auto;
+  
+  width: 420px;
+  height: 420px;
+
+  .cubes{
+    $cube_width: 80;
+    $cube_height: 50;
+    $half_width: $cube_width/2;
+    $half_height: $cube_height/2;
+
+    $side_length: sqrt(($half_width*$half_width)+($half_height*$half_height));
+    $ratio: 100*$cube_height/$cube_width+0%;
+    $middle_ratio: 100*$side_length/($side_length+$half_height)+0%;
+    $complement: 100% - $middle_ratio;
+
+    $top_pic:"../images/desert.jpg";
+    $left_pic:"../images/pines.jpg";
+    $right_pic:"../images/water.jpg";
+
+    position: relative;
+    width: 32em;
+    height: 32em;
+    left: -1*$half_width + 0px;
+    top: -1*$half_height + 0px;
+    
+    .spacer{
+      display:inline-block;
+      height:$cube_height + 0px;
+      width:$cube_width/2 + 2px;
+    }
+    .cube{
+      display:inline-block;
+      position:relative;
+      width:$cube_width+4px;
+      height:$cube_height/2+$side_length+0px;
+
+      .side{
+        position:absolute;
+        background-attachment: fixed;
+      }
+
+      .top {
+        -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        clip-path: url("#top");
+        width: $cube_width+0px;
+        height: $cube_height+0px;
+        background-image: url($top_pic);
+      }
+
+
+      .left {
+        top: $half_height+0px;
+        width: $half_width+0px;
+        height: $side_length+$half_height+0px;
+        -webkit-clip-path: polygon(0 0, 100% $complement, 100% 100%, 0 $middle_ratio);
+        clip-path: url("#left");
+        background-image: url($left_pic);
+      }
+
+
+      .right {
+        top: $half_height+0px;
+        left: $half_width+0px;
+        width: $half_width+0px;
+        height: $side_length+$half_height+0px;
+        -webkit-clip-path: polygon(100% 0, 0% $complement, 0% 100%, 100% $middle_ratio);
+        clip-path: url(#right);
+        background-image: url($right_pic);
+      }
+
+
+    }
+  }
+}
+/* Center the demo */

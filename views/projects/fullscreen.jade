@@ -1,0 +1,11 @@
+extends ../requirements
+
+block layout_header
+  title= title
+  link(rel='stylesheet', href='/stylesheets/fullscreen.css')
+block layout_content
+  a.back(href="/")
+    i.fa.fa-arrow-circle-left
+  canvas#draw.center(width="#{width}", height="#{height}")
+  script(src="#{src}")
+  script(src="./js/fullscreen.js")

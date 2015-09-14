@@ -1,11 +1,14 @@
     /*One way sphere*/
-    var c = document.getElementById("draw");
-    var context = c.getContext("2d");
+    var canvas = document.getElementById("draw");
+    var context = canvas.getContext("2d");
     
+    canvas.width = screen.width;
+    canvas.height = screen.height;
+
 	var Edges = new Array();
     var Faces = new Array();
-    var WIDTH = c.width;
-    var HEIGHT = c.height;
+    var WIDTH = canvas.width;
+    var HEIGHT = canvas.height;
     var DEBUG = true;
     var camera = {
         x: 50,

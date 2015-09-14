@@ -37,15 +37,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', routes.home);
 app.get('/about', routes.about);
 app.get('/projects', routes.projects);
+
+app.get('/bullseye', routes.seuss);
 app.get('/zbuff', routes.zbuff);
 app.get('/flower', routes.flower);
-app.get('/gravity', routes.gravity);
-app.get('/bullseye', routes.seuss);
-//app.get('/resume', routes.resume);
-//app.get('/rainbow', routes.rainbow);
+app.get('/isometric', routes.isometric);
+app.get('/perlin', routes.perlin);
+app.get('/squares', routes.squares);
+app.get('/cubes', routes.cubes);
+
+
 app.get('/calculator', routes.calculator);
 app.get('/tetris', routes.tetris);
 app.get('/golf', routes.golf);
+app.get('/gravity', routes.gravity);
 
 app.get("/quote", function (Req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&source=joel_on_software+paul_graham+prog_stylemyfortune', function (error, response, content) {
@@ -57,6 +62,10 @@ app.get("/quote", function (Req, res) {
         }
     });
 });
+//app.get('/resume', routes.resume);
+//app.get('/rainbow', routes.rainbow);
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -87,7 +96,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-app.listen(80);
 
 module.exports = app;

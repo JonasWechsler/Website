@@ -1,7 +1,15 @@
 /*One way sphere*/
 var Particles = new Array();
-var WIDTH = 500;
-var HEIGHT = 500;
+
+var canvas = document.getElementById("draw");
+var context = canvas.getContext("2d");
+
+canvas.width = screen.width;
+canvas.height = screen.height;
+
+var WIDTH = canvas.width;
+var HEIGHT = canvas.height;
+
 var DEBUG = true;
 var camera = {
     x: -1,
@@ -24,7 +32,7 @@ $(document).keyup(function (e) {
 });
 var oldx, oldy;
 document.onmousedown = function (e) {
-    c.onmousemove = function (e) {
+    canvas.onmousemove = function (e) {
         if (!e.x) e.x = e.clientX;
         if (!e.y) e.y = e.clientY;
         if (!oldx) oldx = e.x;
@@ -45,7 +53,7 @@ document.onmousedown = function (e) {
 document.onmouseup = function (e) {
     oldx = null;
     oldy = null;
-    c.onmousemove = null;
+    canvas.onmousemove = null;
 };
 
 function checkKeys() {
@@ -255,8 +263,6 @@ function drawItAll(ctx) {
     }
     return true;
 }
-var c = document.getElementById("draw");
-var context = c.getContext("2d");
 var run = false;
 setInterval(function () {
     if (checkKeys() || oldy || oldy || !run || timeSinceClick > 2000) {

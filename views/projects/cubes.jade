@@ -1,0 +1,29 @@
+extends ../layout
+block header
+  link(rel='stylesheet', href='/stylesheets/cubes.css')
+block content
+  .blog
+    .border
+      .cubes
+        - for(var y=0;y<6;y++)
+          if(y%2==0)
+            .spacer
+          else
+            .cube(class="#{x}")
+              .side.top
+              .side.left
+              .side.right
+          - for(var x=0;x<5;x++)
+            .cube(class="#{x}")
+              .side.top
+              .side.left
+              .side.right
+          br
+  svg(width="0", height="0")
+    clipPath#top(clipPathUnits="objectBoundingBox")
+      polygon(points=".5 0, 1 .5, .5 1, 0 .5")
+    clipPath#left(clipPathUnits="objectBoundingBox")
+      polygon(points="1 0, 0 .3464033, 0 1, 1 .6535967")
+    clipPath#right(clipPathUnits="objectBoundingBox")
+      polygon(points="0 0, 1 .3464033, 1 1, 0 .6535967")
+  script(src="./js/cubes.js")
