@@ -13,11 +13,11 @@ var render = function(res,file,params){
 
 var projects = [{
             'title': 'Tetris',
-            'img': './images/tetris_2.png',
+            'img': './images/tetris.png',
             'desc': 'Tetrisu',
             'link': '/tetris',
             'w': 1,
-            'h': 2
+            'h': 1
         }, {
             'title': 'Calculator',
             'img': './images/calculator.png',
@@ -47,10 +47,31 @@ var projects = [{
             'w':1,
             'h':1
         }, {
+            'title': 'Perlin2d',
+            'img': './images/perlin2d.jpg',
+            'desc': 'A function based graphing calculator',
+            'link': '/perlin2d',
+            'w':1,
+            'h':1
+        }, {
             'title': 'Squares',
             'img': './images/squares.png',
             'desc': 'A function based graphing calculator',
             'link': '/squares',
+            'w':1,
+            'h':1
+        }, {
+            'title': 'Ball',
+            'img': './images/ball.jpg',
+            'desc': 'A function based graphing calculator',
+            'link': '/ball',
+            'w':1,
+            'h':1
+        }, {
+            'title': 'Clover',
+            'img': './images/clover.jpg',
+            'desc': 'A function based graphing calculator',
+            'link': '/clover',
             'w':1,
             'h':1
         }, {
@@ -118,7 +139,6 @@ exports.calculator = function (req, res) {
 exports.tetris = function (req, res){
     render(res,'projects/tetris');
 }
-
 /**************************************/
 /**************************************/
 /**************************************/
@@ -153,8 +173,26 @@ exports.squares = function (req, res) {
         src: './js/squares.js'
     })
 }
+exports.perlin2d = function (req, res) {
+    render(res,'projects/fullscreen', {
+        title: 'Perlin2d',
+        src: './js/perlin2d.js'
+    })
+}
 exports.cubes = function (req, res) {
     render(res,'projects/cubes');
+}
+exports.ball = function (req, res) {
+    render(res,'projects/fullscreen', {
+        title: 'Ball',
+        src: './js/ball.js'
+    });
+}
+exports.clover = function (req, res) {
+    render(res,'projects/fullscreen', {
+        title: 'Clover',
+        src: './js/clover.js'
+    });
 }
 
 /**************************************/

@@ -45,6 +45,9 @@ app.get('/isometric', routes.isometric);
 app.get('/perlin', routes.perlin);
 app.get('/squares', routes.squares);
 app.get('/cubes', routes.cubes);
+app.get('/perlin2d', routes.perlin2d);
+app.get('/ball', routes.ball);
+app.get('/clover', routes.clover);
 
 
 app.get('/calculator', routes.calculator);
