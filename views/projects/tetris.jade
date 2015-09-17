@@ -7,22 +7,28 @@ block header
 	script(src='./js/keys.js')
 block content
 	.blog
-		.tetriscontainer
-			#next.tetromino
-			#hold.tetromino
-			#tetris
-			#stats
-				#line
-					|0
-				#score
-					|0pts
-				#combo
-			canvas#draw.center(width=250, height=500)
+		.game
+			.menu
+			form.options
+			.tetriscontainer
+				#next.tetromino
+				#hold.tetromino
+				#tetris
+				#stats
+					#line
+						|0
+					#score
+						|0pts
+					#combo
+				canvas#draw.center(width=250, height=500)
 			
 block footer
 	script(src='./js/Tetris/tetris_main.js')
 	script(src='./js/Tetris/piece_viewer.js')
 	script(src='./js/Tetris/style_creator.js')
 	script(src='./js/Tetris/score_keeper.js')
+	script(src='./js/Tetris/menu.js')
+	script(src='./js/Tetris/options.js')
 	script(src='./js/Tetris/run.js')
+	
 
