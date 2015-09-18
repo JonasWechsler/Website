@@ -356,8 +356,8 @@ setInterval(function() {
   isoctx.fillStyle = color(0,0,0);
   isoctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  var mx = (mouseX - canvas.width/8)/3,
-    my = (mouseY-canvas.width/8)/3;
+  var mx = (mouseX - canvas.width/8)/16,
+    my = (mouseY - canvas.height/2)/100;
   drawBoard(mx,my);
   //isoctx.fillStyle = "black";
   //isoctx.fillText(mx + "," + my, 0, canvas.height - 10);
