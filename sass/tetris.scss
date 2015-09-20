@@ -1,4 +1,4 @@
-@import 'constants';
+@import "constants";
 
 /*body {
       background-color: #FAFAFA;
@@ -12,92 +12,150 @@
   transform: translate(-50%, -50%);
 }*/
 canvas {
-  display: none;
-  background-color: black;
-  border: 1px inset gray;
+    display: none;
+    background-color: black;
+    border: 1px inset gray;
 }
 
 body {
-  overflow: hidden;
+    overflow: hidden;
+}
+
+button{
+    border:0;
+    background:0;
 }
 
 .blog {
-  position: relative;
-  height: 100%;
-  .tetriscontainer{
-    position:absolute;
-    left:50%;
-    top:10%;
-    margin:0 0 0 -200px;
+    position: relative;
+    height: 100%;
 
-    width:400px;
-    height:400px;
+    .game {
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        margin: 0 0 0 -200px;
+        width: 400px;
+        height: 400px;
 
-    #next{
-      position:absolute;
-      top:0px;
-      left:0px;
-      box-shadow: inset 0 7px 9px -7px rgba(0,0,0,0.4);
-      background-color: #F5F5F5;
-    }
-    #hold{
-      position:absolute;
-      top:100px;
-      left:0px;
-    }
-    .tetromino{
-      position:absolute;
-      width:100px;
-      height:100px;
-      display:block;
-      div{
-        width:20px;
-        height:20px;
-        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
-      }
-      .B {
-        opacity: 0;
-        filter: alpha(opacity = 0);
-        /* For IE8 and earlier */
-      }
-    }
-    #tetris {
-      position:absolute;
-      box-shadow: inset -4px 4px 6px rgba(0, 0, 0, 0.16);
-      width: 200px;
-      left:100px;
-      top:0;
-      overflow: hidden;
-      background-color: #F5F5F5;
-      span {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        width: 20px;
-        height: 20px;
-        z-index: 5;
-        position: relative;
-        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
-      }
-      div {
-        margin: 0;
-        padding: 0;
-        height: 20px;
-        .B {
-          opacity: 0;
-          filter: alpha(opacity = 0);
-          /* For IE8 and earlier */
+        button.back{
+            font:20px;
+            position:absolute;
+            left:0;
+            bottom:0;
         }
-      }
+
+        .tetriscontainer {
+            #next {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                box-shadow: inset 0 7px 9px -7px rgba(0, 0, 0, 0.4);
+                background-color: #F5F5F5;
+            }
+
+            #hold {
+                position: absolute;
+                top: 100px;
+                left: 0px;
+            }
+
+            .tetromino {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                display: block;
+
+                div {
+                    width: 20px;
+                    height: 20px;
+                    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+                }
+
+                .B {
+                    opacity: 0;
+                    filter: alpha(opacity = 0);
+
+                    /* For IE8 and earlier */
+                }
+            }
+
+            #tetris {
+                position: absolute;
+                box-shadow: inset -4px 4px 6px rgba(0, 0, 0, 0.16);
+                width: 200px;
+                left: 100px;
+                top: 0;
+                overflow: hidden;
+                background-color: #F5F5F5;
+
+                span {
+                    display: inline-block;
+                    margin: 0;
+                    padding: 0;
+                    width: 20px;
+                    height: 20px;
+                    z-index: 5;
+                    position: relative;
+                    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+                }
+
+                div {
+                    margin: 0;
+                    padding: 0;
+                    height: 20px;
+
+                    .B {
+                        opacity: 0;
+                        filter: alpha(opacity = 0);
+
+                        /* For IE8 and earlier */
+                    }
+                }
+            }
+
+            #stats {
+                position: absolute;
+                left: 300px;
+                width: 100px;
+                top: 0;
+                padding: 10px;
+            }
+        }
     }
-    #stats{
-      position:absolute;
-      left:300px;
-      width:100px;
-      top:0;
-      padding:10px;
+}
+
+.options {
+    .option {
+        display: block;
+        height: 25px;
+
+        .label {
+            width: 100px;
+            display: inline-block;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked + label {
+            color: black;
+            text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+        }
+
+        input[type="radio"] + label {
+            margin-right: 10px;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            color: white;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            margin-left: 100px;
+            text-transform: uppercase;
+        }
     }
-  }
 }
 
  /*
