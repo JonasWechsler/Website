@@ -9,7 +9,8 @@ body {
   font-family: Helvetica;
   background-color: #E0E0E0;
   overflow-y: scroll;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  color: #271C18; }
 
 a {
   text-decoration: none; }
