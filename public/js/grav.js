@@ -2,6 +2,9 @@ var canvas = document.getElementById("draw");
 var ctx = canvas.getContext("2d");
 var update_rate = 10;
 
+canvas.width = screen.width;
+canvas.height = screen.height;
+
 var CENTER_X = canvas.width/2;
 var CENTER_Y = canvas.height/2;
 var web_length = 70;

@@ -1,14 +1,11 @@
-/*One way sphere*/
-var Particles = new Array();
-
 var canvas = document.getElementById("draw");
 var context = canvas.getContext("2d");
 
 canvas.width = screen.width;
 canvas.height = screen.height;
 
-var WIDTH = canvas.width;
-var HEIGHT = canvas.height;
+/*One way sphere*/
+var Particles = new Array();
 
 var DEBUG = true;
 var camera = {
@@ -21,8 +18,7 @@ var camera = {
 var timeSinceClick = 1500;
 var fov = 90;
 var fov_coef = 600;
-var RELW = WIDTH / fov_coef;
-var RELH = HEIGHT / fov_coef;
+
 var keys = [];
 $(document).keydown(function (e) {
     keys[String.fromCharCode(e.which)] = true;
@@ -44,7 +40,6 @@ document.onmousedown = function (e) {
             y: 0,
             z: 0
         }, dx, dy);
-        console.log(oldx, oldy);
         oldx = e.x;
         oldy = e.y;
         timeSinceClick = 0;
@@ -231,22 +226,60 @@ function Part(x, y, z, color) {
     }
 }
 
-var date = new Date();
-for (var x = 0; x < 100; x += 10) {
-    for (var y = 0; y < 100; y += 10) {
-        for (var z = 0; z < 100; z += 10) {
-            var rand1 = Math.random() * 2 - 1;
-            var rand2 = Math.random() * 2 - 1;
-            var rand3 = Math.random() * 2 - 1;
+/***/
 
-            Particles.push(new Part(rand1 * x, rand2 * y, rand3 * z, '#' + (Math.random() * 0xFFFFFF << 0).toString(16)));
-        }
-    }
+function push(x,y,z,color){
+    Particles.push(new Part(x,y,z,color));
 }
 
+var initialText = "\
+function rand(a){\n\
+    return (random() * 2 - 1) * a;\n\
+}\n\
+\n\
+function color(){\n\
+    var r = random()*255;\n\
+    return '#'+floor(random()*16777215).toString(16);\n\
+}\n\
+\n\
+for (var x = 0; x < 160; x += 20) {\n\
+    for (var y = 0; y < 160; y += 20) {\n\
+        for (var z = 0; z < 160; z += 20) {\n\
+            push(rand(x),rand(y),rand(z),color());\n\
+        }\n\
+    }\n\
+}\n\
+";
+
+var min_x = 0, max_x = canvas.width, min_y = 0, max_y = canvas.height;
+var run = false;
+
+function update(){
+    Particles = [];
+    min_x = 0, max_x = canvas.width, min_y = 0, max_y = canvas.height;
+    run = false;
+    var pretext = "";
+    Object.getOwnPropertyNames(Math).forEach(function(val){
+        pretext += "var " + val + " = Math." + val + ";\n";
+    });
+    var text = pretext+ getTextarea(0).value;
+    eval(text);
+}
+
+addElement(document.createElement("textarea"));
+var button = document.createElement("button");
+button.innerHTML = "Regenerate";
+button.onclick = update;
+addElement(button);
+setTextarea(0,initialText);
+update();
+
 function drawItAll(ctx) {
-    if (!ctx) return false;
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    if (!ctx)
+        return false;
+
+    ctx.clearRect(min_x, min_y, max_x-min_x, max_y-min_y);
+    min_x = 0, max_x = 0, min_y = canvas.width, max_y = canvas.height;
     ctx.fillStyle = "#D7D988";
     var zbuffer = new Array();
     for (var p = 0; p < Particles.length; p++) {
@@ -259,12 +292,21 @@ function drawItAll(ctx) {
     ctx.fillStyle = "black";
     for (var z = 0; z < zbuffer.length; z++) {
         ctx.fillStyle = zbuffer[z].color;
-        ctx.fillRect(zbuffer[z].x * fov_coef + WIDTH / 2, zbuffer[z].y * fov_coef + HEIGHT / 2, 1000 / zbuffer[z].zdist, 1000 / zbuffer[z].zdist);
+        var x = (zbuffer[z].x * fov_coef + canvas.width / 2 + 0.5)|0,
+            y = (zbuffer[z].y * fov_coef + canvas.height / 2 + 0.5)|0,
+            w = (1000 / zbuffer[z].zdist + 0.5)|0,
+            h = (1000 / zbuffer[z].zdist + 0.5)|0;
+        min_x = Math.min(x,min_x);
+        max_x = Math.max(x,max_x+w);
+        min_y = Math.min(y,min_y);
+        max_y = Math.max(y,max_y+h);
+        
+        ctx.fillRect(x,y,w,h);
     }
     return true;
 }
-var run = false;
-setInterval(function () {
+
+function frame() {
     if (checkKeys() || oldy || oldy || !run || timeSinceClick > 2000) {
         var start = new Date().getTime();
         run = drawItAll(context);
@@ -278,4 +320,6 @@ setInterval(function () {
             z: 0
         }, 1, 0);
     }
-}, 10);
+    window.requestAnimationFrame(frame);
+}
+frame();

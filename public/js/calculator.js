@@ -158,7 +158,11 @@ function slope(F, x, p) {
 }
 
 function graph() {
-    var functions = "";
+    var pretext = "";
+    Object.getOwnPropertyNames(Math).forEach(function(val){
+        pretext += "var " + val + " = Math." + val + ";\n";
+    });
+    var functions = pretext;
     for (var f = 0; f < equations.length; f++) {
         functions += equations[f];
     }
@@ -284,3 +288,6 @@ for (var i = 0; i < startgraph.length; i++) {
 }
 
 check_DOM();
+
+disableResize();
+disableCanvas();

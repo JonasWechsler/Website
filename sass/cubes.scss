@@ -26,20 +26,34 @@ svg{
   width:0;
 }
 
+canvas{
+  display:none;
+}
 .border{
+  $cube_width: 80;
+  $cube_height: 50;
+  $half_width: $cube_width/2;
+  $half_height: $cube_height/2;
+
+  $width: 32em;
+  $height: 32em;
+
   overflow:hidden;
-  margin: calc(50vh - 12.5em) auto;
-  margin: 10vh auto;
+  /*margin: calc(50vh - 12.5em) auto;
+  margin: 10vh auto;*/
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin-left:$width/-2;
+  margin-top:$height/-2;
   
   width: 420px;
   height: 420px;
 
-  .cubes{
-    $cube_width: 80;
-    $cube_height: 50;
-    $half_width: $cube_width/2;
-    $half_height: $cube_height/2;
+  background-color:white;
+  border:10px solid white;
 
+  .cubes{
     $side_length: sqrt(($half_width*$half_width)+($half_height*$half_height));
     $ratio: 100*$cube_height/$cube_width+0%;
     $middle_ratio: 100*$side_length/($side_length+$half_height)+0%;
@@ -50,8 +64,8 @@ svg{
     $right_pic:"../images/water.jpg";
 
     position: relative;
-    width: 32em;
-    height: 32em;
+    width: $width;
+    height: $height;
     left: -1*$half_width + 0px;
     top: -1*$half_height + 0px;
     

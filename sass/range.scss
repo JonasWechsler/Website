@@ -1,0 +1,189 @@
+@import 'constants';
+
+/*With help from http://brennaobrien.com/blog/2014/05/style-input-type-range-in-every-browser.html*/
+
+$track-width: 110px;
+$track-height: 2px;
+$track-color: $medium-gray-selected;
+$track-border: none;
+
+$thumb-height: 12px;
+$thumb-width: 12px;
+$thumb-color: $light-gray;
+$thumb-border: 0px solid $light-gray;
+$thumb-margin-left:-1*$thumb-width/2;
+$thumb-margin-top:-1*$thumb-height/2;
+  
+$thumb-focus-color:rgba(150,150,150,.2);
+$thumb-focus-border:15px;
+$thumb-focus-margin-left:$thumb-margin-left - $thumb-focus-border;
+$thumb-focus-margin-top:$thumb-margin-top - $thumb-focus-border;
+$thumb-focus-height:10px;
+$thumb-focus-width:10px;
+
+$transition-time:.25s;
+$thumb-after-transition: border-width $transition-time, margin $transition-time;
+
+@mixin transition($params){
+  -webkit-transition: $params;
+     -moz-transition: $params;
+       -o-transition: $params;
+          transition: $params;  
+}
+
+input[type=range] + label{
+  display:block;
+  float:left;
+  margin-left: 5px;
+  text-align:left;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size:14px;
+  vertical-align:middle;
+  position:relative;
+  top:-2px;
+  border-width:0 0 0px 0;
+  border-style:solid;
+}
+
+input[type=range] {
+	float:left;
+	background-color:transparent;
+    -webkit-appearance: none;
+    width: $track-width;
+}
+
+input[type=range]:focus {
+    outline: 0;
+}
+
+/*Chrome*/
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: $track-width;
+    height: $track-height;
+    background: $track-color;
+    border: $track-border;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	position:relative;
+	display: block;
+	border: $thumb-border;
+	height: $thumb-height;
+	width: $thumb-width;
+	border-radius: 50%;
+	background-color: $thumb-color;
+	-webkit-appearance: none;
+	margin-top: $thumb-margin-top + 1;
+	z-index:2;
+}
+
+input[type=range]::-webkit-slider-thumb:after {
+	content:" ";
+	position: absolute;
+	left:50%;
+	top:50%;
+	width:$thumb-width;
+	height:$thumb-height;
+	margin-left:$thumb-margin-left;
+	margin-top:$thumb-margin-top + 1;
+  
+	background-color:transparent;
+  
+	border-color:$thumb-focus-color;
+	border-width:0;
+	border-style:solid;
+  	border-radius:100%;
+  
+	@include transition($thumb-after-transition);
+	z-index:-1;
+}
+
+input[type=range]:active::-webkit-slider-thumb:after {
+	border-width:$thumb-focus-border;
+	margin-left:$thumb-focus-margin-left;
+	margin-top:$thumb-focus-margin-top;
+	@include transition($thumb-after-transition);
+}
+
+/*Firefox*/
+
+input[type=range]::-moz-range-track {
+    width: $track-width;
+    height: $track-height;
+    background: $track-color;
+    border: $track-border;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+	position:relative;
+	display: block;
+	border: 2px solid #555;
+	height: $thumb-height;
+	width: $thumb-width;
+	border-radius: 50%;
+	background-color: white;
+	-webkit-appearance: none;
+	margin-top: $thumb-margin-top + 1;
+	z-index:2;
+}
+input[type=range]::-moz-range-thumb:after {
+	content:" ";
+	position: absolute;
+	left:50%;
+	top:50%;
+	width:$thumb-width;
+	height:$thumb-height;
+	margin-left:$thumb-margin-left;
+	margin-top:$thumb-margin-top;
+  
+	background-color:transparent;
+  
+	border-color:$thumb-focus-color;
+	border-width:0;
+	border-style:solid;
+  border-radius:100%;
+  
+	@include transition($thumb-after-transition);
+	z-index:-1;
+}
+
+input[type=range]:active::-moz-range-thumb:after {
+	border-width:$thumb-focus-border;
+	margin-left:-21px;
+	margin-top:-21px;
+	@include transition($thumb-after-transition);
+}
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+/*IE*/
+input[type=range]::-ms-track {
+    width: $track-width;
+    height: $track-height;
+    
+    background: transparent;
+    border-color: transparent;
+    border-width: 6px 0;
+    color: transparent;
+}
+input[type=range]::-ms-fill-upper {
+    background: $track-color;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: $thumb-border;
+    height: $thumb-height;
+    width: $thumb-width;
+    border-radius: 50%;
+    background: $thumb-color;
+}
+input[type=range]:focus::-ms-thumb {
+    background: $thumb-focus-color; 
+    height: $thumb-focus-height;
+    width: $thumb-focus-width;
+}

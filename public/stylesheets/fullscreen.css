@@ -1,23 +1,147 @@
 /*DO NOT EDIT .css FILES*/
+@charset "UTF-8";
 body {
   padding: 0;
   margin: 0;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #E0E0E0; }
 
-canvas {
-  z-index: -1;
+a {
+  text-decoration: none;
+  color: inherit; }
+
+body > canvas {
+  z-index: -2;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); }
+  transform: translate(-50%, -50%);
+  background-color: white; }
 
-.back {
+.navigation-options {
+  font-family: Helvetica, Arial, sans-serif;
+  /*fa-bars*/
+  /*fa-remove*/
   position: absolute;
-  left: 20px;
-  top: 20px;
-  border: none;
-  background: none;
-  font-size: 50px;
-  color: #222; }
+  left: 0;
+  top: 0;
+  color: white; }
+  .navigation-options .back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    border: none;
+    background: none;
+    font-size: 50px;
+    color: #222; }
+  .navigation-options .button {
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+    width: 30px;
+    height: 30px; }
+  .navigation-options input[type=checkbox] {
+    display: none; }
+    .navigation-options input[type=checkbox] + .show:before {
+      display: block;
+      font-family: FontAwesome;
+      background-color: #212121;
+      content: "";
+      width: 30px;
+      padding: 6px;
+      -webkit-transition: width 0.25s, padding 0.25s;
+      -moz-transition: width 0.25s, padding 0.25s;
+      -o-transition: width 0.25s, padding 0.25s;
+      transition: width 0.25s, padding 0.25s;
+      -webkit-transition-delay: 0.25s;
+      -moz-transition-delay: 0.25s;
+      -o-transition-delay: 0.25s;
+      transition-delay: 0.25s; }
+  .navigation-options input[type=checkbox]:checked + .show:before {
+    content: "";
+    width: 200px;
+    padding: 6px 0;
+    -webkit-transition: width 0.25s, padding 0.25s;
+    -moz-transition: width 0.25s, padding 0.25s;
+    -o-transition: width 0.25s, padding 0.25s;
+    transition: width 0.25s, padding 0.25s; }
+  .navigation-options .drop {
+    position: absolute;
+    width: 200px;
+    background-color: #303030;
+    padding-bottom: 16px;
+    z-index: -1;
+    top: -548px;
+    -webkit-transition: top 0.25s;
+    -moz-transition: top 0.25s;
+    -o-transition: top 0.25s;
+    transition: top 0.25s; }
+    .navigation-options .drop .button {
+      background-color: #212121;
+      margin: 16px 0 0 16px;
+      padding: 8px; }
+    .navigation-options .drop .disabled {
+      background-color: #212121;
+      color: #303030; }
+    .navigation-options .drop .controls {
+      position: relative;
+      text-align: left; }
+      .navigation-options .drop .controls input {
+        margin: 6px 6px 6px 14px; }
+      .navigation-options .drop .controls div {
+        text-transform: uppercase;
+        margin: 14px 14px 6px 14px;
+        font-size: 11px; }
+      .navigation-options .drop .controls textarea {
+        width: 136px;
+        height: 3em;
+        font-size: 10px;
+        outline: none;
+        overflow: hidden;
+        margin: 16px 16px 0 16px;
+        padding: 16px;
+        resize: vertical;
+        border-width: 0 0 0 2px;
+        border-style: solid;
+        border-color: #212121;
+        background-color: #303030;
+        color: #E0E0E0;
+        -webkit-transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
+        -moz-transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
+        -o-transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
+        transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s; }
+        .navigation-options .drop .controls textarea:focus {
+          width: 40em;
+          height: 20em;
+          border-color: #424242;
+          background-color: #424242;
+          -webkit-transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
+          -moz-transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
+          -o-transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
+          transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s; }
+      .navigation-options .drop .controls button {
+        -moz-outline: 0 none;
+        outline: 0 none;
+        float: right;
+        margin: 16px 16px 0 16px;
+        text-transform: uppercase;
+        border: 0;
+        color: #E0E0E0;
+        background-color: transparent;
+        padding: 8px;
+        display: inline-block;
+        letter-spacing: 1px; }
+        .navigation-options .drop .controls button:hover {
+          background-color: #424242; }
+  .navigation-options input[type=checkbox]:checked + label + .drop {
+    top: 42px;
+    -webkit-transition: top 0.25s;
+    -moz-transition: top 0.25s;
+    -o-transition: top 0.25s;
+    transition: top 0.25s;
+    -webkit-transition-delay: 0.25s;
+    -moz-transition-delay: 0.25s;
+    -o-transition-delay: 0.25s;
+    transition-delay: 0.25s; }
 
 /*# sourceMappingURL=fullscreen.scss.map */

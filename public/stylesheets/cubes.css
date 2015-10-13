@@ -3,12 +3,22 @@ svg {
   height: 0;
   width: 0; }
 
+canvas {
+  display: none; }
+
 .border {
   overflow: hidden;
-  margin: calc(50vh - 12.5em) auto;
-  margin: 10vh auto;
+  /*margin: calc(50vh - 12.5em) auto;
+  margin: 10vh auto;*/
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -16em;
+  margin-top: -16em;
   width: 420px;
-  height: 420px; }
+  height: 420px;
+  background-color: white;
+  border: 10px solid white; }
   .border .cubes {
     position: relative;
     width: 32em;

@@ -1,0 +1,153 @@
+/*DO NOT EDIT .css FILES*/
+/*With help from http://brennaobrien.com/blog/2014/05/style-input-type-range-in-every-browser.html*/
+input[type=range] + label {
+  display: block;
+  float: left;
+  margin-left: 5px;
+  text-align: left;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  border-width: 0 0 0px 0;
+  border-style: solid; }
+
+input[type=range] {
+  float: left;
+  background-color: transparent;
+  -webkit-appearance: none;
+  width: 110px; }
+
+input[type=range]:focus {
+  outline: 0; }
+
+/*Chrome*/
+input[type=range]::-webkit-slider-runnable-track {
+  width: 110px;
+  height: 2px;
+  background: #424242;
+  border: none;
+  border-radius: 3px; }
+
+input[type=range]::-webkit-slider-thumb {
+  position: relative;
+  display: block;
+  border: 0px solid #E0E0E0;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #E0E0E0;
+  -webkit-appearance: none;
+  margin-top: -5px;
+  z-index: 2; }
+
+input[type=range]::-webkit-slider-thumb:after {
+  content: " ";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  margin-top: -5px;
+  background-color: transparent;
+  border-color: rgba(150, 150, 150, 0.2);
+  border-width: 0;
+  border-style: solid;
+  border-radius: 100%;
+  -webkit-transition: border-width 0.25s, margin 0.25s;
+  -moz-transition: border-width 0.25s, margin 0.25s;
+  -o-transition: border-width 0.25s, margin 0.25s;
+  transition: border-width 0.25s, margin 0.25s;
+  z-index: -1; }
+
+input[type=range]:active::-webkit-slider-thumb:after {
+  border-width: 15px;
+  margin-left: -21px;
+  margin-top: -21px;
+  -webkit-transition: border-width 0.25s, margin 0.25s;
+  -moz-transition: border-width 0.25s, margin 0.25s;
+  -o-transition: border-width 0.25s, margin 0.25s;
+  transition: border-width 0.25s, margin 0.25s; }
+
+/*Firefox*/
+input[type=range]::-moz-range-track {
+  width: 110px;
+  height: 2px;
+  background: #424242;
+  border: none;
+  border-radius: 3px; }
+
+input[type=range]::-moz-range-thumb {
+  position: relative;
+  display: block;
+  border: 2px solid #555;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: white;
+  -webkit-appearance: none;
+  margin-top: -5px;
+  z-index: 2; }
+
+input[type=range]::-moz-range-thumb:after {
+  content: " ";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  margin-top: -6px;
+  background-color: transparent;
+  border-color: rgba(150, 150, 150, 0.2);
+  border-width: 0;
+  border-style: solid;
+  border-radius: 100%;
+  -webkit-transition: border-width 0.25s, margin 0.25s;
+  -moz-transition: border-width 0.25s, margin 0.25s;
+  -o-transition: border-width 0.25s, margin 0.25s;
+  transition: border-width 0.25s, margin 0.25s;
+  z-index: -1; }
+
+input[type=range]:active::-moz-range-thumb:after {
+  border-width: 15px;
+  margin-left: -21px;
+  margin-top: -21px;
+  -webkit-transition: border-width 0.25s, margin 0.25s;
+  -moz-transition: border-width 0.25s, margin 0.25s;
+  -o-transition: border-width 0.25s, margin 0.25s;
+  transition: border-width 0.25s, margin 0.25s; }
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring {
+  outline: 1px solid white;
+  outline-offset: -1px; }
+
+/*IE*/
+input[type=range]::-ms-track {
+  width: 110px;
+  height: 2px;
+  background: transparent;
+  border-color: transparent;
+  border-width: 6px 0;
+  color: transparent; }
+
+input[type=range]::-ms-fill-upper {
+  background: #424242;
+  border-radius: 10px; }
+
+input[type=range]::-ms-thumb {
+  border: 0px solid #E0E0E0;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #E0E0E0; }
+
+input[type=range]:focus::-ms-thumb {
+  background: rgba(150, 150, 150, 0.2);
+  height: 10px;
+  width: 10px; }
+
+/*# sourceMappingURL=range.scss.map */

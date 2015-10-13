@@ -3,9 +3,22 @@ extends ../requirements
 block layout_header
   title= title
   link(rel='stylesheet', href='/stylesheets/fullscreen.css')
+  link(rel='stylesheet', href='/stylesheets/range.css')
+  block header
 block layout_content
-  a.back(href="/")
-    i.fa.fa-arrow-circle-left
+  .navigation-options
+    input#show(type="checkbox" checked="checked")
+    label.show.button(for="show")
+    .drop
+      a.button.fa.fa-home(href="/")
+      a.button.fa#resize
+      a.button.fa.fa-codepen.disabled
+      .controls
+        block controls
   canvas#draw.center(width="#{width}", height="#{height}")
-  script(src="#{src}")
   script(src="./js/fullscreen.js")
+  script(src="#{src}")
+  .center
+    .content
+      block content
+  block footer

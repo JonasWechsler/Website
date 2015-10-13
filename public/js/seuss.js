@@ -7,8 +7,7 @@
 
 	var Edges = new Array();
     var Faces = new Array();
-    var WIDTH = canvas.width;
-    var HEIGHT = canvas.height;
+    
     var DEBUG = true;
     var camera = {
         x: 50,
@@ -19,8 +18,8 @@
     };
     var fov = 90;
     var fov_coef = 600;
-    var RELW = WIDTH / fov_coef;
-    var RELH = HEIGHT / fov_coef;
+    var RELW = canvas.width / fov_coef;
+    var RELH = canvas.height / fov_coef;
 
     function checkKeys() {
         var ret = false;
@@ -252,15 +251,15 @@
     function drawItAll(ctx) {
         if (!ctx)
             return false;
-        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#D7D988";
         for (r = 0; r < Faces.length; r++) {
             var nDrop = Faces[r].tod(camera.x, camera.y, camera.z, camera.yaw, camera.pitch);
             ctx.fillStyle = Faces[r].color;
             ctx.beginPath();
             for (var v = 0; v < nDrop.length; v++) {
-                var vx = nDrop[v].x * fov_coef + WIDTH / 2;
-                var vy = nDrop[v].y * fov_coef + HEIGHT / 2;
+                var vx = nDrop[v].x * fov_coef + canvas.width / 2;
+                var vy = nDrop[v].y * fov_coef + canvas.height / 2;
                 ctx.lineTo(vx, vy);
             }
             ctx.fill();
@@ -268,8 +267,8 @@
         for (r = 0; r < Edges.length; r++) {
             var nDrop = Edges[r].tod(camera.x, camera.y, camera.z, camera.yaw, camera.pitch);
             ctx.beginPath();
-            ctx.moveTo(nDrop.x0 * fov_coef + WIDTH / 2, nDrop.y0 * fov_coef + HEIGHT / 2);
-            ctx.lineTo(nDrop.x1 * fov_coef + WIDTH / 2, nDrop.y1 * fov_coef + HEIGHT / 2);
+            ctx.moveTo(nDrop.x0 * fov_coef + canvas.width / 2, nDrop.y0 * fov_coef + canvas.height / 2);
+            ctx.lineTo(nDrop.x1 * fov_coef + canvas.width / 2, nDrop.y1 * fov_coef + canvas.height / 2);
             ctx.stroke();
         }
         return true;

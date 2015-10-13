@@ -1,9 +1,13 @@
 ROOT=$(pwd)
 DEST=$(cd ../public/stylesheets/; pwd)
-for file in *.scss; do
-    destfile="$DEST/$file"
-    sass "$file" "$destfile"
+write() {
+    destfile="$DEST/$1"
+    sass "$1" "$destfile"
     mv "$destfile" "${destfile%.scss}.css"
     sed -i "1i/*DO NOT EDIT .css FILES*/" "${destfile%.scss}.css"
-    echo "$file > $destfile > ${destfile%.scss}.css"
-done
+    echo "$1 > $destfile > ${destfile%.scss}.css"
+}
+watch() {
+    while inotifywait -e close_write -q $1; do write $1; done
+}
+for file in *.scss; do watch $file & done

@@ -5,6 +5,22 @@ var next_piece = new piece_viewer(0,0,100,100,0,"#next");
 var hold_piece = new piece_viewer(0,0,100,100,0,"#hold");
 var style_creator = new StyleCreator();
 
+var level = document.createElement("div");
+level.innerHTML = "Level: <span id=\"level\">1</span>";
+addElement(level);
+
+var line = document.createElement("div");
+line.innerHTML = "<span id=\"line\">0 cleared</span>";
+addElement(line);
+
+var score = document.createElement("div");
+score.innerHTML = "<span id=\"score\">0PTS</span>";
+addElement(score);
+
+var combo = document.createElement("div");
+combo.innerHTML = "<span id=\"combo\"></span>";
+addElement(combo);
+
 var score_keeper = new ScoreKeeper();
 score_keeper.levelSelector = "#level";
 score_keeper.comboSelector = "#combo";
@@ -36,8 +52,6 @@ main.line_clear_callback(function(a){
 	score_keeper.clear(a);
 });
 
-
-
 document.onkeydown= function (e) {
 	e = e || window.event;
 	main.queue_key_event(e.which,true);
@@ -47,9 +61,23 @@ document.onkeyup= function (e) {
 	main.queue_key_event(e.which,false);
 };
 
-setInterval(function(){
-	main.step();
-	main.draw(ctx);
-	hold_piece.draw();
-	next_piece.draw();
-},20);
+//var menu = new Menu(".menu","Tetris");
+//menu.addSubmenu(".tetriscontainer","Play", function(){
+  main.init();
+  function frame(){
+    main.step();
+    main.draw(ctx);
+    hold_piece.draw();
+    next_piece.draw();
+    var level = Math.floor(score_keeper.lines_cleared/score_keeper.level);
+    if(score_keeper.level < level){
+      score_keeper.level = level;
+      main.level(score_keeper.level);
+      console.log(main.level());
+    }
+    window.requestAnimationFrame(frame);
+  }
+  frame();
+//});
+
+disableResize();

@@ -15,81 +15,77 @@ canvas {
   border: 1px inset gray; }
 
 body {
-  overflow: hidden; }
+  overflow: hidden;
+  font-family: Helvetica, Arial, sans-serif; }
 
-button {
-  border: 0;
-  background: 0; }
-
-.blog {
-  position: relative;
-  height: 100%; }
-  .blog .game {
+.blog .game {
+  background-color: #FAFAFA;
+  border: 10px solid #FAFAFA;
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  margin: 0 0 0 -200px;
+  width: 300px;
+  height: 400px; }
+  .blog .game button.back {
+    font: 20px;
     position: absolute;
-    left: 50%;
-    top: 10%;
-    margin: 0 0 0 -200px;
-    width: 400px;
-    height: 400px; }
-    .blog .game button.back {
-      font: 20px;
-      position: absolute;
-      left: 0;
-      bottom: 0; }
-    .blog .game .tetriscontainer #next {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      box-shadow: inset 0 7px 9px -7px rgba(0, 0, 0, 0.4);
-      background-color: #F5F5F5; }
-    .blog .game .tetriscontainer #hold {
-      position: absolute;
-      top: 100px;
-      left: 0px; }
-    .blog .game .tetriscontainer .tetromino {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      display: block; }
-      .blog .game .tetriscontainer .tetromino div {
-        width: 20px;
-        height: 20px;
-        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16); }
-      .blog .game .tetriscontainer .tetromino .B {
+    left: 0;
+    bottom: 0; }
+  .blog .game .tetriscontainer #next {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    box-shadow: inset 0 7px 9px -7px rgba(0, 0, 0, 0.4);
+    background-color: #F5F5F5; }
+  .blog .game .tetriscontainer #hold {
+    position: absolute;
+    top: 100px;
+    left: 0px; }
+  .blog .game .tetriscontainer .tetromino {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    display: block; }
+    .blog .game .tetriscontainer .tetromino div {
+      width: 20px;
+      height: 20px;
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16); }
+    .blog .game .tetriscontainer .tetromino .B {
+      opacity: 0;
+      filter: alpha(opacity=0);
+      /* For IE8 and earlier */ }
+  .blog .game .tetriscontainer #tetris {
+    position: absolute;
+    box-shadow: inset -4px 4px 6px rgba(0, 0, 0, 0.16);
+    width: 200px;
+    left: 100px;
+    top: 0;
+    overflow: hidden;
+    background-color: #F5F5F5; }
+    .blog .game .tetriscontainer #tetris span {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      z-index: 5;
+      position: relative;
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16); }
+    .blog .game .tetriscontainer #tetris div {
+      margin: 0;
+      padding: 0;
+      height: 20px; }
+      .blog .game .tetriscontainer #tetris div .B {
         opacity: 0;
         filter: alpha(opacity=0);
         /* For IE8 and earlier */ }
-    .blog .game .tetriscontainer #tetris {
-      position: absolute;
-      box-shadow: inset -4px 4px 6px rgba(0, 0, 0, 0.16);
-      width: 200px;
-      left: 100px;
-      top: 0;
-      overflow: hidden;
-      background-color: #F5F5F5; }
-      .blog .game .tetriscontainer #tetris span {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        width: 20px;
-        height: 20px;
-        z-index: 5;
-        position: relative;
-        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16); }
-      .blog .game .tetriscontainer #tetris div {
-        margin: 0;
-        padding: 0;
-        height: 20px; }
-        .blog .game .tetriscontainer #tetris div .B {
-          opacity: 0;
-          filter: alpha(opacity=0);
-          /* For IE8 and earlier */ }
-    .blog .game .tetriscontainer #stats {
-      position: absolute;
-      left: 300px;
-      width: 100px;
-      top: 0;
-      padding: 10px; }
+  .blog .game .tetriscontainer #stats {
+    position: absolute;
+    left: 300px;
+    width: 100px;
+    top: 0;
+    padding: 10px; }
 
 .options .option {
   display: block;

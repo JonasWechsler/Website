@@ -4,9 +4,6 @@ var context = canvas.getContext("2d");
 canvas.width=500;
 canvas.height=500;
 
-var RAD = 250;
-var WIDTH = canvas.width;
-var HEIGHT = canvas.height;
 var total_verts = 25;
 var verts = [];
 
@@ -16,8 +13,8 @@ function set_verts(i){
     if(v>i)v0=0;
     var radians = Math.PI*2*(v0/i);
     verts[v] = {x:0,y:0};
-    verts[v].x = (WIDTH/2) + Math.cos(radians)*RAD;
-    verts[v].y = (HEIGHT/2) + Math.sin(radians)*RAD;
+    verts[v].x = (canvas.width/2) + Math.cos(radians)*(canvas.height/2);
+    verts[v].y = (canvas.height/2) + Math.sin(radians)*(canvas.height/2);
   }
 }
 

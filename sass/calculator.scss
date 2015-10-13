@@ -39,9 +39,9 @@ canvas {
    border: 4px grey double;
 }
 */
-.blog {
-  position: relative;
-  height: 90%;
+
+body{
+  background-color:$off-white;
 }
 
 .content * {
@@ -61,12 +61,22 @@ canvas {
   width: 316px;
 }
 
-.calculator > * {
-  margin: 0 auto;
+.calculator{
+  $calculator-width:316px;
+  position:absolute;
+  left:50%;
+  top:20%;
+  margin-left:-1 * ($calculator-width/2 + 25px);
   width: 316px;
-  margin-top: 10px;
-  background-color: white;
   display: block;
+  background-color:$light-gray;
+  padding: 10px 20px;
+
+  > *{
+    background-color: $off-white;
+    width: 316px;
+    margin: 10px 0;
+  }
 }
 
 .h1 {

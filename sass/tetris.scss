@@ -19,23 +19,20 @@ canvas {
 
 body {
     overflow: hidden;
-}
-
-button{
-    border:0;
-    background:0;
+    font-family:$default-font;
 }
 
 .blog {
-    position: relative;
-    height: 100%;
 
     .game {
+        background-color:$off-white;
+        border:10px solid $off-white;
+
         position: absolute;
         left: 50%;
         top: 10%;
         margin: 0 0 0 -200px;
-        width: 400px;
+        width: 300px;
         height: 400px;
 
         button.back{
@@ -104,7 +101,6 @@ button{
                     margin: 0;
                     padding: 0;
                     height: 20px;
-
                     .B {
                         opacity: 0;
                         filter: alpha(opacity = 0);

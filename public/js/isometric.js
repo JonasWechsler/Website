@@ -20,16 +20,19 @@ var getColorAt = function(x, y) {
 }
 
 var getHeightAt = function(x, y) {
-  return (Math.abs(Math.sin(t / 100 + x * y * 15485863 % 1000 / 1000) * 4 + 2));
+  return (Math.abs(Math.sin(t / 50 + x * y * 15485863 % 1000 / 1000) * 4 + 2));
   //return Math.abs(Math.sin(x / 4 + t/100) * Math.cos(y/5 + t/180)* Math.cos(y/4 + t/180) * 3);
   //return 1;
 }
+
+var prerender = [];
 
 var drawTile = function(color, x, y, height) {
   var left = new Point(x, y + tile_height / 2),
     right = new Point(x + tile_width, y + tile_height / 2),
     top = new Point(x + tile_width / 2, y),
     bottom = new Point(x + tile_width / 2, y + tile_height);
+
   ctx.fillStyle = color;
   ctx.beginPath();
   ctx.moveTo(top.x, top.y - height);
@@ -39,7 +42,6 @@ var drawTile = function(color, x, y, height) {
   ctx.lineTo(left.x, left.y);
   ctx.lineTo(left.x, left.y - height);
   ctx.closePath();
-  ctx.stroke();
   ctx.fill();
 }
 
@@ -57,6 +59,7 @@ var drawBoard = function(cameraX,cameraY){
         x = (j * tile_width) + offset_x - tile_width - (cameraX % 1) * tile_width,
         y = i * tile_height / 2 - tile_height - (cameraY % 1) * tile_height,
         h = getHeightAt(ax, ay) * tile_height / 2;
+
       drawTile(getColorAt(ax, ay),x,y,h,ax,ay);
     }
   }
@@ -74,7 +77,7 @@ canvas.addEventListener('mousemove', function(evt) {
     mouseY = evt.clientY - rect.top
 }, false);
 
-setInterval(function() {
+function frame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   var mx = mouseX / 10,
@@ -84,4 +87,6 @@ setInterval(function() {
   ctx.fillText(mx + "," + my, 0, canvas.height - 10);
 
   t++;
-}, 10);
+  window.requestAnimationFrame(frame);
+}
+frame();

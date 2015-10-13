@@ -11,7 +11,14 @@ var render = function(res,file,params){
   res.render(file,params);
 }
 
-var projects = [{
+var projects = [/*{
+            'title':'Flower',
+            'img': './images/flower.png',
+            'desc':'Flower',
+            'link':'/flower',
+            'w':1,
+            'h':1
+        }, */{
             'title': 'Tetris',
             'img': './images/tetris.png',
             'desc': 'Tetrisu',
@@ -128,7 +135,10 @@ exports.projects = function (req, res) {
 /**************************************/
 
 exports.gravity = function (req, res) {
-    render(res,'projects/gravity');
+    render(res,'projects/fullscreen', {
+        title: 'Gravity',
+        src: './js/grav.js'
+    });
 }
 exports.golf = function(req, res){
     render(res,'projects/golf');
@@ -227,8 +237,8 @@ exports.rainbow = function (req, res) {
 }
 
 exports.flower = function (req, res) {
-    render(res,'projects/theatre', {
+    render(res,'projects/fullscreen', {
         title: 'Flower',
-        src: './js/flower.js'
+        src: './js/leaf.js'
     });
 }

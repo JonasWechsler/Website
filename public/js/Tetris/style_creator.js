@@ -92,7 +92,9 @@ function StyleCreator(){
 	/**
 	*
 	*/
-
+	function JSONtoRGB(json){
+	  return "rgb(" + json.r + "," + json.g + "," + json.b + ")";
+	}
 	/* accepts parameters
 	 * h  Object = {h:x, s:y, v:z}
 	 * OR 

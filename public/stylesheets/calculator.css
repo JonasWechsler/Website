@@ -38,9 +38,8 @@ canvas {
    border: 4px grey double;
 }
 */
-.blog {
-  position: relative;
-  height: 90%; }
+body {
+  background-color: #FAFAFA; }
 
 .content * {
   color: black;
@@ -57,12 +56,19 @@ canvas {
   position: relative;
   width: 316px; }
 
-.calculator > * {
-  margin: 0 auto;
+.calculator {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  margin-left: -183px;
   width: 316px;
-  margin-top: 10px;
-  background-color: white;
-  display: block; }
+  display: block;
+  background-color: #E0E0E0;
+  padding: 10px 20px; }
+  .calculator > * {
+    background-color: #FAFAFA;
+    width: 316px;
+    margin: 10px 0; }
 
 .h1 {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }

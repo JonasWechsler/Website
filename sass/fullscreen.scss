@@ -1,21 +1,218 @@
-body{
-	padding:0;
-	margin:0;
-	overflow:hidden;
+@import "constants";
+
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-color: $light-gray;
 }
-canvas{
-	z-index:-1;
-	position:absolute;
-	  top: 50%;
-	  left: 50%;
-	  transform: translate(-50%, -50%);
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
-.back{
-	position:absolute;
-	left:20px;
-	top:20px;
-    border:none;
-    background:none;
-    font-size:50px;
-    color:#222;
+
+body > canvas {
+    z-index: -2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
+@mixin transition($params) {
+    -webkit-transition: $params;
+    -moz-transition: $params;
+    -o-transition: $params;
+    transition: $params;
+}
+
+@mixin transition-delay($params) {
+    -webkit-transition-delay: $params;
+    -moz-transition-delay: $params;
+    -o-transition-delay: $params;
+    transition-delay: $params;
+}
+
+.navigation-options {
+    font-family: Helvetica, Arial, sans-serif;
+
+    $button-disabled-color: $medium-gray;
+    $button-disabled-bg: $dark-gray;
+
+    $icon-size: 30px;
+    $icon-color: $light-gray;
+    $icon-padding: 6px;
+    $icon-font: FontAwesome;
+
+    $bar-bg: $dark-gray;
+    $bar-padding: 24px;
+
+    $button-padding: 8px;
+    $button-margin: 16px;
+
+    $text-margin: 16px;
+
+    $bars-icon: "";
+
+    /*fa-bars*/
+    $close-icon: "";
+
+    /*fa-remove*/
+
+    $drop-height: 500px;
+    $drop-width: 200px;
+    $drop-bg: $medium-gray;
+
+    $transition-time: 0.5s;
+    $bar-transition-time: $transition-time / 2;
+    $drop-transition-time: $transition-time / 2;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: white;
+
+
+    .back {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        border: none;
+        background: none;
+        font-size: 50px;
+        color: #222;
+    }
+
+    .button {
+        display: inline-block;
+        text-align: center;
+        font-size: $icon-size;
+        width: $icon-size;
+        height: $icon-size;
+    }
+
+    $transition: width $bar-transition-time, padding $bar-transition-time;
+
+    input[type=checkbox] {
+        display: none;
+
+        + .show:before {
+            display: block;
+            font-family: $icon-font;
+            background-color: $bar-bg;
+            content: $bars-icon;
+            width: $icon-size;
+            padding: $icon-padding;
+
+            @include transition($transition);
+
+            @include transition-delay($drop-transition-time);
+        }
+    }
+
+    input[type=checkbox]:checked {
+        + .show:before {
+            content: $close-icon;
+            width: $drop-width;
+            padding: $icon-padding 0;
+
+            @include transition($transition);
+        }
+    }
+
+    .drop {
+        position: absolute;
+        width: $drop-width;
+        background-color: $drop-bg;
+        padding-bottom: $button-margin;
+        z-index: -1;
+        top: -1 * $drop-height - 2 * $bar-padding;
+
+        @include transition(top $drop-transition-time);
+
+        .button {
+            background-color: $bar-bg;
+            margin: $button-margin 0 0 $button-margin;
+            padding: $button-padding;
+        }
+
+        .disabled{
+          background-color: $button-disabled-bg;
+          color: $button-disabled-color;
+        }
+
+        .controls {
+            position: relative;
+
+            $input-margin: 14px;
+            $element-margin: 6px;
+            $transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
+
+            text-align: left;
+
+            input {
+                margin: $element-margin $element-margin $element-margin $input-margin;
+            }
+
+            div {
+                text-transform: uppercase;
+                margin: $input-margin $input-margin $element-margin $input-margin;
+                font-size: 11px;
+            }
+
+            textarea {
+                width: $drop-width - 2 * $button-margin - 2 * $text-margin;
+                height: 3em;
+                font-size: 10px;
+                outline: none;
+                overflow: hidden;
+                margin: $button-margin $button-margin 0 $button-margin;
+                padding: $text-margin;
+                resize: vertical;
+                border-width: 0 0 0 2px;
+                border-style: solid;
+                border-color: $dark-gray;
+                background-color: $medium-gray;
+                color: $light-gray;
+
+                &:focus {
+                    width: 40em;
+                    height: 20em;
+                    border-color: $medium-gray-selected;
+                    background-color: $medium-gray-selected;
+
+                    @include transition($transition);
+                }
+
+                @include transition($transition);
+            }
+
+            button {
+                -moz-outline: 0 none;
+                outline: 0 none;
+                float: right;
+                margin: $button-margin $button-margin 0 $button-margin;
+                text-transform: uppercase;
+                border: 0;
+                color: $light-gray;
+                background-color: transparent;
+                padding: $button-padding;
+                display: inline-block;
+                letter-spacing: 1px;
+
+                &:hover {
+                    background-color: $medium-gray-selected;
+                }
+            }
+        }
+    }
+
+    input[type=checkbox]:checked + label + .drop {
+        top: $icon-size + 2 * $icon-padding;
+
+        @include transition(top $drop-transition-time);
+
+        @include transition-delay($bar-transition-time);
+    }
 }

@@ -1,5 +1,15 @@
-$headerheight: 38px;
-$blogwidth: 900px;
+$header-height: 38px;
+$blog-width: 900px;
+
+$black: #000000;
+$dark-gray: #212121;
+$medium-gray: #303030;
+$medium-gray-selected: #424242;
+$light-gray: #E0E0E0;
+$off-white: #FAFAFA;
+
+$header-font: 'Monoton', cursive;
+$default-font: Helvetica, Arial, sans-serif;
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -7,3 +17,4 @@ $blogwidth: 900px;
       -ms-border-radius: $radius;
           border-radius: $radius;
 }
+

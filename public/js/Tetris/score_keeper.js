@@ -22,7 +22,7 @@ function ScoreKeeper(){
 		this.score+=50*(this.combo)*this.level;
 		console.log("x" + this.combo + " " + this.score + "pts lvl " + this.level);
 		$(this.levelSelector).text(this.level);
-		$(this.lineSelector).text(this.lines_cleared);
+		$(this.lineSelector).text(this.lines_cleared + " cleared");
 		$(this.scoreSelector).text(this.score + "pts");
 		if(this.combo)
 			$(this.comboSelector).text(this.combo + "x");
