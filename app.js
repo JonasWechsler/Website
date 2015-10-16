@@ -38,24 +38,9 @@ app.get('/', routes.home);
 app.get('/about', routes.about);
 app.get('/projects', routes.projects);
 
-app.get('/bullseye', routes.bullseye);
-app.get('/zbuff', routes.zbuff);
-app.get('/flower', routes.flower);
-app.get('/isometric', routes.isometric);
-app.get('/perlin', routes.perlin);
-app.get('/squares', routes.squares);
-app.get('/cubes', routes.cubes);
-app.get('/perlin2d', routes.perlin2d);
-app.get('/ball', routes.ball);
-app.get('/clover', routes.clover);
-app.get('/evo', routes.evo);
-app.get('/plant', routes.plant);
-
-
-app.get('/calculator', routes.calculator);
-app.get('/tetris', routes.tetris);
-app.get('/golf', routes.golf);
-app.get('/gravity', routes.gravity);
+routes.projectList.forEach(function(val){
+    app.get("/" + val.name, routes[val.name]);
+});
 
 app.get("/quote", function (Req, res) {
     request('http://www.iheartquotes.com/api/v1/random?format=json&show_source=0&source=joel_on_software+paul_graham+prog_stylemyfortune', function (error, response, content) {
