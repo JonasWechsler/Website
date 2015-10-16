@@ -6,8 +6,6 @@ canvas.width = 500;
 canvas.height = 500;
 
 var Particles = new Array();
-var WIDTH = canvas.width;
-var HEIGHT = canvas.height;
 var DEBUG = true;
 var camera = {
     x: -1,
@@ -19,8 +17,8 @@ var camera = {
 var timeSinceClick = 1500;
 var fov = 90;
 var fov_coef = 600;
-var RELW = WIDTH / fov_coef;
-var RELH = HEIGHT / fov_coef;
+var RELW = canvas.width / fov_coef;
+var RELH = canvas.height / fov_coef;
 var keys = [];
 $(document).keydown(function (e) {
     keys[String.fromCharCode(e.which)] = true;
@@ -229,7 +227,7 @@ function Part(x, y, z, color) {
 }
 function drawItAll(ctx) {
     if (!ctx) return false;
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#D7D988";
     var zbuffer = new Array();
     for (var p = 0; p < Particles.length; p++) {
@@ -242,7 +240,7 @@ function drawItAll(ctx) {
     ctx.fillStyle = "black";
     for (var z = 0; z < zbuffer.length; z++) {
         ctx.fillStyle = zbuffer[z].color;
-        ctx.fillRect(zbuffer[z].x * fov_coef + WIDTH / 2, zbuffer[z].y * fov_coef + HEIGHT / 2, 2000 / zbuffer[z].zdist, 2000 / zbuffer[z].zdist);
+        ctx.fillRect(zbuffer[z].x * fov_coef + canvas.width / 2, zbuffer[z].y * fov_coef + canvas.height / 2, 2000 / zbuffer[z].zdist, 2000 / zbuffer[z].zdist);
     }
     return true;
 }

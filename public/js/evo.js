@@ -47,7 +47,6 @@ function World(){
     }
   }
   var assign_new_ID = function(){
-    console.log("ASSIGNING");
     var IDs = [];
     for(var r=0;r<rows;r++){
       for(var c=0;c<cols;c++){
@@ -59,7 +58,6 @@ function World(){
       new_ID++;
     }while(IDs[new_ID])
     max_ID=Math.max(new_ID,max_ID);
-    console.log(new_ID);
     return new_ID;
   }
   this.step = function(ctx,w,h){
@@ -302,10 +300,10 @@ function relMouseCoords(canvas,event){
   	return {x:x,y:y};
 }
 
-var WIDTH = canvas.width;
-var HEIGHT = cavas.height;
 var canvas = document.getElementById("draw");
 var ctx = canvas.getContext("2d");
+canvas.width = 500;
+canvas.height = 500;
 
 var world = new World();
 var mouse_down = false;
@@ -329,10 +327,10 @@ canvas.addEventListener('mousemove', function(evt) {
   }, false);
 
 setInterval(function(){
-  ctx.clearRect(0,0,WIDTH,HEIGHT);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   if(mouse_down){
-  var r = Math.floor((mouse_y/HEIGHT)*world.rows());
-  	var c = Math.floor((mouse_x/WIDTH)*world.cols());
+  var r = Math.floor((mouse_y/canvas.height)*world.rows());
+  	var c = Math.floor((mouse_x/canvas.width)*world.cols());
   for(var c0=c-5;c0<c+5;c0++){
     for(var r0=r-5;r0<r+5;r0++){
       if(c0>=0 && c0<world.cols() && r0>=0 && r0<world.rows() && Math.sqrt((c0-c)*(c0-c)+(r0-r)*(r0-r))<5)
@@ -340,5 +338,5 @@ setInterval(function(){
     }
   }
   }
-  world.step(ctx,WIDTH,HEIGHT);
+  world.step(ctx,canvas.width,canvas.height);
 },50);

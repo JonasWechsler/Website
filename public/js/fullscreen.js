@@ -98,10 +98,12 @@ function disableCanvas(){
 	document.getElementById("draw").remove();
 }
 
-if(document.getElementById("draw").width === 500){
-	document.getElementById("resize").innerHTML='&#xf065;';
-}else{
-	document.getElementById("resize").innerHTML='&#xf066;';
+function updateResizeIcon(){ 
+	if(document.getElementById("draw").width === screen.width){
+		document.getElementById("resize").innerHTML='&#xf066;';
+	}else{
+		document.getElementById("resize").innerHTML='&#xf065;';
+	}
 }
-
+updateResizeIcon();
 document.getElementById("resize").onclick = toggleSize;

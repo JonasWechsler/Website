@@ -38,7 +38,7 @@ app.get('/', routes.home);
 app.get('/about', routes.about);
 app.get('/projects', routes.projects);
 
-app.get('/bullseye', routes.seuss);
+app.get('/bullseye', routes.bullseye);
 app.get('/zbuff', routes.zbuff);
 app.get('/flower', routes.flower);
 app.get('/isometric', routes.isometric);
@@ -48,6 +48,8 @@ app.get('/cubes', routes.cubes);
 app.get('/perlin2d', routes.perlin2d);
 app.get('/ball', routes.ball);
 app.get('/clover', routes.clover);
+app.get('/evo', routes.evo);
+app.get('/plant', routes.plant);
 
 
 app.get('/calculator', routes.calculator);

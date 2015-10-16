@@ -42,14 +42,14 @@ canvas {
         clip-path: url("#top");
         width: 80px;
         height: 50px;
-        background-image: url("../images/desert.jpg"); }
+        background-image: url("../images/desert.png"); }
       .border .cubes .cube .left {
         top: 25px;
         width: 40px;
         height: 72.17021px;
         -webkit-clip-path: polygon(0 0, 100% 34.64033%, 100% 100%, 0 65.35967%);
         clip-path: url("#left");
-        background-image: url("../images/pines.jpg"); }
+        background-image: url("../images/pines.png"); }
       .border .cubes .cube .right {
         top: 25px;
         left: 40px;
@@ -57,7 +57,7 @@ canvas {
         height: 72.17021px;
         -webkit-clip-path: polygon(100% 0, 0% 34.64033%, 0% 100%, 100% 65.35967%);
         clip-path: url(#right);
-        background-image: url("../images/water.jpg"); }
+        background-image: url("../images/water.png"); }
 
 /* Center the demo */
 

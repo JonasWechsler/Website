@@ -12,12 +12,17 @@ block layout_content
     .drop
       a.button.fa.fa-home(href="/")
       a.button.fa#resize
-      a.button.fa.fa-codepen.disabled
+      if(desc)
+        a.button.fa.fa-book
+      else
+        a.button.fa.fa-book.disabled
       .controls
         block controls
   canvas#draw.center(width="#{width}", height="#{height}")
   script(src="./js/fullscreen.js")
   script(src="#{src}")
+  script
+    |updateResizeIcon()
   .center
     .content
       block content

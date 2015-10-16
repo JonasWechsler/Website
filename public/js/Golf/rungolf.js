@@ -25,6 +25,12 @@ document.addEventListener('keydown', function(e) {
     case 'E':
       fixeds[1].up = true;
       break;
+    case 'A':
+      setAcceleration(function(x,y){return new Vector(-.02,.02)});
+      break;
+    case 'D':
+      setAcceleration(function(x,y){return new Vector(.02,.02)});
+      break;
   }
 }, false);
 

@@ -59,9 +59,9 @@ canvas{
     $middle_ratio: 100*$side_length/($side_length+$half_height)+0%;
     $complement: 100% - $middle_ratio;
 
-    $top_pic:"../images/desert.jpg";
-    $left_pic:"../images/pines.jpg";
-    $right_pic:"../images/water.jpg";
+    $top_pic:"../images/desert.png";
+    $left_pic:"../images/pines.png";
+    $right_pic:"../images/water.png";
 
     position: relative;
     width: $width;

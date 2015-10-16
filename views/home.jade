@@ -22,7 +22,12 @@ block layout_content
   .content
     .blog#container
       each val in projects
-        .project(class="w#{val.w} h#{val.h}")
-          a(href=val.link)
-            img(src=val.img)
+        if(val.w && val.h)
+          .project(class="w#{val.w} h#{val.h}")
+            a(href="/#{val.name}")
+              img(src='./images/#{val.name}.png')
+        else
+          .project(class="w1 h1")
+            a(href="/#{val.name}")
+              img(src='./images/#{val.name}.png')
   script(src="./js/projects.js")

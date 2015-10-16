@@ -11,108 +11,53 @@ var render = function(res,file,params){
   res.render(file,params);
 }
 
-var projects = [/*{
-            'title':'Flower',
-            'img': './images/flower.png',
-            'desc':'Flower',
-            'link':'/flower',
-            'w':1,
-            'h':1
-        }, */{
-            'title': 'Tetris',
-            'img': './images/tetris.png',
-            'desc': 'Tetrisu',
-            'link': '/tetris',
-            'w': 1,
-            'h': 1
+exports.projectList = [{
+            'desc':'Non-binary cellular automata by generating a random list of coefficients and comparisons.',
+            'name':'evo'
+        },{
+            'desc':'Generating plant-like images through a randomized binary tree.',
+            'name':'plant'
+        },{
+            'desc':'Generating flower-like images through perlin noise.',
+            'name':'flower'
         }, {
-            'title': 'Calculator',
-            'img': './images/calculator.png',
-            'desc': 'A function based graphing calculator',
-            'link': '/calculator',
-            'w':1,
-            'h':1
+            'desc': 'Good old-fashioned Tetris according to the standard Tetris guidelines.',
+            'name': 'tetris'
         }, {
-            'title': 'Perlin',
-            'img': './images/perlin.jpg',
-            'desc': 'A function based graphing calculator',
-            'link': '/perlin',
-            'w':1,
-            'h':1
+            'desc': 'A function based graphing calculator.',
+            'name': 'calculator'
         }, {
-            'title': 'Isometric',
-            'img': './images/isometric.jpg',
-            'desc': 'A function based graphing calculator',
-            'link': '/isometric',
-            'w':1,
-            'h':1
+            'desc': 'Terrain generation through perlin noise.',
+            'name': 'perlin'
         }, {
-            'title': 'Cubes',
-            'img': './images/cubes.png',
-            'desc': 'A function based graphing calculator',
-            'link': '/cubes',
-            'w':1,
-            'h':1
+            'name': 'isometric'
         }, {
-            'title': 'Perlin2d',
-            'img': './images/perlin2d.jpg',
-            'desc': 'A function based graphing calculator',
-            'link': '/perlin2d',
-            'w':1,
-            'h':1
+            'desc': 'Pure CSS cubes.',
+            'name': 'cubes'
         }, {
-            'title': 'Squares',
-            'img': './images/squares.png',
-            'desc': 'A function based graphing calculator',
-            'link': '/squares',
-            'w':1,
-            'h':1
+            'name': 'clover'
         }, {
-            'title': 'Ball',
-            'img': './images/ball.jpg',
-            'desc': 'A function based graphing calculator',
-            'link': '/ball',
-            'w':1,
-            'h':1
+            'name': 'zbuff'
         }, {
-            'title': 'Clover',
-            'img': './images/clover.jpg',
-            'desc': 'A function based graphing calculator',
-            'link': '/clover',
-            'w':1,
-            'h':1
+            'name': 'gravity'
         }, {
-            'title': 'Star',
-            'img': './images/zbuff.png',
-            'desc': 'Probability distro',
-            'link': '/zbuff',
-            'w':1,
-            'h':1
+            'name': 'bullseye'
         }, {
-            'title': 'Gravity',
-            'img': './images/gravity.png',
-            'desc': 'Brevity',
-            'link': '/gravity',
-            'w':1,
-            'h':1
+            'desc': 'Moving seamlessly between different methods of random generation.',
+            'name': 'perlin2d'
         }, {
-            'title': 'Bullseye',
-            'img': './images/seuss.png',
-            'desc': 'somein',
-            'link': '/bullseye',
-            'w':1,
-            'h':1
+            'name': 'squares'
         }, {
-
+            'name': 'ball'
         }];
 
 /**************************************/
-/**************************************/
+/*** Basic pages- index, home, etc. ***/
 /**************************************/
 
 exports.home = function (req, res) {
      render(res,'home', {
-        projects: projects
+        projects: exports.projectList
     });
 }
 
@@ -131,15 +76,23 @@ exports.projects = function (req, res) {
 }
 
 /**************************************/
-/**************************************/
+/* Generates all the fullscreen demos */
 /**************************************/
 
-exports.gravity = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Gravity',
-        src: './js/grav.js'
-    });
-}
+exports.projectList.forEach(function(val){
+    exports[val.name] = function(req, res){
+        render(res,'projects/fullscreen', {
+            title: val.name.charAt(0).toUpperCase() + val.name.slice(1),
+            src: './js/' + val.name + ".js"
+        });
+    }
+});
+
+/**************************************/
+/***** Custom jade files, replaces ****/
+/***** the auto generated ones.    ****/
+/**************************************/
+
 exports.golf = function(req, res){
     render(res,'projects/golf');
 }
@@ -149,64 +102,13 @@ exports.calculator = function (req, res) {
 exports.tetris = function (req, res){
     render(res,'projects/tetris');
 }
-/**************************************/
-/**************************************/
-/**************************************/
-
-exports.seuss = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Bullseye',
-        src: './js/seuss.js'
-    });
-}
-exports.zbuff = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Star',
-        src: './js/zbuff.js'
-    });
-}
-exports.isometric = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Isometric',
-        src: './js/isometric.js'
-    });
-}
-exports.perlin = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Perlin',
-        src: './js/perlin.js'
-    })
-}
-exports.squares = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Squares',
-        src: './js/squares.js'
-    })
-}
-exports.perlin2d = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Perlin2d',
-        src: './js/perlin2d.js'
-    })
-}
 exports.cubes = function (req, res) {
     render(res,'projects/cubes');
 }
-exports.ball = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Ball',
-        src: './js/ball.js'
-    });
-}
-exports.clover = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Clover',
-        src: './js/clover.js'
-    });
-}
+
 
 /**************************************/
-/**************************************/
+/*********** Depricated? **************/
 /**************************************/
 
 exports.rainbow = function (req, res) {
@@ -233,12 +135,5 @@ exports.rainbow = function (req, res) {
                 height: 0
             });
         }
-    });
-}
-
-exports.flower = function (req, res) {
-    render(res,'projects/fullscreen', {
-        title: 'Flower',
-        src: './js/leaf.js'
     });
 }
