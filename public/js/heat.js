@@ -36,6 +36,16 @@ canvas.addEventListener('mouseup', function(e){
   mouseDown = false;
 });
 
+function nextSplash(){
+  var x = Math.floor(Math.random()*grid.width);
+  var y = Math.floor(Math.random()*grid.height);
+  var p = Math.floor(Math.random()*2000);
+  var t = Math.floor(Math.random()*5000);;
+  grid.speed(x,y,p)
+  setTimeout(nextSplash,t);
+}
+nextSplash();
+
 function frame() {
   if(mouseDown){
     grid.speed(mouseX,mouseY,1000);
@@ -51,6 +61,12 @@ function frame() {
     l = (100-l) + "%";
     l = "75%";
     ctx.fillStyle = "hsl(" + h + "," + s + "," + l + ")";
+    /*var r = 0;
+    var g = Math.round(100 + val.position);
+    if(g < 100)g = 100;
+    var b = Math.round(200 + val.position);
+    if(b < 200)b = 200;
+    ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";*/
     ctx.fillRect(x * scale, y * scale, scale, scale);
   });
   window.requestAnimationFrame(frame);
