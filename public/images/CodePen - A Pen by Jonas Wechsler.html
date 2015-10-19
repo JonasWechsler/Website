@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://s.codepen.io/JWechs/debug/qOVPwa? -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+
+
+    <title>CodePen - A Pen by  Jonas Wechsler</title>
+    
+    
+    
+    
+        <style>
+      body{
+  overflow:hidden;
+}
+canvas{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+    </style>
+
+    
+    
+    
+  <style type="text/css"></style></head>
+
+  <body data-pinterest-extension-installed="cr1.39.1">
+
+    
+<canvas id="draw" width="200" height="200"></canvas>
+    
+    
+        <script>
+      var canvas = document.getElementById("draw");
+var ctx = canvas.getContext("2d");
+
+canvas.width = 200
+canvas.height = 200;
+
+var scale = 4;
+var width = canvas.width / scale;
+var height = canvas.height / scale;
+
+var grid = new WaveGrid(width, height);
+
+//grid.position(width / 2, 0, 1);
+
+setInterval(function() {
+  grid.step();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  grid.forEach(function(val, x, y) {
+    //var r = Math.floor(255*(val.position - grid.minHeight())/(grid.maxHeight() - grid.minHeight()));
+    var r = Math.floor(Math.abs(val.position % 255));
+    var g = Math.floor(Math.abs(val.speed % 255));
+    var b = Math.floor(Math.abs(val.acceleration % 255));
+    g = b = r;
+    ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+    ctx.fillRect(x * scale, y * scale, scale, scale);
+    //ctx.fillRect(x,0,1,val.position + 100);
+  });
+}, 10);
+
+function WaveGrid(w, h) {
+  this.width = w;
+  this.height = h;
+  var self = this;
+
+  var maxHeight = 0;
+  var minHeight = 0;
+  var targetHeight = 0;
+
+  var grid = [];
+  var springCoefficient = .00001;
+  var mass = 1;
+
+  // spring stuff
+  var tension = .0025,
+    dampening = .0025,
+    spread = .025;
+
+  for (var x = 0; x < self.width; x++) {
+    grid[x] = [];
+    for (var y = 0; y < self.height; y++) {
+      grid[x][y] = {};
+      grid[x][y].x = 0;
+      grid[x][y].dx = 0;
+      grid[x][y].ddx = 0;
+    }
+  }
+  var stepSelf = function() {
+    for (var x = 0; x < self.width; x++) {
+      for (var y = 0; y < self.height; y++) {
+        var deltax = targetHeight - grid[x][y].x;
+        grid[x][y].ddx = tension * deltax - grid[x][y].dx * dampening
+        grid[x][y].dx += grid[x][y].ddx;
+        grid[x][y].x += grid[x][y].dx;
+      }
+    }
+  }
+
+  var stepNeighbors = function() {
+    var newGrid = [];
+    for (var j = 0; j < 4; j++) {
+      for (var x = 0; x < self.width; x++) {
+        if (!newGrid[x]) newGrid[x] = [];
+        for (var y = 0; y < self.height; y++) {
+          if (!newGrid[x][y]) newGrid[x][y] = {
+            x: grid[x][y].x,
+            dx: grid[x][y].dx,
+            ddx: grid[x][y].ddx
+          };
+
+          var del = delta(x, y);
+          newGrid[x][y].x += del;
+          newGrid[x][y].dx += del;
+        }
+      }
+    }
+    grid = newGrid;
+  }
+
+  this.step = function() {
+    stepSelf();
+    stepNeighbors();
+  }
+
+  var adjacent = function(x, y) {
+    var points = [{
+      x: x - 1,
+      y: y,
+      c: 1
+    }, {
+      x: x + 1,
+      y: y,
+      c: 1
+    }, {
+      x: x,
+      y: y - 1,
+      c: 1
+    }, {
+      x: x,
+      y: y + 1,
+      c: 1
+    }, {
+      x: x - 1,
+      y: y - 1,
+      c: 1
+    }, {
+      x: x + 1,
+      y: y + 1,
+      c: 1
+    }, {
+      x: x + 1,
+      y: y - 1,
+      c: 1
+    }, {
+      x: x - 1,
+      y: y + 1,
+      c: 1
+    }];
+
+    for (var i = 0; i < points.length; i++) {
+      var val = points[i];
+      if (val.x < 0 || val.x >= self.width ||
+        val.y < 0 || val.y >= self.height) {
+        points.splice(i, 1);
+        i--;
+      }
+    }
+    return points;
+  }
+
+  var delta = function(x, y) {
+    var forceSum = 0;
+    adjacent(x, y).forEach(function(val) {
+      var ax = val.x;
+      var ay = val.y;
+      if(isNaN(grid[ax][ay].x) || isNaN(grid[x][y].x))
+        throw "(" + grid[ax][ay].x + "," +  grid[x][y].x + ")";
+      var del = spread * (grid[ax][ay].x - grid[x][y].x)
+      forceSum += del;
+    });
+    return forceSum;
+  }
+
+  /*
+
+  this.step = function() {
+    var newGrid = [];
+    for (var x = 0; x < self.width; x++) {
+      newGrid[x] = [];
+      for (var y = 0; y < self.height; y++) {
+        var dddx = force(x, y) / mass;
+
+        if (isNaN(grid[x][y].x) && isNaN(grid[x][y].dx) && isNaN(grid[x][y].ddx))
+          throw new JSON.stringify(grid[x][y]);
+
+        newGrid[x][y] = {};
+        newGrid[x][y].x = self.position(x, y) + self.speed(x, y);
+        newGrid[x][y].dx = self.speed(x, y) + self.acceleration(x, y);
+        newGrid[x][y].ddx = dddx;
+        if (newGrid[x][y].ddx > 1000) {
+          newGrid[x][y].ddx = 1000;
+        }
+        if (newGrid[x][y].ddx < -1000) {
+          newGrid[x][y].ddx = -1000;
+        }
+        if (isNaN(newGrid[x][y].x) && isNaN(newGrid[x][y].dx) && isNaN(newGrid[x][y].ddx))
+          throw JSON.stringify(newGrid[x][y]) + " " + JSON.stringify(grid[x][y]);
+
+        if (maxHeight < newGrid[x][y].x) {
+          maxHeight = newGrid[x][y].x;
+        }
+        if (minHeight > newGrid[x][y].x) {
+          minHeight = newGrid[x][y].x;
+        }
+
+      }
+    }
+    grid = newGrid;
+  }
+  
+  var force = function(x, y) {
+    var forceSum = 0;
+    adjacent(x, y).forEach(function(val) {
+      var ax = val.x;
+      var ay = val.y;
+      var heightDifference = grid[x][y].x - grid[ax][ay].x;
+      var force = .5 * springCoefficient * heightDifference;
+      //if (grid[x][y].x > grid[ax][ay].x)
+      //  force *= -1;
+      force *= -1;
+      forceSum += force;
+    });
+    if (isNaN(forceSum)) {
+      throw "(" + x + "," + y + ")";
+    }
+    return forceSum;
+  }*/
+
+  this.maxHeight = function() {
+    return maxHeight;
+  }
+
+  this.minHeight = function() {
+    return minHeight;
+  }
+
+  this.position = function(x, y, val) {
+    val = Math.round(val);
+    if (x >= self.width)
+      throw x + " is too large";
+    if (x < 0)
+      throw x + " is too small";
+    if (y >= self.height)
+      throw y + " is too large";
+    if (y < 0)
+      throw y + " is too small";
+    
+    if (val !== undefined) grid[x][y].x = val;
+    if (maxHeight < grid[x][y].x) {
+      maxHeight = grid[x][y].x;
+    }
+    if (minHeight > grid[x][y].x) {
+      minHeight = grid[x][y].x;
+    }
+    return grid[x][y].x;
+  }
+
+  this.speed = function(x, y, val) {
+    if (val !== undefined) grid[x][y].dx = val;
+    return grid[x][y].dx;
+  }
+
+  this.acceleration = function(x, y, val) {
+    if (val !== undefined) grid[x][y].ddx = val;
+    return grid[x][y].ddx;
+  }
+
+  this.forEach = function(callback) {
+
+    for (var x = 0; x < this.width; x++) {
+      for (var y = 0; y < this.height; y++) {
+        callback({
+            position: grid[x][y].x,
+            speed: grid[x][y].dx,
+            acceleration: grid[x][y].ddx
+          },
+          x, y);
+      }
+    }
+  }
+}
+      //@ sourceURL=pen.js
+    </script>
+
+    
+    
+    
+  
+
+ 
+</body></html>

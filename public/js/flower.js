@@ -206,11 +206,12 @@ function generate() {
     var s = Math.floor(Math.random() * 100);
     var l = Math.floor(Math.random() * 100);
 
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
     for (var i = 0; i < canvas.width; i++) {
         ctx.fillStyle = "hsl(" + Math.floor(i * 360 / canvas.width) + "," + s + "%," + l + "%)";
         ctx.fillRect(i, 0, 1, 10);
     }
-
     //for (var a = 0; a < screen.width / f_diam - 1; a++) 
     nonBlockFor(0,canvas.width/f_diam - 1,1,function(a){
         h += 1.61803398875 * 360;

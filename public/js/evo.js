@@ -199,11 +199,11 @@ function World(){
       this.dynamicism = specimen.dynamicism;
       this.ID = specimen.ID;
       if(Math.random()>specimen.dynamicism){
-        this.ID=assign_new_ID();
+        //2this.ID=assign_new_ID();
       }
       this.max_health = specimen.max_health;
       if(Math.random()>.5){
-      	this.dynamicism = Math.random()*.1+.9;
+      	//this.dynamicism = Math.random()*.001+.999;
       }
       if(Math.random()>.5){
         this.max_health++;
@@ -220,9 +220,11 @@ function World(){
             this.stats[stat] = specimen.stats[stat]*specimen.dynamicism;
           }else{
             var divergence = specimen.stats[stat]*specimen.dynamicism - specimen.stats[stat];
-            this.stats[stat] += divergence;
-            this.stats[stat] = Math.min(this.stats[stat],.9);
+            //this.stats[stat] -= divergence;
+            this.stats[stat] = this.stats[stat]*(2-specimen.dynamicism);
           }
+          this.stats[stat] = Math.min(this.stats[stat],.9);
+          this.stats[stat] = Math.max(this.stats[stat],.1);
       }
     }
     this.random = function(){
@@ -299,7 +301,6 @@ function relMouseCoords(canvas,event){
     var y = event.clientY - rect.top;
   	return {x:x,y:y};
 }
-
 var canvas = document.getElementById("draw");
 var ctx = canvas.getContext("2d");
 canvas.width = 500;
@@ -326,7 +327,9 @@ canvas.addEventListener('mousemove', function(evt) {
     mouse_y = coords.y;
   }, false);
 
-setInterval(function(){
+var delay = 10;
+
+function frame(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   if(mouse_down){
   var r = Math.floor((mouse_y/canvas.height)*world.rows());
@@ -339,4 +342,11 @@ setInterval(function(){
   }
   }
   world.step(ctx,canvas.width,canvas.height);
-},50);
+  setTimeout(frame,delay);
+}
+frame();
+
+addRange("Speed", 1,1000,1, function(r){
+  delay = Math.floor(1000/r);
+  return r + " fps";
+});

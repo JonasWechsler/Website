@@ -314,8 +314,6 @@ setRange(7,waterHeight);
 disableResize();
 
 function usergen(){
-    console.log(width, height, tile_width, tile_height, persistence, iterations, frequency, distanceCoef, waterHeight);
-
     width = Math.pow(2,getRange(0).value);
     height = width;
     tile_width = parseInt(getRange(1).value);
@@ -328,7 +326,6 @@ function usergen(){
 
     waterHeight = parseFloat(getRange(7).value);
 
-    console.log(width, height, tile_width, tile_height, persistence, iterations, frequency, distanceCoef, waterHeight);
     initialize();
 }
 

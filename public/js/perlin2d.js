@@ -4,9 +4,6 @@ var ctx = canvas.getContext("2d");
 canvas.width = screen.width;
 canvas.height = screen.height;
 
-var WIDTH = canvas.width;
-var HEIGHT = canvas.height;
-
 function Point(x, y) {
   this.x = x;
   this.y = y;
@@ -16,7 +13,7 @@ function World() {
   var points = [];
   
   var x = 0;
-  var last_y = HEIGHT/2;
+  var last_y = canvas.height/2;
 
   var algorithm = "perlin";
   var algorithms = ["perlin", "urban"];
@@ -33,7 +30,7 @@ function World() {
       var frequency = Math.pow(2,idx),
           wavelength = Math.floor(zone_width/frequency),
           persistance = 1/2,
-          amplitude = Math.pow(persistance,idx)*HEIGHT;
+          amplitude = Math.pow(persistance,idx)*canvas.height;
         
       if(x%wavelength==0){
         perlin_subgraphs[idx] = amplitude*Math.random();
@@ -65,7 +62,7 @@ function World() {
       points.push(new Point(x,last_y));
       new_point = true;
     }
-    if(last_y > HEIGHT)last_y = HEIGHT;
+    if(last_y > canvas.height)last_y = canvas.height;
     if(last_y < 0) last_y = 0;
     return new_point;
   }
@@ -95,10 +92,10 @@ function World() {
 
 var world = new World();
 setInterval(function(){
-	if(world.getX()>WIDTH){
-    world.setX(0);
+	if(world.getX()>canvas.width){
+    world.setX(-1*10);
     ctx.fillStyle = "white";
-    ctx.fillRect(0,0,WIDTH,HEIGHT);
+    ctx.fillRect(0,0,canvas.width,canvas.height);
     world.setPoints([]);
   }
   world.generate();
@@ -108,7 +105,7 @@ setInterval(function(){
   ctx.fillStyle="black";
   points.forEach(function(val){
       ctx.lineTo(val.x, val.y);
-    	ctx.fillRect(val.x, val.y,1,HEIGHT);
+    	ctx.fillRect(val.x, val.y,1,canvas.height);
   });
   ctx.stroke();
 },10);

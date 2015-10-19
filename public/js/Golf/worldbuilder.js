@@ -14,7 +14,7 @@ var playSound = function(sound,vol){
 	sounds[sound].play();
 }
 
-var build1 = function(){
+var build = function(){
 	clearAll();
 	var stat = function(x0,y0,x1,y1){
 		addStatic(new LineSegment(new Vector(x0,y0), new Vector(x1,y1)));
@@ -28,39 +28,26 @@ var build1 = function(){
 		addStatic(new LineSegment(lastStroke,vec));
 		lastStroke = vec;
 	}
-	var rubber = new Material(.4,"black",function(vol){
+	var glass = new Material(0,"black",function(vol){
 		if(vol<.05)vol*=vol;
 		vol = Math.min(vol,1);
-		var sounds = ["Percussive Elements-06.wav"],
+		var sounds = ["Percussive Elements-06.wav",
+					  "Percussive Elements-04.wav",
+						"Percussive Elements-05.wav"],
 		i = Math.floor(Math.random()*sounds.length);
 		playSound(sounds[i],vol);
 	});
-	var bouncey = new Material(2,"red",function(vol){
-		vol = Math.min(vol,1);
-		var sounds = ["Percussive Elements-15.wav"],
-		i = Math.floor(Math.random()*sounds.length);
-		playSound(sounds[i],vol);
-	});
-	var wood = new Material(.95, "blue", function(vol){
-		vol = Math.min(vol,1);
-		var sounds = ["Percussive Elements-04.wav",
-		"Percussive Elements-05.wav"],
-		i = Math.floor(Math.random()*sounds.length);
-		playSound(sounds[i],vol);
-	});
-	setMaterial(wood);
-	moveTo(0,250);
-	strokeTo(250,250);
-	//150,250,30,30
+	setMaterial(glass);
 
-	addDynamic(new DynamicBall(new Vector(413,370), 10, new Vector(0,-100)));
+	var world = new World(1080);
 
-	addFixed(new Flapper(new Vector(125,745),-.03,-.27,-.01));
-	addFixed(new Flapper(new Vector(280,745),.03,.94,.68));
+	moveTo(0,0);
+	for(var x=0;x<1280;x++){
+	  	strokeTo(x,1080 - world.getHeightAt(x));
+	}
+	strokeTo(1280-1,0);
 
-	addTrigger(new TriggerLineSegment(new Vector(150,830),new Vector(250,830),function(){
-		build1();
-	}));
+	addDynamic(new DynamicBall(new Vector(413,370), 10, new Vector(0,0)));
 }
 
-build1();
+build();

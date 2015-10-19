@@ -21,14 +21,16 @@ exports.projectList = [{
             'desc':'Generating flower-like images through perlin noise.',
             'name':'flower'
         }, {
+            'desc': 'Terrain generation through perlin noise.',
+            'name': 'perlin'
+        }, {
             'desc': 'Good old-fashioned Tetris according to the standard Tetris guidelines.',
             'name': 'tetris'
         }, {
             'desc': 'A function based graphing calculator.',
             'name': 'calculator'
-        }, {
-            'desc': 'Terrain generation through perlin noise.',
-            'name': 'perlin'
+        },{
+            'name':'heat'
         }, {
             'name': 'isometric'
         }, {
