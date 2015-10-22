@@ -278,7 +278,7 @@ function drawItAll(ctx) {
     if (!ctx)
         return false;
 
-    ctx.clearRect(min_x, min_y, max_x-min_x, max_y-min_y);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     min_x = 0, max_x = 0, min_y = canvas.width, max_y = canvas.height;
     ctx.fillStyle = "#D7D988";
     var zbuffer = new Array();
