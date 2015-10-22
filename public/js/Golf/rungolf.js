@@ -11,46 +11,36 @@ canvas.height = screen.height;
 
 var world = new World(canvas.height);
 var plants = new Plant();
+var physics = new Physics();
+var builder = new WorldBuilder(physics);
+
 plants.setLength(25).setIterations(3);
 
-document.addEventListener('keydown', function(e) {
-  var char = String.fromCharCode(e.keyCode);
-  switch (char) {
-    case 'A':
-      setAcceleration(function(x,y){return new Vector(-.03,.02)});
-      break;
-    case 'D':
-      setAcceleration(function(x,y){return new Vector(.03,.02)});
-      break;
-  }
-}, false);
-
-function draw(){
-	stepPhysics();
-	drawPhysics(ctx);
-	window.requestAnimationFrame(draw);
+function runPhysics() {
+  physics.stepPhysics();
+  setTimeout(runPhysics,10);
 }
-
-document.addEventListener('keyup', function(e) {
-  var char = String.fromCharCode(e.keyCode);
-  switch (char) {
-    case 'A':
-      setAcceleration(function(x,y){return new Vector(0,.02)});
-      break;
-    case 'D':
-      setAcceleration(function(x,y){return new Vector(0,.02)});
-      break;
-  }
-}, false);
-
-setInterval(function() {
-  stepPhysics();
-}, 10);
 
 function draw() {
-  drawPhysics(ctx);
+  physics.drawPhysics(ctx);
+  checkInputs();
   window.requestAnimationFrame(draw);
 }
+
 window.requestAnimationFrame(draw);
+runPhysics();
 
-
+/*                            
+ *                                           
+ *               (Vector Tools)              
+ *                    |                      
+ *               (Physics Engine)            
+ *                    |                      
+ *  (Save Data)  (Game World)-+              
+ *        \           |       |              
+ *    (Back end)-(Game Rules)-|-(Inputs)     
+ *         |                  |              
+ *      (Game)-(Front End)-(Graphics)        
+ *                                           
+ *                                           
+ */

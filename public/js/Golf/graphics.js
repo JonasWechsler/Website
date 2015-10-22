@@ -1,75 +1,8 @@
-function World(){
+function Graphics(){
 
 }
 
-World.Perlin = function() {
-    var heights = {
-        '-1': canvas.height / 2,
-        '0': canvas.height / 2,
-        '1': canvas.height / 2
-    };
-
-    var x = 0;
-    var max_x = -1;
-    var min_x = 1;
-
-    var perlin_resolution = 15;
-    var left_perlin_subgraph = [];
-    var right_perlin_subgraph = [];
-    var perlin_smoothness = .9965; //0<smooth<1
-
-    var generate_perlin_at = function(x) {
-        var active_subgraphs = [];
-        var last_y = 0;
-        if (x < min_x) {
-            min_x = x;
-            last_y = heights[x + 1];
-            active_subgraphs = left_perlin_subgraph;
-        } else if (x > max_x) {
-            max_x = x;
-            last_y = heights[x - 1];
-            active_subgraphs = right_perlin_subgraph;
-        } else {
-            return heights[x];
-        }
-
-        var new_point = false;
-
-        for (var idx = 1; idx < perlin_resolution; idx++) {
-            var frequency = Math.pow(2, idx),
-                wavelength = Math.floor(200 / frequency);
-
-            if (x % wavelength == 0) {
-                var persistance = 1 / 2,
-                    amplitude = Math.pow(persistance, idx) * canvas.height;
-                active_subgraphs[idx] = amplitude * Math.random();
-                new_point = true;
-            }
-        }
-
-        var y = 0;
-        if (new_point) {
-            active_subgraphs.forEach(function(val) {
-                if (val)
-                    y += val;
-            });
-            y = last_y * perlin_smoothness + y * (1 - perlin_smoothness);
-        } else {
-            y = last_y;
-        }
-
-        heights[x] = y;
-        return y;
-    }
-
-
-
-    this.getHeightAt = function(x) {
-        return generate_perlin_at(x);
-    }
-}
-
-World.Plant = function() {
+Graphics.Plant = function() {
     var iterations = 5,
         diam = Math.random() * 1 + 1,
         len = (Math.random() * (screen.height / (iterations + 1)) + screen.height / (iterations + 1)) / 2,
@@ -83,37 +16,30 @@ World.Plant = function() {
         iterations = p;
         return this;
     }
-
     this.setDiameter = function(p) {
         diam = p;
         return this;
     }
-
     this.setLength = function(p) {
         len = p;
         return this;
     }
-
     this.setDiameterCoefficient = function(p) {
         diam_coef = p;
         return this;
     }
-
     this.setLengthCoefficient = function(p) {
         len_coef = p;
         return this;
     }
-
     this.setBranches = function(p) {
         branches = p;
         return this;
     }
-
     this.setTwigChance = function(p) {
         twig_chance = p;
         return this;
     }
-
     this.setMaxAngle = function(p) {
         max_angle = p;
         return this;
@@ -171,37 +97,3 @@ World.Plant = function() {
     }
 }
 
-var canvas = document.getElementById("draw");
-var ctx = canvas.getContext("2d");
-canvas.width = screen.width + 400;
-canvas.height = screen.height;
-
-var world = new World.Perlin();
-var plants = new World.Plant();
-plants.setLength(25).setIterations(3);
-
-var maxx = 0;
-function frame() {
-    var maxxy = world.getHeightAt(maxx);
-    // shift everything to the left:
-    var imageData = ctx.getImageData(1, 0, canvas.width-1, canvas.height);
-    ctx.putImageData(imageData, 0, 0);
-    // now clear the right-most pixels:
-    ctx.clearRect(canvas.width-1, 0, 1, canvas.height);
-    ctx.fillRect(canvas.width - 1, canvas.height - maxxy, 1, maxxy);
-
-    if (Math.random() > .995) {
-        new World.Plant().setLength(30).setIterations(3).generate(canvas.width - 100, canvas.height - world.getHeightAt(maxx - 100), ctx);
-    }
-    maxx++;
-}
-
-for(;maxx<canvas.width;maxx++){
-    var maxxy = world.getHeightAt(maxx);
-    ctx.fillRect(maxx, canvas.height - maxxy, 1, maxxy);
-    if (Math.random() > .995) {
-        new World.Plant().setLength(30).setIterations(3).generate(maxx, canvas.height - maxxy, ctx);
-    }
-}
-
-setInterval(frame,100);
