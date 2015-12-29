@@ -9,10 +9,10 @@ canvas.height = 900;
 canvas.width = screen.width;
 canvas.height = screen.height;
 
-var world = new World(canvas.height);
-var plants = new Plant();
+var world = new WorldBuilder.PerlinGenerator(canvas.height);
+var plants = new Graphics.Plant();
 var physics = new Physics();
-var builder = new WorldBuilder(physics);
+var builder = new WorldBuilder.Build1(physics);
 
 plants.setLength(25).setIterations(3);
 

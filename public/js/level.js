@@ -18,6 +18,13 @@ World.Perlin = function() {
     var right_perlin_subgraph = [];
     var perlin_smoothness = .9965; //0<smooth<1
 
+    var seed = new Date().getTime();
+
+    var random = function() {
+        var x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+    }
+
     var generate_perlin_at = function(x) {
         var active_subgraphs = [];
         var last_y = 0;
@@ -42,7 +49,7 @@ World.Perlin = function() {
             if (x % wavelength == 0) {
                 var persistance = 1 / 2,
                     amplitude = Math.pow(persistance, idx) * canvas.height;
-                active_subgraphs[idx] = amplitude * Math.random();
+                active_subgraphs[idx] = amplitude * random();
                 new_point = true;
             }
         }

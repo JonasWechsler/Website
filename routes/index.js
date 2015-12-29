@@ -12,6 +12,8 @@ var render = function(res,file,params){
 }
 
 exports.projectList = [{
+            'name':'golf'
+        },{
             'desc':'Non-binary cellular automata by generating a random list of coefficients and comparisons.',
             'name':'evo'
         },{
