@@ -12,8 +12,6 @@ var render = function(res,file,params){
 }
 
 exports.projectList = [{
-            'name':'golf'
-        },{
             'desc':'Non-binary cellular automata by generating a random list of coefficients and comparisons.',
             'name':'evo'
         },{
@@ -22,6 +20,8 @@ exports.projectList = [{
         },{
             'desc':'Generating flower-like images through perlin noise.',
             'name':'flower'
+        }, {
+            'name':'golf'
         }, {
             'desc': 'Terrain generation through perlin noise.',
             'name': 'perlin'
