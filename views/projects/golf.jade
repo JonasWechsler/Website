@@ -5,10 +5,16 @@ block header
   link(rel='stylesheet', href='/stylesheets/theatre.css')
   script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
 block content
-  script(src="./js/Golf/graphics.js")
-  script(src="./js/Golf/tools.js")
-  script(src="./js/Golf/physics.js")
-  script(src="./js/Golf/worldbuilder.js")
-  script(src="./js/Golf/inputs.js")
-  script(src="./js/Golf/rungolf.js")
-
+  script(src="./js/golf.js/built/out.js")
+  script(src="./js/fullscreen.js")
+  script.
+    disableResize();
+    new Runner("draw");
+  style.
+    canvas{
+        position:absolute !important;
+        bottom:0 !important;
+        border:none !important;
+        top:initial !important;
+        transform: translate(-50%, 0) !important;
+    }

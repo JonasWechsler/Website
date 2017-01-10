@@ -6,8 +6,8 @@ canvas.width = window.innerWidth || document.documentElement.clientWidth || docu
 canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 canvas.width = 450;
 canvas.height = 900;
-canvas.width = screen.width;
-canvas.height = screen.height;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 var world = new WorldBuilder.PerlinGenerator(canvas.height);
 var plants = new Graphics.Plant();
